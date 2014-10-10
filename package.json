@@ -1,0 +1,39 @@
+{
+  "name": "grunt-openui5",
+  "version": "0.1.0-pre",
+  "description": "Grunt tasks around OpenUI5",
+  "scripts": {
+    "test": "grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SAP/grunt-openui5.git"
+  },
+  "keywords": [
+    "gruntplugin",
+    "openui5"
+  ],
+  "author": "SAP SE",
+  "license": {
+    "type": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+  },
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "dependencies": {
+    "async": "^0.9.0",
+    "connect-openui5": "0.1.0",
+    "less-openui5": "0.1.0",
+    "object-assign": "^1.0.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-eslint": "^1.1.0",
+    "grunt-mocha-test": "^0.12.1"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.5"
+  }
+}
