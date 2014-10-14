@@ -1,6 +1,6 @@
 ![OpenUI5](http://openui5.org/images/OpenUI5_new_big_side.png)
 
-[![Build Status](http://img.shields.io/travis/v/grunt-openui5.svg?style=flat)](https://travis-ci.org/SAP/grunt-openui5)
+[![Build Status](http://img.shields.io/travis/SAP/grunt-openui5.svg?style=flat)](https://travis-ci.org/SAP/grunt-openui5)
 [![NPM Version](http://img.shields.io/npm/v/grunt-openui5.svg?style=flat)](https://www.npmjs.org/package/grunt-openui5)
 
 # grunt-openui5
