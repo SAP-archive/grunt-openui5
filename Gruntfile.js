@@ -111,7 +111,7 @@ module.exports = function(grunt) {
 					'test/connect/fixtures/someLib/test-resources',
 					'test/connect/fixtures/anotherLib/testres'
 				],
-				contextpath: "mycontext"
+				contextpath: 'mycontext'
 			},
 
 			connectTest: {
