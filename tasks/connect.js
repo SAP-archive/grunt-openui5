@@ -72,6 +72,7 @@ module.exports = function(grunt, config) {
 
 						// register a context handler for testsuite and a properties handler
 						// for the I18N files which are ISO-8859-1 encoded and the header must specify this
+						// this will rewrite the requests url and prepend the context path. This will be undone by the uncontext middleware
 						if (configOptions.contextpath) {
 							aMiddleware.push(oui5connect.context(configOptions.contextpath));
 						}
