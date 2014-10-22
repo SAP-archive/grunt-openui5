@@ -15,60 +15,37 @@
 /*eslint-env mocha */
 'use strict';
 
-var assert = require('assert');
-var grunt = require('grunt');
+var fileContent = require('./asserts/fileContent');
+function themeTestcase (sFolderName) {
+
+	return function () {
+		fileContent.equal({
+			sActualFileSource : 'tmp/theme/' + sFolderName + '/library.css',
+			sExpectedFileSource : 'test/theme/expected/' + sFolderName + '/library.css',
+			sMessage : 'css file should be correctly created.'
+		});
+
+		fileContent.equal({
+			sActualFileSource : 'tmp/theme/' + sFolderName + '/library-RTL.css',
+			sExpectedFileSource : 'test/theme/expected/' + sFolderName + '/library-RTL.css',
+			sMessage : 'rtl css file should be correctly created.'
+		});
+
+		fileContent.equal({
+			sActualFileSource : 'tmp/theme/' + sFolderName + '/library-parameters.json',
+			sExpectedFileSource : 'test/theme/expected/' + sFolderName + '/library-parameters.json',
+			sMessage : 'parameters file should be correctly created.'
+		});
+	};
+
+}
 
 describe('openui5_theme', function() {
 
-  it('default_options', function(done) {
+	it('default_options', themeTestcase('default_options'));
 
-    var actualCss = grunt.file.read('tmp/theme/default_options/library.css');
-    var expectedCss = grunt.file.read('test/theme/expected/default_options/library.css');
-    assert.equal(actualCss, expectedCss, 'css file should be correctly created.');
+	it('compress_option', themeTestcase('compress_option'));
 
-    var actualRtlCss = grunt.file.read('tmp/theme/default_options/library-RTL.css');
-    var expectedRtlCss = grunt.file.read('test/theme/expected/default_options/library-RTL.css');
-    assert.equal(actualRtlCss, expectedRtlCss, 'rtl css file should be correctly created.');
-
-    var actualParameters = grunt.file.read('tmp/theme/default_options/library-parameters.json');
-    var expectedParameters = grunt.file.read('test/theme/expected/default_options/library-parameters.json').replace(/\n$/, ''); // remove the last LF
-    assert.equal(actualParameters, expectedParameters, 'parameters file should be correctly created.');
-
-    done();
-  });
-
-  it('compress_option', function(done) {
-
-    var actualCss = grunt.file.read('tmp/theme/compress_option/library.css');
-    var expectedCss = grunt.file.read('test/theme/expected/compress_option/library.css').replace(/\n$/, ''); // remove the last LF
-    assert.equal(actualCss, expectedCss, 'css file should be correctly created.');
-
-    var actualRtlCss = grunt.file.read('tmp/theme/compress_option/library-RTL.css');
-    var expectedRtlCss = grunt.file.read('test/theme/expected/compress_option/library-RTL.css').replace(/\n$/, ''); // remove the last LF
-    assert.equal(actualRtlCss, expectedRtlCss, 'rtl css file should be correctly created.');
-
-    var actualParameters = grunt.file.read('tmp/theme/compress_option/library-parameters.json');
-    var expectedParameters = grunt.file.read('test/theme/expected/compress_option/library-parameters.json').replace(/\n$/, ''); // remove the last LF
-    assert.equal(actualParameters, expectedParameters, 'parameters file should be correctly created.');
-
-    done();
-  });
-
-  it('rootPaths_option', function(done) {
-
-    var actualCss = grunt.file.read('tmp/theme/rootPaths_option/library.css');
-    var expectedCss = grunt.file.read('test/theme/expected/rootPaths_option/library.css');
-    assert.equal(actualCss, expectedCss, 'css file should be correctly created.');
-
-    var actualRtlCss = grunt.file.read('tmp/theme/rootPaths_option/library-RTL.css');
-    var expectedRtlCss = grunt.file.read('test/theme/expected/rootPaths_option/library-RTL.css');
-    assert.equal(actualRtlCss, expectedRtlCss, 'rtl css file should be correctly created.');
-
-    var actualParameters = grunt.file.read('tmp/theme/rootPaths_option/library-parameters.json');
-    var expectedParameters = grunt.file.read('test/theme/expected/rootPaths_option/library-parameters.json').replace(/\n$/, ''); // remove the last LF
-    assert.equal(actualParameters, expectedParameters, 'parameters file should be correctly created.');
-
-    done();
-  });
+	it('rootPaths_option', themeTestcase('rootPaths_option'));
 
 });

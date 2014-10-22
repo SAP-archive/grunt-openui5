@@ -15,18 +15,18 @@
 /*eslint-env mocha */
 'use strict';
 
-var assert = require('assert');
-var grunt = require('grunt');
+var fileContent = require('./asserts/fileContent');
 
 describe('openui5_library_preload', function() {
 
-  it('default_options', function(done) {
+	it('default_options', function() {
 
-    var actualPreloadJson = grunt.file.read('tmp/library_preload/default_options/lib1/my/ui/lib/library-preload.json');
-    var expectedPreloadJson = grunt.file.read('test/library_preload/expected/default_options/lib1/my/ui/lib/library-preload.json').replace(/\n$/, ''); // remove the last LF
-    assert.equal(actualPreloadJson, expectedPreloadJson, 'preload JSON should be correctly created.');
+		fileContent.equal({
+			sActualFileSource : 'tmp/library_preload/default_options/lib1/my/ui/lib/library-preload.json',
+			sExpectedFileSource : 'test/library_preload/expected/default_options/lib1/my/ui/lib/library-preload.json',
+			sMessage : 'preload JSON should be correctly created.'
+		});
 
-    done();
   });
 
 });
