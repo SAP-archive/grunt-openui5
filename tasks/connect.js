@@ -14,7 +14,8 @@
 
 'use strict';
 
-var oui5connect = require('connect-openui5');
+var oui5connect = require('connect-openui5'),
+	cors = require('cors');
 
 // connect server
 module.exports = function(grunt, config) {
@@ -69,6 +70,13 @@ module.exports = function(grunt, config) {
 					middleware: function(connect, options, aMiddleware) {
 
 						aMiddleware = []; // ignore the original middleware
+
+						// Cors header must be set on all responses
+						if (configOptions.cors) {
+							aMiddleware.push(cors({
+								origin: configOptions.cors
+							}));
+						}
 
 						// register a context handler for testsuite and a properties handler
 						// for the I18N files which are ISO-8859-1 encoded and the header must specify this

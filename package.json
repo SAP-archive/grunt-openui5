@@ -1,6 +1,6 @@
 {
   "name": "grunt-openui5",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Grunt tasks around OpenUI5",
   "scripts": {
     "test": "grunt"
@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "async": "^0.9.0",
+    "cors": "^2.0.0",
     "connect-openui5": "0.1.0",
     "less-openui5": "0.1.0",
     "object-assign": "^1.0.0"
