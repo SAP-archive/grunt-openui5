@@ -98,23 +98,25 @@ module.exports = function(grunt) {
 		openui5_connect : {
 			options: {
 				port: 8080,
-				keepalive: false,
-				appresources: [
-					'test/connect/fixtures',
-					'test/connect/fixtures/app'
-				],
-				resources: [
-					'test/connect/fixtures/someLib/resources',
-					'test/connect/fixtures/anotherLib/res'
-				],
-				testresources: [
-					'test/connect/fixtures/someLib/test-resources',
-					'test/connect/fixtures/anotherLib/testres'
-				],
-				contextpath: 'mycontext'
+				keepalive: false
 			},
 
 			connectTest: {
+				options: {
+					appresources: [
+						'test/connect/fixtures',
+						'test/connect/fixtures/app'
+					],
+					resources: [
+						'test/connect/fixtures/someLib/resources',
+						'test/connect/fixtures/anotherLib/res'
+					],
+					testresources: [
+						'test/connect/fixtures/someLib/test-resources',
+						'test/connect/fixtures/anotherLib/testres'
+					],
+					contextpath: 'mycontext'
+				}
 			}
 
 		},
@@ -150,12 +152,6 @@ module.exports = function(grunt) {
 		'openui5_connect',
 
 		'mochaTest:tests'
-	]);
-
-	grunt.registerTask('connect_test', [
-		'openui5_connect',
-
-		'mochaTest:connectTest'
 	]);
 
 	// By default, lint and run all tests.
