@@ -70,6 +70,13 @@ module.exports = function(grunt, config) {
 
 						aMiddleware = []; // ignore the original middleware
 
+						// Cors header must be set on all responses
+						if (configOptions.corsAllowOrigin) {
+							aMiddleware.push(oui5connect.cors({
+								allowOrigin: configOptions.corsAllowOrigin
+							}));
+						}
+
 						// register a context handler for testsuite and a properties handler
 						// for the I18N files which are ISO-8859-1 encoded and the header must specify this
 						// this will rewrite the requests url and prepend the context path. This will be undone by the uncontext middleware
