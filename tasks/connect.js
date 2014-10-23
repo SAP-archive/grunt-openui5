@@ -88,7 +88,7 @@ module.exports = function(grunt, config) {
 						var sProxypath = configOptions.proxypath;
 						if (sProxypath) {
 
-							aMiddleware.push(connect().use('/' + sProxypath, oui5connect.proxy(grunt)));
+							aMiddleware.push(connect().use('/' + sProxypath, oui5connect.proxy(grunt.log.writeln)));
 
 						}
 
