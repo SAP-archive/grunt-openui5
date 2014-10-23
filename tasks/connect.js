@@ -84,6 +84,14 @@ module.exports = function(grunt, config) {
 						}
 						aMiddleware.push(oui5connect.properties());
 
+						// do not alow proxy all proxypath : ''
+						var sProxypath = configOptions.proxypath;
+						if (sProxypath) {
+
+							aMiddleware.push(connect().use('/' + sProxypath, oui5connect.proxy(grunt)));
+
+						}
+
 						// register the less on-the-fly compiler handler
 						if (configOptions.useLess) {
 							aMiddleware.push(connect().use('/resources', oui5connect.less({
