@@ -15,6 +15,7 @@
 'use strict';
 
 var oui5connect = require('connect-openui5'),
+	oui5proxy = require('connect-openui5/lib/proxy'),
 	cors = require('cors');
 
 // connect server
@@ -88,7 +89,7 @@ module.exports = function(grunt, config) {
 						var sProxypath = configOptions.proxypath;
 						if (sProxypath) {
 
-							aMiddleware.push(connect().use('/' + sProxypath, oui5connect.proxy(grunt.log.writeln)));
+							aMiddleware.push(connect().use('/' + sProxypath, oui5proxy(grunt.log.writeln)));
 
 						}
 
