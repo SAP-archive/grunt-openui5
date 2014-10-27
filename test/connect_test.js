@@ -25,7 +25,6 @@ function getHttpStatus (sUrl, fnCallback) {
 		path: sUrl,
 		method: 'GET'
 	};
-
 	var oRequest = http.request(oOptions, function (oResponse) {
 
 		//If you do not add this the server will hang after 5 requests
