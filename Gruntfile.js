@@ -92,6 +92,20 @@ module.exports = function(grunt) {
 						src: 'my/ui/lib/**/*.{js,json,xml}'
 					}
 				]
+			},
+			'raw_options': {
+				options: {
+					libraryName: 'my.ui.lib',
+					dest: 'tmp/library_preload/raw_options/lib1',
+					compress: false
+				},
+				files: [
+					{
+						expand: true,
+						cwd: 'test/library_preload/fixtures/lib1',
+						src: 'my/ui/lib/**/*.{js,json,xml}'
+					}
+				]
 			}
 		},
 

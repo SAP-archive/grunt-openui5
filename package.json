@@ -27,7 +27,9 @@
     "connect-openui5": "^0.2.1",
     "less-openui5": "^0.1.1",
     "object-assign": "^1.0.0",
-    "grunt-contrib-connect": "^0.8.0"
+    "grunt-contrib-connect": "^0.8.0",
+    "pretty-data": "^0.40.0",
+    "uglifyjs": "^2.3.6"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
