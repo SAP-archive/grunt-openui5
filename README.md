@@ -155,5 +155,111 @@ grunt.initConfig({
 Creates
 - tmp/my/ui/lib/library-preload.json
 
+## "openui5_connect"
+
+### Options
+
+#### appresources
+
+Type: `array` of `string`
+
+You can provide multiple filepaths. All files located directly in this directory will be available at the root path of your server.
+eg: there are two files in the folder
+myAppFiles/foo.html
+my/other/appfiles/bar.html
+
+and appresrouces is
+appresources : [ "myAppFiles", "my/other/appfiles" ]
+
+they will be served under
+http://myHost/foo.html
+http://myHost/bar.html
+
+
+#### resources
+
+Type: `array` of `string`
+
+You can provide multiple filepaths. All files located directly in this directory will be available at the root path of your server.
+eg: there are two files in the folder
+my/firstUi5Library/foo.js
+my/secondUi5Library/bar.js
+
+and appresrouces is
+appresources : [ "my/firstUi5Library/", "my/secondUi5Library" ]
+
+they will be served under
+http://myHost/resources/foo.html
+http://myHost/resources/bar.html
+
+#### testresources
+
+Type: `array` of `string`
+
+You can provide multiple filepaths. All files located directly in this directory will be available at the root path of your server.
+eg: there are two files in the folder
+my/firstUi5Library/tests/foo.js
+my/secondUi5Library/tests/bar.js
+
+and appresrouces is
+appresources : [ "my/firstUi5Library/tests", "my/secondUi5Library/tests" ]
+
+they will be served under
+http://myHost/test-resources/foo.html
+http://myHost/test-resources/bar.html
+
+#### contextpath
+
+Type: `string`
+Default value: ``
+The contextpath has to be prepended on any url to require a resource/testresource or an appresource eg:
+if the contextpath is "foo" and an appresource is called bar.html the resource will be located under
+http://yourHost/foo/bar.html
+
+#### proxypath
+
+Type: `string`
+Default value: ``
+
+The proxypath is used to proxy requests to generic hosts. If the proxypath is empty, no proxy server will be created.
+If you provide it you can proxy an request to any url.
+
+eg:
+you want to send a request to http://example.com/bar
+and the proxypath is 'foo'
+
+you can call http://yourHost/foo/http/example.com/bar
+
+to do the request on the same domain.
+
+For the exact pattern docu see the [proxy middleware](https://github.com/SAP/connect-openui5#Proxy).
+
+### Usage Examples
+
+```js
+openui5_connect : {
+	connect: {
+		options: {
+			keepalive: false,
+			appresources: [
+				'test/connect/fixtures',
+				'test/connect/fixtures/app'
+			],
+			resources: [
+				'test/connect/fixtures/someLib/resources',
+				'test/connect/fixtures/anotherLib/res'
+			],
+			testresources: [
+				'test/connect/fixtures/someLib/test-resources',
+				'test/connect/fixtures/anotherLib/testres'
+			],
+			contextpath: 'mycontext'
+			proxypath : 'proxy',
+			port: 8080
+		}
+	}
+},
+```
+
 ## Contributing
 See [CONTRIBUTING.md](CONTRIBUTING.md).
