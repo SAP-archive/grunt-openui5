@@ -1,4 +1,16 @@
+/* © */
 'use strict';
+
+/**
+* This is a copyright comment
+*/
+
+/* (c) */
+
+/* released under */
+/* normal comment */
+/* license */
+
 
 console.log('myJS');
 
@@ -8,4 +20,3 @@ console.log('myJS');
 function myFunction(longVariableName, longerVariableName) {
 	return longVariableName + longerVariableName;
 }
-

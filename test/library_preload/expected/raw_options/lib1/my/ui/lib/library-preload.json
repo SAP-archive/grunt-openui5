@@ -2,8 +2,9 @@
 	"version": "2.0",
 	"name": "my.ui.lib.library-preload",
 	"modules": {
-		"my/ui/lib/myJS.js": "'use strict';\n\nconsole.log('myJS');\n\n/**\n * This is a little comment\n */\nfunction myFunction(longVariableName, longerVariableName) {\n\treturn longVariableName + longerVariableName;\n}\n\n",
-		"my/ui/lib/myJSON.json": "{\r\n\t\"my\": \"json\"\r\n}\r\n",
-		"my/ui/lib/myXML.xml": "<my>XML</my>\n<!-- A comment in XML is the same as in HTML -->"
+		"my/ui/lib/myJS.js": "/* © */\n'use strict';\n\n/**\n* This is a copyright comment\n*/\n\n/* (c) */\n\n/* released under */\n/* normal comment */\n/* license */\n\n\nconsole.log('myJS');\n\n/**\n * This is a little comment\n */\nfunction myFunction(longVariableName, longerVariableName) {\n\treturn longVariableName + longerVariableName;\n}\n",
+		"my/ui/lib/myJSON.json": "{\n\t\"my\": \"json\"\n}\n",
+		"my/ui/lib/myXML.xml": "<my>XML</my>\n<!-- A comment in XML is the same as in HTML -->",
+		"my/ui/lib/myXMLWithHtmlPre.xml": "<my>XML</my>\n<!-- A comment in XML is the same as in HTML -->\n<html:pre>   </html:pre>"
 	}
 }

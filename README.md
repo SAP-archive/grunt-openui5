@@ -136,7 +136,10 @@ Path to the dest folder in which the preload file should be created. All other d
 Type: `boolean`
 Default value: `true`
 
-Optional parameter to turn off the compression/minifiers on the files. Javascript is minified using UglifyJS and XML by Pretty-data. JSON is parsed for correctness and to remove extra whitespace.
+Optional parameter to turn off the compression/minifiers on the files.
+- Javascript is minified using [UglifyJS2](https://github.com/mishoo/UglifyJS2) and copyright comments are preserved (comments matching regular expression `/copyright|\(c\)|released under|license|\u00a9/i` )
+- XML is minified using [pretty-data](https://github.com/vkiryukhin/pretty-data)
+- JSON is parsed for correctness and to remove extra whitespace
 
 ### Usage Examples
 

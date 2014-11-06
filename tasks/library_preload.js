@@ -18,8 +18,11 @@
 
 var path   = require('path'),
 	async  = require('async'),
-	uglify = require('uglifyjs'),
+	uglify = require('uglify-js'),
 	pd     = require('pretty-data').pd;
+
+var copyrightCommentsPattern = /copyright|\(c\)|released under|license|\u00a9/i;
+var xmlHtmlPrePattern = /<(?:\w+:)?pre>/;
 
 module.exports = function (grunt) {
 
@@ -36,7 +39,10 @@ module.exports = function (grunt) {
 				// Javascript files are processed by Uglify
 				result = uglify.minify(result, {
 					fromString: true,
-					warnings: true
+					warnings: grunt.option('verbose') === true,
+					output: {
+						comments: copyrightCommentsPattern
+					}
 				}).code;
 				cb(result);
 				break;
@@ -49,7 +55,12 @@ module.exports = function (grunt) {
 
 			case '.xml':
 				// For XML we use the pretty data
-				result = pd.xmlmin(result, false);
+
+				// Do not minify if XML(View) contains an <*:pre> tag because whitespace of HTML <pre> should be preserved (should only happen rarely)
+				if (!xmlHtmlPrePattern.test(result)) {
+					result = pd.xmlmin(result, false);
+				}
+
 				cb(result);
 				break;
 
