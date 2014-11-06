@@ -26,7 +26,14 @@ describe('openui5_library_preload', function() {
 			sExpectedFileSource : 'test/library_preload/expected/default_options/lib1/my/ui/lib/library-preload.json',
 			sMessage : 'preload JSON should be correctly created.'
 		});
+	});
 
-  });
+	it('raw_options', function() {
 
+		fileContent.equal({
+			sActualFileSource : 'tmp/library_preload/raw_options/lib1/my/ui/lib/library-preload.json',
+			sExpectedFileSource : 'test/library_preload/expected/raw_options/lib1/my/ui/lib/library-preload.json',
+			sMessage : 'preload JSON should be correctly created.'
+		});
+	});
 });

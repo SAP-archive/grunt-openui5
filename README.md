@@ -132,6 +132,12 @@ Default value: `.`
 
 Path to the dest folder in which the preload file should be created. All other dest paths (from the files configuration) will be ignored.
 
+#### compress
+Type: `boolean`
+Default value: `true`
+
+Optional parameter to turn off the compression/minifiers on the files. Javascript is minified using UglifyJS and XML by Pretty-data. JSON is parsed for correctness and to remove extra whitespace.
+
 ### Usage Examples
 
 ```js
