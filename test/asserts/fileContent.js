@@ -28,5 +28,6 @@ exports.equal = function (oOptions){
 		.replace(/\r\n/gm, '\n') // replace \r\n with \n to be consistent everywhere
 		.replace(/\\r\\n/gm, '\\n') // replace \\r\\n with \\n to be consistent everywhere
 		.replace(/\n$/, ''); // remove the last LF
-	assert.equal(sActualFileContent, sExpectedFileContent, oOptions.sMessage + ' acutal:\n' + sActualFileContent + ' \nexpected:\n' + sExpectedFileContent);
+
+	assert.equal(sActualFileContent, sExpectedFileContent, oOptions.sMessage);
 };

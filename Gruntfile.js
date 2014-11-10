@@ -109,6 +109,116 @@ module.exports = function(grunt) {
 			}
 		},
 
+		// Configuration to be run (and then tested).
+		'openui5_preload': { // maybe other task name?
+
+			// 'examples': {
+			//
+			// 	options: {
+			//
+			// 		resources: 'test/preload/component/fixtures/app1',
+			// 		// OR
+			// 		resources: [
+			// 			{
+			// 				cwd: 'test/preload/component/fixtures/app1',
+			// 				prefix: 'my/app', // default: ''
+			// 				//autoDetectPrefix: false, // default: false (analyzes files (declare/define)) escope -> var definitions (detect globals) -> see eslint no-global rule
+			// 				src: [ '**', '!*.bla' ], // default: see default_includes
+			// 				ignoreDefaultFilters: false // default: false
+			// 			},
+			// 			'test/preload/component/fixtures/app1'
+			// 		],
+			//
+			// 		dest: 'tmp/preload/component/default_options/app1'
+			//
+			// 	},
+			//
+			// 	components: true, // looks for **/Component.js files and writes **/Component-preload.js
+			// 	components: 'my/**', // looks for my/**/Component.js files and writes my/**/Component-preload.js
+			// 	components: [
+			// 		'my/app'
+			// 	],
+			// 	components: {
+			// 		'my/app': {
+			// 			// TODO
+			// 		}
+			// 	},
+			//
+			// 	libraries: true, // looks for **/.library files and writes **/library-preload.js
+			// 	libraries: 'my/**', // looks for my/**/.library files and writes my/**/library-preload.js
+			// 	libraries: [
+			// 		'my/ui/lib'
+			// 	],
+			// 	libraries: {
+			// 		'my/ui/lib': {
+			// 			// TODO
+			// 		}
+			// 	}
+			//
+			// },
+
+			'component_default_options': {
+				options: {
+					resources: 'test/preload/fixtures/app',
+					dest: 'tmp/preload/component_default_options'
+				},
+				components: '**'
+			},
+
+			'component_resource_prefix': {
+				options: {
+					resources: [
+						{
+							cwd: 'test/preload/fixtures/app/my/app',
+							prefix: 'my/app'
+						}
+					],
+					dest: 'tmp/preload/component_resource_prefix'
+				},
+				components: 'my/app'
+			},
+
+			'component_no_compress': {
+				options: {
+					resources: 'test/preload/fixtures/app',
+					dest: 'tmp/preload/component_no_compress',
+					compress: false
+				},
+				components: '**'
+			},
+
+			'library_default_options': {
+				options: {
+					resources: 'test/preload/fixtures/library',
+					dest: 'tmp/preload/library_default_options'
+				},
+				libraries: '**'
+			},
+
+			'library_resource_prefix': {
+				options: {
+					resources: [
+						{
+							cwd: 'test/preload/fixtures/library/my/ui/lib',
+							prefix: 'my/ui/lib'
+						}
+					],
+					dest: 'tmp/preload/library_resource_prefix'
+				},
+				libraries: 'my/ui/lib'
+			},
+
+			'library_no_compress': {
+				options: {
+					resources: 'test/preload/fixtures/library',
+					dest: 'tmp/preload/library_no_compress',
+					compress: false
+				},
+				libraries: '**'
+			}
+
+		},
+
 		connect: {
 
 			connectTest: {
@@ -173,6 +283,9 @@ module.exports = function(grunt) {
 			},
 			connectTest: {
 				src: ['test/connect_test.js' ]
+			},
+			preload: {
+				src: 'test/preload_test.js'
 			}
 		}
 
@@ -194,9 +307,18 @@ module.exports = function(grunt) {
 
 		'openui5_theme',
 		'openui5_library_preload',
+		'openui5_preload',
 		'openui5_connect',
 
 		'mochaTest:tests'
+	]);
+
+	grunt.registerTask('test-preload', [
+		'clean',
+
+		'openui5_preload',
+
+		'mochaTest:preload'
 	]);
 
 	// By default, lint and run all tests.

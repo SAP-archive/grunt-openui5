@@ -1,0 +1,10 @@
+{
+	"version": "2.0",
+	"name": "my.ui.lib.library-preload",
+	"modules": {
+		"my/ui/lib/myJS.js": "/* © */\n\"use strict\";function myFunction(n,o){return n+o}/**\n* This is a copyright comment\n*/\n/* (c) */\n/* released under */\n/* license */\nconsole.log(\"myJS\");",
+		"my/ui/lib/myJSON.json": "{\"my\":\"json\"}",
+		"my/ui/lib/myXML.xml": "<my>XML</my>\n",
+		"my/ui/lib/myXMLWithHtmlPre.xml": "<my>XML</my>\n<!-- A comment in XML is the same as in HTML -->\n<html:pre>   </html:pre>"
+	}
+}
