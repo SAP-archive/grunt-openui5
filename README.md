@@ -164,5 +164,115 @@ grunt.initConfig({
 Creates
 - tmp/my/ui/lib/library-preload.json
 
+## "openui5_connect" task
+
+### Overview
+
+Provides middleware for the [grunt-contrib-connect](https://github.com/gruntjs/grunt-contrib-connect) task to run a web server.  
+This task will configure the `connect` task target with the same name and invoke it with the provided arguments.
+
+### Options
+
+#### contextpath
+
+Type: `string`  
+Default value: `/`  
+
+The contextpath for all middlewares provided by this task.
+
+#### appresources
+
+Type: `array` of `string`
+
+Directories that should be served under the root `/` path.
+
+Example
+```js
+appresources: 'webapp'
+```
+```
+webapp
+  - dir
+    - index.html
+```
+`http://localhost/contextpath/dir/index.html`
+
+#### resources
+
+Type: `array` of `string`
+
+Directories that should be served under the `/resources` path.
+
+Example
+```js
+resources: 'src'
+```
+```
+src
+  - my
+    - lib
+      - Button.js
+```
+`http://localhost/contextpath/resources/my/lib/Button.js`
+
+#### testresources
+
+Type: `array` of `string`
+
+Directories that should be served under the `/test-resources` path.
+
+Example
+```js
+testresources: 'test'
+```
+```
+test
+  - my
+    - lib
+      - Button.html
+```
+`http://localhost/contextpath/test-resources/my/lib/Button.html`
+
+#### cors
+
+Type: `object`  
+Default: `null`
+
+Configuration for [node-cors](https://github.com/troygoode/node-cors/) to enable Cross Origin Resource Sharing (CORS).
+
+Example
+```js
+cors: {
+  origin: '*'
+}
+```
+
+### Usage Examples
+
+#### App
+
+This example will run a web server at `http://localhost:8000/`.  
+It serves the `webapp` directory at root level and the openui5 resources at `http://localhost:8000/resources/*`.
+
+```js
+connect: {
+  server: {
+    options: {
+      port: 8000
+    }
+  }
+},
+
+openui5_connect: {
+  server: {
+    options: {
+      appresources: 'webapp',
+      resources: 'path/to/openui5/resources'
+    }
+  }
+
+}
+```
+
 ## Contributing
 See [CONTRIBUTING.md](CONTRIBUTING.md).

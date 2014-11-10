@@ -17,6 +17,7 @@
 
 var assert = require('assert');
 var http = require('http');
+var async = require('async');
 
 function getHttpStatus (sUrl, fnCallback) {
 	var oOptions = {
@@ -25,7 +26,6 @@ function getHttpStatus (sUrl, fnCallback) {
 		path: sUrl,
 		method: 'GET'
 	};
-	console.log('start ' + sUrl);
 
 	var oRequest = http.request(oOptions, function (oResponse) {
 
@@ -111,6 +111,66 @@ describe('openui5 connect should return status 404 not found for', function() {
 	it('a file in the app resources', function(fnDone) {
 
 		fnStatusNotFoundTestCase('/resources/someHtml.html', fnDone);
+
+	});
+
+});
+
+function connectTestcase (fnDone, sUrl) {
+	var sExpectedData = '',
+		sActualData = '',
+		iExpectedStatusCode,
+		iActualStatusCode,
+		aCalls = [];
+
+	aCalls.push(function (fnCallback) {
+
+		http.get('http://localhost:9000/' + sUrl, function (oResponse) {
+			oResponse.on('data', function(oData) {
+				sExpectedData += oData;
+			});
+			iExpectedStatusCode = oResponse.statusCode;
+			oResponse.on('end', fnCallback);
+		});
+
+	});
+
+	aCalls.push(function (fnCallback) {
+
+		http.get('http://localhost:8080/mycontext/proxy/http/localhost:9000/' + sUrl, function (oResponse) {
+			oResponse.on('data', function (oData) {
+				sActualData += oData;
+			});
+			iActualStatusCode = oResponse.statusCode;
+			oResponse.on('end', fnCallback);
+		});
+
+	});
+
+	async.parallel(aCalls, function() {
+		assert.equal(sExpectedData, sActualData);
+		assert.equal(iExpectedStatusCode, iActualStatusCode);
+		fnDone();
+	});
+}
+
+describe('openui5 connect should proxy requests', function () {
+
+	it('proxies a request to an existing resource', function (done) {
+
+		connectTestcase(done, 'mycontext/resources/someHtml.html');
+
+	});
+
+	it('proxies a request to an non existing resource', function (done) {
+
+		connectTestcase(done, 'mycontext/resources/hundekuchen.js');
+
+	});
+
+	it('proxies a request to an non existing resource not in the context', function (done) {
+
+		connectTestcase(done, 'any/other/url.js');
 
 	});
 

@@ -109,13 +109,44 @@ module.exports = function(grunt) {
 			}
 		},
 
-		openui5_connect : {
-			options: {
-				port: 8080,
-				keepalive: false
-			},
+		connect: {
 
 			connectTest: {
+				options: {
+					port: 8080
+				}
+			},
+
+			serverToBeProxified: {
+				options: {
+					port: 9000
+				}
+			}
+
+		},
+
+		'openui5_connect': {
+
+			connectTest: {
+				options: {
+					appresources: [
+						'test/connect/fixtures',
+						'test/connect/fixtures/app'
+					],
+					resources: [
+						'test/connect/fixtures/someLib/resources',
+						'test/connect/fixtures/anotherLib/res'
+					],
+					testresources: [
+						'test/connect/fixtures/someLib/test-resources',
+						'test/connect/fixtures/anotherLib/testres'
+					],
+					contextpath: 'mycontext',
+					proxypath: 'proxy'
+				}
+			},
+
+			serverToBeProxified: {
 				options: {
 					appresources: [
 						'test/connect/fixtures',

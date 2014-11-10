@@ -14,120 +14,101 @@
 
 'use strict';
 
-var oui5connect = require('connect-openui5'),
-	cors = require('cors');
+var openui5 = {
+	connect: require('connect-openui5')
+};
+var cors = require('cors');
+var urljoin = require('url-join');
 
-// connect server
 module.exports = function(grunt, config) {
 
-	/*
-	// some playground testing
-	grunt.event.on('watch', function(action, filepath) {
-		console.log("Resource changed: " + filepath + " - action: " + action);
-	});
-	*/
-
-	grunt.registerMultiTask('openui5_connect', 'Grunt task to start a connect server', function(mode) {
+	grunt.registerMultiTask('openui5_connect', 'Grunt task to start an OpenUI5 connect server', function() {
 
 		// Merge task-specific and/or target-specific options with these defaults.
-		var configOptions = this.options({
-			contextpath: '',
+		var options = this.options({
+			contextpath: '/',
 			appresources: [],
 			resources: [],
-			registerResources: true,
 			testresources: [],
-			registerTestresources: true,
-			useLess: false,
-			keepalive: true
+			cors: null,
+			proxypath: null
 		});
 
-		grunt.config(['connect'], {
+		// normalize strings to arrays for "resources" options
+		['appresources', 'resources', 'testresources'].forEach(function(optionName) {
+			var option = options[optionName];
+			if (typeof option === 'string') {
+				options[optionName] = [ option ];
+			}
+		});
 
-			// default options
-			options: {
+		var target = this.target;
+		var args = this.args;
 
-				// makes the server accessible from the outside
-				hostname: '0.0.0.0',
+		// Make sure the same target is configured for the 'connect' task
+		this.requiresConfig(['connect', this.target]);
 
-				// port can be specified via grunt option: --port=8080
-				onCreateServer: function(server, connect, options) {
-					var port = configOptions.port;
-					options.port = typeof port !== 'undefined' ? port : 8080;
-				},
+		// Adopt connect middleware
+		grunt.config(['connect', target, 'options', 'middleware'], function(connect, connectOptions, middlewares) {
+			middlewares = []; // clear existing middlewares
 
-				// enable injecting livereload script into html pages
-				livereload: configOptions.livereload || false
+			// get connect app instance
+			var app = connect();
 
-			},
-
-			// for development serve all projects from the individual src folders
-			run: {
-
-				options: {
-
-					// add middleware to remove testsuite segment from url
-					// add .properties Content-Type middleware
-					middleware: function(connect, options, aMiddleware) {
-
-						aMiddleware = []; // ignore the original middleware
-
-						// Cors header must be set on all responses
-						if (configOptions.cors) {
-							aMiddleware.push(cors(configOptions.cors));
-						}
-
-						// register a context handler for testsuite and a properties handler
-						// for the I18N files which are ISO-8859-1 encoded and the header must specify this
-						// this will rewrite the requests url and prepend the context path. This will be undone by the uncontext middleware
-						if (configOptions.contextpath) {
-							aMiddleware.push(oui5connect.context(configOptions.contextpath));
-						}
-						aMiddleware.push(oui5connect.properties());
-
-						// register the less on-the-fly compiler handler
-						if (configOptions.useLess) {
-							aMiddleware.push(connect().use('/resources', oui5connect.less({
-									paths: configOptions.resources
-							})));
-						}
-
-						// register the handler for application resources, resources and test resources
-						configOptions.appresources.forEach(function(sPath) {
-							aMiddleware.push(connect().use('/', connect.static(sPath)));
-						});
-						if (configOptions.registerResources) {
-							configOptions.resources.forEach(function(sPath) {
-								aMiddleware.push(connect().use('/resources', connect.static(sPath, {hidden:true})));
-							});
-						}
-						if (configOptions.registerTestresources) {
-							configOptions.testresources.forEach(function(sPath) {
-								aMiddleware.push(connect().use('/test-resources', connect.static(sPath)));
-							});
-						}
-
-						// register the discovery service
-						aMiddleware.push(oui5connect.discovery({
-							contextpath: configOptions.contextpath,
-							appresources: configOptions.appresources,
-							resources: configOptions.resources,
-							testresources: configOptions.testresources
-						}));
-
-						return aMiddleware;
-
-					}
-
+			// adds the middleware (with optional context url)
+			function mountMiddleware(middleware, context) {
+				if (typeof context === 'string') {
+					middleware = app.use(urljoin('/', options.contextpath, context), middleware);
 				}
+				middlewares.push(middleware);
 			}
 
+			// returns a function that mounts the static middleware using the provided path
+			function mountStatic(context) {
+				return function(staticPath) {
+					mountMiddleware(connect.static(staticPath, { hidden: true }), context);
+				};
+			}
+
+			// fix serving *.properties files (encoding)
+			mountMiddleware(openui5.connect.properties());
+
+			// enable cors when configured and pass in configuration
+			if (options.cors) {
+				mountMiddleware(cors(options.cors));
+			}
+
+			// mount discovery middleware (for testsuite)
+			mountMiddleware(openui5.connect.discovery({
+				appresources: options.appresources,
+				resources: options.resources,
+				testresources: options.testresources
+			}), '/discovery');
+
+			// mount all static paths
+			options.appresources.forEach(mountStatic('/'));
+			options.resources.forEach(mountStatic('/resources'));
+			options.testresources.forEach(mountStatic('/test-resources'));
+
+			// compile themes on-the-fly using openui5 less middleware
+			mountMiddleware(openui5.connect.less({
+				rootPaths: options.resources
+			}), '/resources');
+
+			// mount a generic proxy
+			if (options.proxypath) {
+				mountMiddleware(openui5.connect.proxy(), options.proxypath);
+			}
+
+			return middlewares;
 		});
 
-		if (grunt.option('watch')) {
-			grunt.task.run([ 'connect:run', 'watch' ]);
-		} else {
-			grunt.task.run([ 'connect:run' + (configOptions.keepalive ? ':keepalive' : '') ]);
+		// Run the 'connect' task with the same target and arguments
+		var task = 'connect:' + target;
+		if (args.length > 0) {
+			task += ':' + args.join(':');
 		}
+		grunt.task.run(task);
 
 	});
 
