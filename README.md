@@ -247,6 +247,20 @@ cors: {
 }
 ```
 
+#### proxypath
+
+Type: `string`
+
+If set, a generic proxy under the specified path will be provided to consume resources from other origins without causing CORS issues.
+
+URL-Format: `proxypath/{http|https}/{host}/{path}`
+
+Example
+```js
+proxypath: 'proxy'
+```
+`http://localhost/contextpath/proxy/http/example.com/foo`
+
 ### Usage Examples
 
 #### App
