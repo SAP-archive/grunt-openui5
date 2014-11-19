@@ -5,6 +5,10 @@
   "scripts": {
     "test": "grunt"
   },
+  "files": [
+    "tasks",
+    "LICENSE.txt"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/SAP/grunt-openui5.git"
