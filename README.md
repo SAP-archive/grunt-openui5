@@ -22,7 +22,7 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-openui5');
 ```
 
-## "openui5_theme" task
+## openui5_theme
 
 ### Overview
 
@@ -113,7 +113,7 @@ Creates the following files
 - tmp/my/ui/lib/themes/bar/library-RTL.css
 - tmp/my/ui/lib/themes/bar/library-parameters.json
 
-## "openui5_library_preload" task
+## openui5_library_preload
 
 ### Overview
 
@@ -164,7 +164,7 @@ grunt.initConfig({
 Creates
 - tmp/my/ui/lib/library-preload.json
 
-## "openui5_connect" task
+## openui5_connect
 
 ### Overview
 
