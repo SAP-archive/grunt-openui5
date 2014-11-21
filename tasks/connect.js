@@ -17,8 +17,38 @@
 var openui5 = {
 	connect: require('connect-openui5')
 };
+var inject = require('connect-inject');
 var cors = require('cors');
 var urljoin = require('url-join');
+var multiline = require('multiline');
+
+var liveReloadLessCssPlugin = multiline(function() {/*
+var LiveReloadPluginLessCss = function(window, host) {
+	this.window = window;
+	this.host = host;
+};
+LiveReloadPluginLessCss.identifier = 'less_css';
+LiveReloadPluginLessCss.version = '1.0';
+LiveReloadPluginLessCss.prototype.reload = function(path, options) {
+	// do only run this if less is not loaded (LiveReload LessPlugin will handle this)
+	if (!this.window.less) {
+		// reload stylesheets (css) also if a less file was changed
+		if (path.match(/\.less$/i)) {
+			return this.window.LiveReload.reloader.reloadStylesheet(path);
+		}
+		if (options.originalPath.match(/\.less$/i)) {
+			return this.window.LiveReload.reloader.reloadStylesheet(options.originalPath);
+		}
+	}
+	return false;
+};
+LiveReloadPluginLessCss.prototype.analyze = function() {
+	// disable the plugin if less is loaded (LiveReload LessPlugin will handle this)
+	return {
+		disable: (this.window.less && this.window.less.refresh)
+	};
+};
+*/});
 
 module.exports = function(grunt, config) {
 
@@ -68,6 +98,18 @@ module.exports = function(grunt, config) {
 				return function(staticPath) {
 					mountMiddleware(connect.static(staticPath, { hidden: true }), context);
 				};
+			}
+
+			// handle livereload option including css/less files (reload css if less files got changed)
+			if (connectOptions.livereload !== false) {
+				var port = (connectOptions.livereload === true) ? 35729 : connectOptions.livereload;
+				connectOptions.livereload = false; // prevent grunt-contrib-connect from inserting the livereload script
+				mountMiddleware(inject({
+					snippet: [
+						'\n<script>//<![CDATA[\n' + liveReloadLessCssPlugin + '\n//]]></script>\n',
+						'\n<script>//<![CDATA[\ndocument.write("<script src=\'//" + (location.hostname || "localhost") + ":' + port + '/livereload.js?snipver=1\'><\\/script>")\n//]]></script>\n'
+					]
+				}));
 			}
 
 			// fix serving *.properties files (encoding)

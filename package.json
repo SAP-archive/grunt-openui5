@@ -27,9 +27,11 @@
   },
   "dependencies": {
     "async": "^0.9.0",
+    "connect-inject": "^0.3.2",
     "connect-openui5": "^0.3.0",
     "cors": "^2.0.0",
     "less-openui5": "^0.1.1",
+    "multiline": "^1.0.1",
     "object-assign": "^1.0.0",
     "pretty-data": "^0.40.0",
     "uglify-js": "^2.4.15",
