@@ -1,0 +1,7 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <ActionSheet title="Choose Your Action" showCancelButton="true" placement="Top">
+        <buttons>
+            <Button text="{i18n>MARK_AS_FAVORITE}" icon="sap-icon://favorite" press="onPress" />
+        </buttons>
+    </ActionSheet>
+</core:FragmentDefinition>
