@@ -16,190 +16,216 @@
 
 module.exports = function(grunt) {
 
-	// Project configuration.
-	grunt.initConfig({
+    // Project configuration.
+    grunt.initConfig({
 
-		eslint: {
-			all: [
-				'Gruntfile.js',
-				'tasks/*.js',
-				'<%= mochaTest.tests.src %>'
-			]
-		},
+        eslint: {
+            all: [
+                'Gruntfile.js',
+                'tasks/*.js',
+                '<%= mochaTest.tests.src %>'
+            ]
+        },
 
-		// Before generating any new files, remove any previously-created files.
-		clean: {
-			tests: ['tmp']
-		},
+        // Before generating any new files, remove any previously-created files.
+        clean: {
+            tests: ['tmp']
+        },
 
-		// Configuration to be run (and then tested).
-		'openui5_theme': {
-			'default_options': {
-				options: {},
-				files: [
-					{
-						expand: true,
-						cwd: 'test/theme/fixtures/lib1/my/theme/foo',
-						src: 'foo.less',
-						dest: 'tmp/theme/default_options'
-					}
-				]
-			},
-			'compress_option': {
-				options: {
-					compiler: {
-						compress: true
-					}
-				},
-				files: [
-					{
-						expand: true,
-						cwd: 'test/theme/fixtures/lib1/my/theme/foo',
-						src: 'foo.less',
-						dest: 'tmp/theme/compress_option'
-					}
-				]
-			},
-			'rootPaths_option': {
-				options: {
-					rootPaths: [
-						'test/theme/fixtures/lib1',
-						'test/theme/fixtures/lib2'
-					]
-				},
-				files: [
-					{
-						expand: true,
-						cwd: 'test/theme/fixtures/lib2/my/theme/bar',
-						src: 'bar.less',
-						dest: 'tmp/theme/rootPaths_option'
-					}
-				]
-			}
-		},
+        // Configuration to be run (and then tested).
+        'openui5_theme': {
+            'default_options': {
+                options: {},
+                files: [{
+                    expand: true,
+                    cwd: 'test/theme/fixtures/lib1/my/theme/foo',
+                    src: 'foo.less',
+                    dest: 'tmp/theme/default_options'
+                }]
+            },
+            'compress_option': {
+                options: {
+                    compiler: {
+                        compress: true
+                    }
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'test/theme/fixtures/lib1/my/theme/foo',
+                    src: 'foo.less',
+                    dest: 'tmp/theme/compress_option'
+                }]
+            },
+            'rootPaths_option': {
+                options: {
+                    rootPaths: [
+                        'test/theme/fixtures/lib1',
+                        'test/theme/fixtures/lib2'
+                    ]
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'test/theme/fixtures/lib2/my/theme/bar',
+                    src: 'bar.less',
+                    dest: 'tmp/theme/rootPaths_option'
+                }]
+            }
+        },
 
-		// Configuration to be run (and then tested).
-		'openui5_library_preload': {
-			'default_options': {
-				options: {
-					libraryName: 'my.ui.lib',
-					dest: 'tmp/library_preload/default_options/lib1'
-				},
-				files: [
-					{
-						expand: true,
-						cwd: 'test/library_preload/fixtures/lib1',
-						src: 'my/ui/lib/**/*.{js,json,xml}'
-					}
-				]
-			},
-			'raw_options': {
-				options: {
-					libraryName: 'my.ui.lib',
-					dest: 'tmp/library_preload/raw_options/lib1',
-					compress: false
-				},
-				files: [
-					{
-						expand: true,
-						cwd: 'test/library_preload/fixtures/lib1',
-						src: 'my/ui/lib/**/*.{js,json,xml}'
-					}
-				]
-			}
-		},
+        // Configuration to be run (and then tested).
+        'openui5_library_preload': {
+            'default_options': {
+                options: {
+                    libraryName: 'my.ui.lib',
+                    dest: 'tmp/library_preload/default_options/lib1'
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'test/library_preload/fixtures/lib1',
+                    src: 'my/ui/lib/**/*.{js,json,xml}'
+                }]
+            },
+            'raw_options': {
+                options: {
+                    libraryName: 'my.ui.lib',
+                    dest: 'tmp/library_preload/raw_options/lib1',
+                    compress: false
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'test/library_preload/fixtures/lib1',
+                    src: 'my/ui/lib/**/*.{js,json,xml}'
+                }]
+            }
+        },
+        openui5_component_preload: {
+            'default_options': {
+                options: {
+                    componentName: 'mycomp',
+                    dest: 'tmp/component_preload/default_options'
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'test/component_preload/fixtures',
+                    src: [
+                        'mycomp/**/*.js',
+                        '!mycomp/Grunt.js',
+                        '!mycomp/Component-preload*.js',
+                        'mycomp/{fragments,view,utils}/*.{js,json,xml}'
+                    ]
+                }]
+            },
+            'raw_options': {
+                options: {
+                    componentName: 'mycomp',
+                    dest: 'tmp/component_preload/raw_options',
+                    compress: false
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'test/component_preload/fixtures',
+                    src: [
+                        'mycomp/**/*.js',
+                        '!mycomp/Grunt.js',
+                        '!mycomp/Component-preload*.js',
+                        'mycomp/{fragments,view,utils}/*.{js,json,xml}'
+                    ]
+                }]
+            }
+        },
 
-		connect: {
+        connect: {
 
-			connectTest: {
-				options: {
-					port: 8080
-				}
-			},
+            connectTest: {
+                options: {
+                    port: 8080
+                }
+            },
 
-			serverToBeProxified: {
-				options: {
-					port: 9000
-				}
-			}
+            serverToBeProxified: {
+                options: {
+                    port: 9000
+                }
+            }
 
-		},
+        },
 
-		'openui5_connect': {
+        'openui5_connect': {
 
-			connectTest: {
-				options: {
-					appresources: [
-						'test/connect/fixtures',
-						'test/connect/fixtures/app'
-					],
-					resources: [
-						'test/connect/fixtures/someLib/resources',
-						'test/connect/fixtures/anotherLib/res'
-					],
-					testresources: [
-						'test/connect/fixtures/someLib/test-resources',
-						'test/connect/fixtures/anotherLib/testres'
-					],
-					contextpath: 'mycontext',
-					proxypath: 'proxy'
-				}
-			},
+            connectTest: {
+                options: {
+                    appresources: [
+                        'test/connect/fixtures',
+                        'test/connect/fixtures/app'
+                    ],
+                    resources: [
+                        'test/connect/fixtures/someLib/resources',
+                        'test/connect/fixtures/anotherLib/res'
+                    ],
+                    testresources: [
+                        'test/connect/fixtures/someLib/test-resources',
+                        'test/connect/fixtures/anotherLib/testres'
+                    ],
+                    contextpath: 'mycontext',
+                    proxypath: 'proxy'
+                }
+            },
 
-			serverToBeProxified: {
-				options: {
-					appresources: [
-						'test/connect/fixtures',
-						'test/connect/fixtures/app'
-					],
-					resources: [
-						'test/connect/fixtures/someLib/resources',
-						'test/connect/fixtures/anotherLib/res'
-					],
-					testresources: [
-						'test/connect/fixtures/someLib/test-resources',
-						'test/connect/fixtures/anotherLib/testres'
-					],
-					contextpath: 'mycontext'
-				}
-			}
+            serverToBeProxified: {
+                options: {
+                    appresources: [
+                        'test/connect/fixtures',
+                        'test/connect/fixtures/app'
+                    ],
+                    resources: [
+                        'test/connect/fixtures/someLib/resources',
+                        'test/connect/fixtures/anotherLib/res'
+                    ],
+                    testresources: [
+                        'test/connect/fixtures/someLib/test-resources',
+                        'test/connect/fixtures/anotherLib/testres'
+                    ],
+                    contextpath: 'mycontext'
+                }
+            }
 
-		},
+        },
 
-		// Unit tests.
-		mochaTest: {
-			tests: {
-				src: ['test/*_test.js']
-			},
-			connectTest: {
-				src: ['test/connect_test.js' ]
-			}
-		}
+        // Unit tests.
+        mochaTest: {
+            tests: {
+                src: ['test/*_test.js']
+            },
+            connectTest: {
+                src: ['test/connect_test.js']
+            }
+        }
 
-	});
+    });
 
-	// Actually load this plugin's task(s).
-	grunt.loadTasks('tasks');
+    // Actually load this plugin's task(s).
+    grunt.loadTasks('tasks');
 
-	// These plugins provide necessary tasks.
-	grunt.loadNpmTasks('grunt-contrib-connect');
-	grunt.loadNpmTasks('grunt-eslint');
-	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-mocha-test');
+    // These plugins provide necessary tasks.
+    grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-eslint');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-mocha-test');
 
-	// Whenever the "test" task is run, first clean the "tmp" dir, then run this
-	// plugin's task(s), then test the result.
-	grunt.registerTask('test', [
-		'clean',
+    // Whenever the "test" task is run, first clean the "tmp" dir, then run this
+    // plugin's task(s), then test the result.
+    grunt.registerTask('test', [
+        'clean',
 
-		'openui5_theme',
-		'openui5_library_preload',
-		'openui5_connect',
+        'openui5_theme',
+        'openui5_library_preload',
+        'openui5_component_preload',
+        'openui5_connect',
 
-		'mochaTest:tests'
-	]);
+        'mochaTest:tests'
+    ]);
 
-	// By default, lint and run all tests.
-	grunt.registerTask('default', [ 'eslint', 'test']);
+    // By default, lint and run all tests.
+    grunt.registerTask('default', ['eslint', 'test']);
 
 };

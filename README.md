@@ -164,6 +164,61 @@ grunt.initConfig({
 Creates
 - tmp/my/ui/lib/library-preload.json
 
+## openui5_component_preload
+
+### Overview
+
+Creates a "Component-preload.json" file which contains all files/modules specified in the task configuration. A component preload file optimizes performance by reducing the number of request made to the server.
+
+### Options
+
+#### componentName
+Type: `string`
+
+Name of the component (e.g. foo.bar)
+
+#### dest
+Type: `string`  
+Default value: `.`
+
+Path to the dest folder in which the preload file should be created. All other dest paths (from the files configuration) will be ignored.
+
+#### compress
+Type: `boolean`
+Default value: `true`
+
+Optional parameter to turn off the compression/minifiers on the files.
+- Javascript is minified using [UglifyJS2](https://github.com/mishoo/UglifyJS2) and copyright comments are preserved (comments matching regular expression `/copyright|\(c\)|released under|license|\u00a9/i` )
+- XML is minified using [pretty-data](https://github.com/vkiryukhin/pretty-data)
+- JSON is parsed for correctness and to remove extra whitespace
+
+### Usage Examples
+
+```js
+grunt.initConfig({
+  openui5_component_preload: {
+    'default_options': {
+      options: {
+        componentName: 'mycomp',
+          dest: 'tmp'
+      },
+      files: [{
+        expand: true,
+        cwd: 'test/component_preload/fixtures',
+           src: [
+            'mycomp/**/*.js',
+            '!mycomp/Grunt.js',
+            '!mycomp/Component-preload*.js',
+            'mycomp/{fragments,view,utils}/*.{js,json,xml}'
+           ]
+      }]
+  },
+});
+```
+
+Creates
+- tmp/mycomp/Component-preload.json
+
 ## openui5_connect
 
 ### Overview
