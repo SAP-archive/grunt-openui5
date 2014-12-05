@@ -171,7 +171,10 @@ Creates
 Provides middleware for the [grunt-contrib-connect](https://github.com/gruntjs/grunt-contrib-connect) task to run a web server.  
 This task will configure the `connect` task target with the same name and invoke it with the provided arguments.
 
+
 ### Options
+
+> Note: This task provides options on top of the `connect` task. For general options, see [grunt-contrib-connect](https://github.com/gruntjs/grunt-contrib-connect#connect-task).
 
 #### contextpath
 
