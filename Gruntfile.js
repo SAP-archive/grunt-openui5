@@ -79,83 +79,7 @@ module.exports = function(grunt) {
 		},
 
 		// Configuration to be run (and then tested).
-		'openui5_library_preload': {
-			'default_options': {
-				options: {
-					libraryName: 'my.ui.lib',
-					dest: 'tmp/library_preload/default_options/lib1'
-				},
-				files: [
-					{
-						expand: true,
-						cwd: 'test/library_preload/fixtures/lib1',
-						src: 'my/ui/lib/**/*.{js,json,xml}'
-					}
-				]
-			},
-			'raw_options': {
-				options: {
-					libraryName: 'my.ui.lib',
-					dest: 'tmp/library_preload/raw_options/lib1',
-					compress: false
-				},
-				files: [
-					{
-						expand: true,
-						cwd: 'test/library_preload/fixtures/lib1',
-						src: 'my/ui/lib/**/*.{js,json,xml}'
-					}
-				]
-			}
-		},
-
-		// Configuration to be run (and then tested).
-		'openui5_preload': { // maybe other task name?
-
-			// 'examples': {
-			//
-			// 	options: {
-			//
-			// 		resources: 'test/preload/component/fixtures/app1',
-			// 		// OR
-			// 		resources: [
-			// 			{
-			// 				cwd: 'test/preload/component/fixtures/app1',
-			// 				prefix: 'my/app', // default: ''
-			// 				//autoDetectPrefix: false, // default: false (analyzes files (declare/define)) escope -> var definitions (detect globals) -> see eslint no-global rule
-			// 				src: [ '**', '!*.bla' ], // default: see default_includes
-			// 				ignoreDefaultFilters: false // default: false
-			// 			},
-			// 			'test/preload/component/fixtures/app1'
-			// 		],
-			//
-			// 		dest: 'tmp/preload/component/default_options/app1'
-			//
-			// 	},
-			//
-			// 	components: true, // looks for **/Component.js files and writes **/Component-preload.js
-			// 	components: 'my/**', // looks for my/**/Component.js files and writes my/**/Component-preload.js
-			// 	components: [
-			// 		'my/app'
-			// 	],
-			// 	components: {
-			// 		'my/app': {
-			// 			// TODO
-			// 		}
-			// 	},
-			//
-			// 	libraries: true, // looks for **/.library files and writes **/library-preload.js
-			// 	libraries: 'my/**', // looks for my/**/.library files and writes my/**/library-preload.js
-			// 	libraries: [
-			// 		'my/ui/lib'
-			// 	],
-			// 	libraries: {
-			// 		'my/ui/lib': {
-			// 			// TODO
-			// 		}
-			// 	}
-			//
-			// },
+		'openui5_preload': {
 
 			'component_default_options': {
 				options: {
@@ -280,12 +204,6 @@ module.exports = function(grunt) {
 		mochaTest: {
 			tests: {
 				src: ['test/*_test.js']
-			},
-			connectTest: {
-				src: ['test/connect_test.js' ]
-			},
-			preload: {
-				src: 'test/preload_test.js'
 			}
 		}
 
@@ -306,19 +224,10 @@ module.exports = function(grunt) {
 		'clean',
 
 		'openui5_theme',
-		'openui5_library_preload',
 		'openui5_preload',
 		'openui5_connect',
 
 		'mochaTest:tests'
-	]);
-
-	grunt.registerTask('test-preload', [
-		'clean',
-
-		'openui5_preload',
-
-		'mochaTest:preload'
 	]);
 
 	// By default, lint and run all tests.
