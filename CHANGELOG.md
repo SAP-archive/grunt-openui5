@@ -1,3 +1,17 @@
+# 0.5.0 (2014-12-08)
+
+### Breaking changes
+- openui5_library_preload task
+  - removed, use openui5_preload task instead [`9e8e556`](https://github.com/SAP/grunt-openui5/commit/9e8e55666a548262532b2a84799d68745e796935)
+
+### Features
+- openui5_preload task
+  - new task to create preload files for components / libraries [`816507d`](https://github.com/SAP/grunt-openui5/commit/816507d045a11bf9dbb0370d69151ad5f341b6ae)
+
+### All changes
+[`0.4.0...0.5.0`](https://github.com/SAP/grunt-openui5/compare/0.4.0...0.5.0)
+
+
 # 0.4.0 (2014-11-21)
 
 ### Breaking changes
