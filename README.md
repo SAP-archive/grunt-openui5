@@ -372,6 +372,12 @@ proxypath: 'proxy'
 ```
 `http://localhost/contextpath/proxy/http/example.com/foo`
 
+#### proxyOptions
+
+Type: `object`
+
+Options for [connect-openui5 proxy](https://github.com/SAP/connect-openui5#proxyoptions).
+
 ### Usage Examples
 
 #### App

@@ -61,7 +61,8 @@ module.exports = function(grunt, config) {
 			resources: [],
 			testresources: [],
 			cors: null,
-			proxypath: null
+			proxypath: null,
+			proxyOptions: null
 		});
 
 		// normalize strings to arrays for "resources" options
@@ -139,7 +140,7 @@ module.exports = function(grunt, config) {
 
 			// mount a generic proxy
 			if (options.proxypath) {
-				mountMiddleware(openui5.connect.proxy(), options.proxypath);
+				mountMiddleware(openui5.connect.proxy(typeof options.proxyOptions === 'object' ? options.proxyOptions : undefined), options.proxypath);
 			}
 
 			return middlewares;
