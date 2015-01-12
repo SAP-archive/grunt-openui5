@@ -415,4 +415,4 @@ See [CHANGELOG.md](CHANGELOG.md).
 
 ## Lisense
 
-[Apache License 2.0](http: //www.apache.org/licenses/LICENSE-2.0) © 2014 [SAP SE](http://www.sap.com)
+[Apache License 2.0](http: //www.apache.org/licenses/LICENSE-2.0) © 2015 [SAP SE](http://www.sap.com)
