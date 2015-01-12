@@ -123,6 +123,11 @@ module.exports = function (grunt) {
 				var preloadOption = preloadOptions[preloadPattern];
 				var preloadFiles = grunt.file.match(preloadPattern + '/' + preloadInfo.indicatorFile, resourceFiles);
 
+				if (preloadFiles.length < 1) {
+					grunt.log.error('No "' + preloadInfo.indicatorFile + '" found for pattern "' + preloadPattern + '"');
+					return;
+				}
+
 				preloadFiles.forEach(function(preloadFile) {
 					var preloadDir = path.dirname(preloadFile);
 					var preloadModuleName = preloadDir + '/' + preloadInfo.moduleName;
