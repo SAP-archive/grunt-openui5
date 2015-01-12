@@ -1,3 +1,17 @@
+# 0.6.0 (2015-01-12)
+
+### Features
+- openui5_connect task
+  - add proxyOptions [`f823c65`](https://github.com/SAP/grunt-openui5/commit/f823c655e72ce940a2b6abc4ee03aaa247a55bed)
+
+### Fixes
+- openui5_preload task
+  - error message when no module file could be found [`f6f18ae`](https://github.com/SAP/grunt-openui5/commit/f6f18ae9043846e367ab98f01494b00844e346ca)
+
+### All changes
+[`0.5.0...0.6.0`](https://github.com/SAP/grunt-openui5/compare/0.5.0...0.6.0)
+
+
 # 0.5.0 (2014-12-08)
 
 ### Breaking changes
