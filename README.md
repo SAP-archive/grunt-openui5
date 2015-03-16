@@ -277,8 +277,8 @@ grunt.initConfig({
 ### Overview
 
 Provides middleware for the [grunt-contrib-connect](https://github.com/gruntjs/grunt-contrib-connect) task to run a web server.  
-This task will configure the `connect` task target with the same name and invoke it with the provided arguments.
-
+This task will configure the `connect` task target with the same name and invoke it with the provided arguments.  
+As this task creates it's own middleware, the `connect` task's `base` option will not be respected. If you want to modify the middleware, provide a function callback as `middleware` option (see [here](https://github.com/gruntjs/grunt-contrib-connect#middleware)). The function will be called after the middleware has been created.
 
 ### Options
 
@@ -401,7 +401,38 @@ openui5_connect: {
       resources: 'path/to/openui5/resources'
     }
   }
+}
+```
 
+#### Custom middleware
+
+This example will add custom middleware before (unshift) and after (push) the middlewares created by this task.
+
+```js
+connect: {
+  server: {
+    options: {
+      port: 8000,
+      middleware: function(connect, options, middlewares) {
+        middlewares.unshift(function(req, res, next) {
+          // before openui5 middleware
+        });
+        middlewares.push(function(req, res, next) {
+          // after openui5 middleware
+        });
+        return middlewares;
+      }
+    }
+  }
+},
+
+openui5_connect: {
+  server: {
+    options: {
+      appresources: 'webapp',
+      resources: 'path/to/openui5/resources'
+    }
+  }
 }
 ```
 

@@ -92,6 +92,12 @@ describe('openui5 connect should return status 200 ok for', function() {
 
 	});
 
+	it('a file from custom connect middleware', function(fnDone) {
+
+		fnStatusOkTestCase('/foo', fnDone);
+
+	});
+
 });
 
 describe('openui5 connect should return status 404 not found for', function() {

@@ -147,7 +147,13 @@ module.exports = function(grunt) {
 
 			connectTest: {
 				options: {
-					port: 8080
+					port: 8080,
+					middleware: function(connect, options, middlewares) {
+						middlewares.push(['/foo', function(req, res, next) {
+							res.end('bar');
+						}]);
+						return middlewares;
+					}
 				}
 			},
 

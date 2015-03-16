@@ -79,6 +79,9 @@ module.exports = function(grunt, config) {
 		// Make sure the same target is configured for the 'connect' task
 		this.requiresConfig(['connect', this.target]);
 
+		// save original middleware object before overwriting it
+		var vOriginalMiddleware = grunt.config(['connect', target, 'options', 'middleware']) || grunt.config(['connect', 'options', 'middleware']);
+
 		// Adopt connect middleware
 		grunt.config(['connect', target, 'options', 'middleware'], function(connect, connectOptions, middlewares) {
 			middlewares = []; // clear existing middlewares
@@ -141,6 +144,11 @@ module.exports = function(grunt, config) {
 			// mount a generic proxy
 			if (options.proxypath) {
 				mountMiddleware(openui5.connect.proxy(typeof options.proxyOptions === 'object' ? options.proxyOptions : undefined), options.proxypath);
+			}
+
+			// run original middleware function
+			if (typeof vOriginalMiddleware === 'function') {
+				middlewares = vOriginalMiddleware.call(this, connect, connectOptions, middlewares);
 			}
 
 			return middlewares;
