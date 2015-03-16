@@ -1,3 +1,20 @@
+# 0.7.0 (2015-03-16)
+
+### Features
+- openui5_connect task
+  - allow custom middleware (via [connect](https://github.com/gruntjs/grunt-contrib-connect) task [`middleware` function](https://github.com/gruntjs/grunt-contrib-connect#middleware)) [`1cab971`](https://github.com/SAP/grunt-openui5/commit/1cab9712343fe5e0c70fc98ba14e8425718d466e)
+- openui5_preload task
+  - improved error logging / log file compression [`aa16e59`](https://github.com/SAP/grunt-openui5/commit/aa16e59dbb4df9676f89ae8a95234aa289cd9c3d)
+
+### Others
+- openui5_connect task
+  - change deprecated usage of server-static "hidden" [`d3911ab`](https://github.com/SAP/grunt-openui5/commit/d3911ab3ce0b3eca8f68a06b0593131b4eb1a7b9)
+- bump dependencies [`f949f90`](https://github.com/SAP/grunt-openui5/commit/f949f90eb81190fb39b5102a40ba7c3c60e97621)
+
+### All changes
+[`0.6.0...0.7.0`](https://github.com/SAP/grunt-openui5/compare/0.6.0...0.7.0)
+
+
 # 0.6.0 (2015-01-12)
 
 ### Features
