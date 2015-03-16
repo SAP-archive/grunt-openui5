@@ -31,6 +31,7 @@
     "connect-openui5": "^0.4.0",
     "cors": "^2.0.0",
     "less-openui5": "^0.1.1",
+    "maxmin": "^1.0.1",
     "multiline": "^1.0.2",
     "pretty-data": "^0.40.0",
     "slash": "^1.0.0",

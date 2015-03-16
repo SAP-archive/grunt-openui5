@@ -18,6 +18,7 @@ var path = require('path');
 var slash = require('slash');
 var uglify = require('uglify-js');
 var pd = require('pretty-data').pd;
+var maxmin = require('maxmin');
 
 var defaultResourcePatterns = [
 	'**/*.js',
@@ -51,6 +52,13 @@ module.exports = function (grunt) {
 			options.resources = [ options.resources ];
 		}
 
+		if (options.resources.length === 0) {
+			grunt.fail.warn('"resources" option is not specified!');
+			return;
+		}
+
+		grunt.verbose.subhead('Collecting resources');
+
 		// process resources array
 		options.resources.forEach(function(resource) {
 			// transform string shorthand to object
@@ -64,19 +72,23 @@ module.exports = function (grunt) {
 				resource.prefix = '';
 			}
 
-			var resourcePatterns = resource.src ? resource.src : defaultResourcePatterns;
+			resource.src = resource.src || defaultResourcePatterns;
+
+			grunt.verbose.writeflags(resource, 'resource');
 
 			grunt.file.expand({
 				cwd: resource.cwd,
 				dot: true,
 				filter: 'isFile'
-			}, resourcePatterns).forEach(function(file) {
+			}, resource.src).forEach(function(file) {
 				var localFile = file;
 				if (resource.prefix) {
 					localFile = slash(path.join(resource.prefix, file));
 				}
+				var fullPath = path.join(resource.cwd, file);
+				grunt.verbose.write('Collecting ' + localFile + ' (' + fullPath + ')...').ok();
 				resourceMap[localFile] = {
-					fullPath: path.join(resource.cwd, file),
+					fullPath: fullPath,
 					prefix: resource.prefix
 				};
 			});
@@ -84,7 +96,17 @@ module.exports = function (grunt) {
 		});
 
 		var resourceFiles = Object.keys(resourceMap);
+
+		if (resourceFiles.length === 0) {
+			grunt.fail.warn('No files found. Check your "resources" option!');
+			return;
+		}
+
 		var preloadData = this.data;
+		if (!preloadData['components'] && !preloadData['libraries']) {
+			grunt.fail.warn('No preload type specified. Please provide "components" and/or "libraries" in task target object!');
+			return;
+		}
 
 		['components', 'libraries'].forEach(function(preloadType) {
 
@@ -119,18 +141,28 @@ module.exports = function (grunt) {
 				preloadOptions[pattern] = {};
 			}
 
-			Object.keys(preloadOptions).forEach(function(preloadPattern) {
+			var preloadOptionKeys = Object.keys(preloadOptions);
+
+			if (preloadOptionKeys.length === 0) {
+				grunt.log.writeflags(preloadOptions, 'preloadOptions');
+				grunt.fail.warn('No valid options provided for "' + preloadType + '" preload!');
+				return;
+			}
+
+			preloadOptionKeys.forEach(function(preloadPattern) {
 				var preloadOption = preloadOptions[preloadPattern];
 				var preloadFiles = grunt.file.match(preloadPattern + '/' + preloadInfo.indicatorFile, resourceFiles);
 
 				if (preloadFiles.length < 1) {
-					grunt.log.error('No "' + preloadInfo.indicatorFile + '" found for pattern "' + preloadPattern + '"');
+					grunt.fail.warn('No "' + preloadInfo.indicatorFile + '" found for pattern "' + preloadPattern + '"!');
 					return;
 				}
 
 				preloadFiles.forEach(function(preloadFile) {
 					var preloadDir = path.dirname(preloadFile);
 					var preloadModuleName = preloadDir + '/' + preloadInfo.moduleName;
+
+					grunt.verbose.subhead('Creating preload module for ' + preloadFile);
 
 					var preloadObject = {
 						version: '2.0',
@@ -146,13 +178,27 @@ module.exports = function (grunt) {
 
 					var preloadPatterns = preloadOption.src ? preloadOption.src : (preloadDir + '/**');
 					var preloadFiles = grunt.file.match(preloadPatterns, resourceFiles);
+					if (preloadFiles.length === 0) {
+						var patternsString = (typeof preloadPatterns === 'string') ? preloadPatterns : preloadPatterns.join('", "');
+						grunt.fail.warn('No files found for pattern(s): "' + patternsString + '"!');
+						return;
+					}
+
+					var iPreloadOriginalSize = 0, iPreloadCompressedSize = 0;
+
 					preloadFiles.forEach(function(preloadFile) {
 
 						var fileName = resourceMap[preloadFile].fullPath;
 						var fileContent = grunt.file.read(fileName);
 						var fileExtension = path.extname(fileName);
+						
+						var iOriginalSize, iCompressedSize;
 
 						if (options.compress) {
+
+							iOriginalSize = fileContent.length;
+							iPreloadOriginalSize += iOriginalSize;
+
 							switch (fileExtension) {
 							case '.js':
 								// Javascript files are processed by Uglify
@@ -178,6 +224,18 @@ module.exports = function (grunt) {
 
 								break;
 							}
+
+							iCompressedSize = fileContent.length;
+							iPreloadCompressedSize += iCompressedSize;
+
+						}
+
+						if (grunt.option('verbose')) {
+							var log = 'Adding ' + preloadFile;
+							if (iOriginalSize && iCompressedSize && iOriginalSize !== iCompressedSize) {
+								log += ' (' + maxmin({ length: iOriginalSize }, { length: iCompressedSize }) + ')';
+							}
+							grunt.verbose.writeln(log);
 						}
 
 						preloadObject.modules[preloadFile] = fileContent;
@@ -198,7 +256,11 @@ module.exports = function (grunt) {
 					destPath += preloadInfo.ext;
 
 					grunt.file.write(destPath, content);
-					grunt.log.writeln('File ' + destPath + ' created with ' + Object.keys(preloadObject.modules).length + ' files.');
+					var log = 'File ' + destPath + ' created with ' + Object.keys(preloadObject.modules).length + ' files';
+					if (iPreloadOriginalSize && iPreloadCompressedSize && iPreloadOriginalSize !== iPreloadCompressedSize) {
+						log += ' (' + maxmin({ length: iPreloadOriginalSize }, { length: iPreloadCompressedSize }) + ')';
+					}
+					grunt.log.writeln(log);
 
 				});
 
