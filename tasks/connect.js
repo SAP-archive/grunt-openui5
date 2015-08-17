@@ -17,6 +17,7 @@
 var openui5 = {
 	connect: require('connect-openui5')
 };
+var serveStatic = require('serve-static');
 var inject = require('connect-inject');
 var cors = require('cors');
 var urljoin = require('url-join');
@@ -100,7 +101,7 @@ module.exports = function(grunt, config) {
 			// returns a function that mounts the static middleware using the provided path
 			function mountStatic(context) {
 				return function(staticPath) {
-					mountMiddleware(connect.static(staticPath, { dotfiles: 'allow' }), context);
+					mountMiddleware(serveStatic(staticPath, { dotfiles: 'allow' }), context);
 				};
 			}
 
