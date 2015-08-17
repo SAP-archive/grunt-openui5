@@ -1,3 +1,16 @@
+# 0.8.0 (2015-08-17)
+
+### Fixes
+- openui5_connect task
+  - support [connect](https://github.com/gruntjs/grunt-contrib-connect) v3 [`b3c9da9`](https://github.com/SAP/grunt-openui5/commit/b3c9da93cd9984ba6bbc391bbdc7745379fa0019)
+
+### Others
+- bump dependencies [`b3c9da9`](https://github.com/SAP/grunt-openui5/commit/b3c9da93cd9984ba6bbc391bbdc7745379fa0019)
+
+### All changes
+[`0.7.0...0.8.0`](https://github.com/SAP/grunt-openui5/compare/0.7.0...0.8.0)
+
+
 # 0.7.0 (2015-03-16)
 
 ### Features

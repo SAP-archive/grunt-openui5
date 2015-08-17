@@ -1,6 +1,6 @@
 {
   "name": "grunt-openui5",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Grunt tasks around OpenUI5",
   "scripts": {
     "test": "grunt"
