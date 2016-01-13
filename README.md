@@ -208,7 +208,7 @@ components: {
   'my/app': {
     src: [
       'my/app/**',
-      'my/app/!ignore.js'
+      '!my/app/Component-preload.js'
     ]
   }
 }
@@ -220,6 +220,8 @@ Default: component namespace path + `/**` (e.g. `my/app/**`)
 
 Glob pattern(s) for files that should be included into the preload.  
 Patterns are based on all available resources (see [resources](#resources)).
+
+**Note:** You can exclude files by prepending the exclamation mark like so: ```!my/app/Component-preload.js```. This allows you to exclude an existing ```Component-preload.js``` file from being carried over to a newly generated one.
 
 ### libraries
 
