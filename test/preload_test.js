@@ -53,7 +53,7 @@ describe('openui5_preload', function() {
 			fileContent.equal({
 				sActualFileSource: 'tmp/preload/component_default_options/my/app/Component-preload.js',
 				sExpectedFileSource: 'test/preload/expected/component_default_options/my/app/Component-preload.js',
-				sMessage: 'component preload JS should be correctly created.'
+				sMessage: 'component preload JS should be correctly created (while ignoring exsiting Component-preload.js file).'
 			});
 		});
 

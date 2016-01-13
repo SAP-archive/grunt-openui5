@@ -22,6 +22,7 @@ var maxmin = require('maxmin');
 
 var defaultResourcePatterns = [
 	'**/*.js',
+	'!**/Component-preload.js',
 	'**/*.fragment.html',
 	'**/*.fragment.json',
 	'**/*.fragment.xml',
@@ -191,7 +192,7 @@ module.exports = function (grunt) {
 						var fileName = resourceMap[preloadFile].fullPath;
 						var fileContent = grunt.file.read(fileName);
 						var fileExtension = path.extname(fileName);
-						
+
 						var iOriginalSize, iCompressedSize;
 
 						if (options.compress) {
