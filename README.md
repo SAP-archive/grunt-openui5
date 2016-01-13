@@ -153,6 +153,7 @@ Default:
 ```
 [
   '**/*.js',
+  '!**/Component-preload.js',
   '**/*.fragment.html',
   '**/*.fragment.json',
   '**/*.fragment.xml',
@@ -163,7 +164,7 @@ Default:
 ]
 ```
 
-Glob pattern(s) for finding relevant resources inside `cwd`. If set, the default patterns will be replaced.
+Glob pattern(s) for finding relevant resources inside `cwd`. If set, the default patterns will be replaced. The second entry ensures that an existing ```Component-preload.js``` file is not carried over to the newly generated one.
 
 #### dest
 Type: `string`  
@@ -208,7 +209,7 @@ components: {
   'my/app': {
     src: [
       'my/app/**',
-      '!my/app/Component-preload.js'
+      '!my/app/ignore.js'
     ]
   }
 }
@@ -221,7 +222,7 @@ Default: component namespace path + `/**` (e.g. `my/app/**`)
 Glob pattern(s) for files that should be included into the preload.  
 Patterns are based on all available resources (see [resources](#resources)).
 
-**Note:** You can exclude files by prepending the exclamation mark like so: ```!my/app/Component-preload.js```. This allows you to exclude an existing ```Component-preload.js``` file from being carried over to a newly generated one.
+**Note:** You can exclude files by prepending the exclamation mark, like so: ```!my/app/ignore.js```.
 
 ### libraries
 
