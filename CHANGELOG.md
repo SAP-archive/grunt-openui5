@@ -1,3 +1,12 @@
+# 0.8.1 (2016-01-20)
+
+### Others
+- Update dependencies [`4524b2f`](https://github.com/SAP/grunt-openui5/commit/4524b2ffd4b58b5bde777ed4268f013db30ef610) [`70e2c92`](https://github.com/SAP/grunt-openui5/commit/70e2c9286ec26a5a02f7204747abc89f6cf8020a)
+
+### All changes
+[`0.8.0...0.8.1`](https://github.com/SAP/grunt-openui5/compare/0.8.0...0.8.1)
+
+
 # 0.8.0 (2015-08-17)
 
 ### Fixes
