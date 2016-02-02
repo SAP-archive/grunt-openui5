@@ -29,7 +29,11 @@ module.exports = function(grunt) {
 
 		// Before generating any new files, remove any previously-created files.
 		clean: {
-			tests: ['tmp']
+			tests: [
+				'tmp',
+				'test/preload/fixtures/app-same-dest/my/app/Component-preload.js',
+				'test/preload/fixtures/library-same-dest/my/ui/lib/library-preload.json'
+			]
 		},
 
 		// Configuration to be run (and then tested).
@@ -111,6 +115,24 @@ module.exports = function(grunt) {
 				components: '**'
 			},
 
+			// The following two targets are testing that a generated preload file
+			// doesn't get included when runnign the preload again
+			// (same folder for src and dest)
+			'component_same_dest_1': {
+				options: {
+					resources: 'test/preload/fixtures/app-same-dest',
+					dest: 'test/preload/fixtures/app-same-dest'
+				},
+				components: '**'
+			},
+			'component_same_dest_2': {
+				options: {
+					resources: 'test/preload/fixtures/app-same-dest',
+					dest: 'test/preload/fixtures/app-same-dest'
+				},
+				components: '**'
+			},
+
 			'library_default_options': {
 				options: {
 					resources: 'test/preload/fixtures/library',
@@ -137,6 +159,58 @@ module.exports = function(grunt) {
 					resources: 'test/preload/fixtures/library',
 					dest: 'tmp/preload/library_no_compress',
 					compress: false
+				},
+				libraries: '**'
+			},
+
+			// The following two targets are testing that a generated preload file
+			// doesn't get included when runnign the preload again
+			// (same folder for src and dest)
+			'library_same_dest_1': {
+				options: {
+					resources: [
+						{
+							cwd: 'test/preload/fixtures/library-same-dest',
+							src: [
+								// Defaults
+								'**/*.js',
+								'**/*.fragment.html',
+								'**/*.fragment.json',
+								'**/*.fragment.xml',
+								'**/*.view.html',
+								'**/*.view.json',
+								'**/*.view.xml',
+								'**/*.properties',
+								// Include "library-preload.json" for this test
+								'**/library-preload.json'
+							]
+						}
+					],
+					dest: 'test/preload/fixtures/library-same-dest'
+				},
+				libraries: '**'
+			},
+			'library_same_dest_2': {
+				options: {
+					resources: [
+						{
+							cwd: 'test/preload/fixtures/library-same-dest',
+							src: [
+								// Defaults
+								'**/*.js',
+								'**/*.fragment.html',
+								'**/*.fragment.json',
+								'**/*.fragment.xml',
+								'**/*.view.html',
+								'**/*.view.json',
+								'**/*.view.xml',
+								'**/*.properties',
+								// Include "library-preload.json" for this test
+								'**/library-preload.json'
+							]
+						}
+					],
+					dest: 'test/preload/fixtures/library-same-dest'
 				},
 				libraries: '**'
 			}

@@ -176,7 +176,15 @@ module.exports = function (grunt) {
 						preloadObject.name = preloadModuleName;
 					}
 
-					var preloadPatterns = preloadOption.src ? preloadOption.src : (preloadDir + '/**');
+					var preloadPatterns = preloadOption.src ? preloadOption.src : [ preloadDir + '/**' ];
+					if (typeof preloadPatterns === "string") {
+						preloadPatterns = [ preloadPatterns ];
+					}
+
+					// Always exclude the corresponding preload file (Component-preload.js / library-preload.json)
+					// Otherwise it might get included every time the build runs if src / dest are the same dir
+					preloadPatterns.push('!' + preloadDir + '/' + preloadInfo.moduleName + preloadInfo.ext);
+
 					var preloadFiles = grunt.file.match(preloadPatterns, resourceFiles);
 					if (preloadFiles.length === 0) {
 						var patternsString = (typeof preloadPatterns === 'string') ? preloadPatterns : preloadPatterns.join('", "');
