@@ -63,7 +63,8 @@ module.exports = function(grunt, config) {
 			testresources: [],
 			cors: null,
 			proxypath: null,
-			proxyOptions: null
+			proxyOptions: null,
+			lessOptions: null
 		});
 
 		// normalize strings to arrays for "resources" options
@@ -138,9 +139,9 @@ module.exports = function(grunt, config) {
 			options.testresources.forEach(mountStatic('/test-resources'));
 
 			// compile themes on-the-fly using openui5 less middleware
-			mountMiddleware(openui5.connect.less({
-				rootPaths: options.resources
-			}), '/resources');
+			options.lessOptions = options.lessOptions || {};
+			options.lessOptions.rootPaths = options.resources;
+			mountMiddleware(openui5.connect.less(options.lessOptions), '/resources');
 
 			// mount a generic proxy
 			if (options.proxypath) {
