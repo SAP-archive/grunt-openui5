@@ -378,6 +378,13 @@ Type: `object`
 
 Options for [connect-openui5 proxy](https://github.com/SAP/connect-openui5#proxyoptions).
 
+#### lessOptions
+
+Type: `object`
+
+Options for [connect-openui5 less](https://github.com/SAP/connect-openui5#lessoptions).
+
+
 ### Usage Examples
 
 #### App
