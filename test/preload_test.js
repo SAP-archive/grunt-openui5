@@ -45,6 +45,14 @@ describe('openui5_preload', function() {
 			});
 		});
 
+		it('library_same_dest', function() {
+			fileContent.equal({
+				sActualFileSource: 'test/preload/fixtures/library-same-dest/my/ui/lib/library-preload.json',
+				sExpectedFileSource: 'test/preload/expected/library_default_options/my/ui/lib/library-preload.json',
+				sMessage: 'library preload JSON should be correctly created.'
+			});
+		});
+
 	});
 
 	describe('component', function() {
@@ -69,6 +77,14 @@ describe('openui5_preload', function() {
 			fileContent.equal({
 				sActualFileSource: 'tmp/preload/component_no_compress/my/app/Component-preload.js',
 				sExpectedFileSource: 'test/preload/expected/component_no_compress/my/app/Component-preload.js',
+				sMessage: 'component preload JS should be correctly created.'
+			});
+		});
+
+		it('component_same_dest', function() {
+			fileContent.equal({
+				sActualFileSource: 'test/preload/fixtures/app-same-dest/my/app/Component-preload.js',
+				sExpectedFileSource: 'test/preload/expected/component_default_options/my/app/Component-preload.js',
 				sMessage: 'component preload JS should be correctly created.'
 			});
 		});
