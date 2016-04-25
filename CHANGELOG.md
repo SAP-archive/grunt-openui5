@@ -1,3 +1,25 @@
+# 0.9.0 (2016-04-25)
+
+### Breaking changes
+- openui5_connect / openui5_theme tasks
+  - Set default of parser option `relativeUrls` to `true` [`4d5fca2 ` via less-openui5@0.2.0](https://github.com/SAP/connect-openui5/commit/4d5fca25954049eec4af53c8bd12c54d6ad020aa) (see [`7cc2781 `](https://github.com/SAP/grunt-openui5/commit/7cc2781bfb63c95deef2a63a426d791f02a8770b))
+
+### Features
+- openui5_connect task
+  - support `lessOptions` [`a8c1280`](https://github.com/SAP/grunt-openui5/commit/a8c1280f09a0dc20fd4987600572a8f34e5d9dc4)
+
+### Fixes
+- openui5_preload task
+  - Always exclude corresponding preload files [`a9ebf40`](https://github.com/SAP/grunt-openui5/commit/a9ebf407bd4700136b0d7277cdac53d2c6366bb7)
+
+### Others
+- Support Grunt 1.0 [`046e8ca`](https://github.com/SAP/grunt-openui5/commit/046e8ca5c2ab0954c679712a2b3259c8e2a918dc)
+- Update dependencies [`7cc2781`](https://github.com/SAP/grunt-openui5/commit/7cc2781bfb63c95deef2a63a426d791f02a8770b)
+
+### All changes
+[`0.8.1...0.9.0`](https://github.com/SAP/grunt-openui5/compare/0.8.1...0.9.0)
+
+
 # 0.8.1 (2016-01-20)
 
 ### Others
