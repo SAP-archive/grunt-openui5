@@ -61,15 +61,16 @@ Options for the [less](http://lesscss.org) compiler (`tree.toCss`).
 ```js
 grunt.initConfig({
   openui5_theme: {
-    options: {},
-    files: [
-      {
-        expand: true,
-        cwd: 'lib1',
-        src: 'my/ui/lib/themes/foo/library.source.less',
-        dest: 'tmp'
-      }
-    ]
+    library: {
+      files: [
+        {
+          expand: true,
+          cwd: 'lib1',
+          src: 'my/ui/lib/themes/foo/library.source.less',
+          dest: 'tmp'
+        }
+      ]
+    }
   },
 });
 ```
@@ -96,14 +97,16 @@ grunt.initConfig({
         compress: true
       }
     },
-    files: [
-      {
-        expand: true,
-        cwd: 'lib2',
-        src: 'my/ui/lib/themes/bar/library.source.less',
-        dest: 'tmp'
-      }
-    ]
+    library: {
+      files: [
+        {
+          expand: true,
+          cwd: 'lib2',
+          src: 'my/ui/lib/themes/bar/library.source.less',
+          dest: 'tmp'
+        }
+      ]
+    }
   },
 });
 ```
