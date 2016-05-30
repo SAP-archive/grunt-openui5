@@ -446,6 +446,41 @@ openui5_connect: {
 }
 ```
 
+
+## openui5_resourcelist
+
+### Overview
+
+Generates a json file containing the list of all files in the base directory matching 
+the src pattern. The file entries listed are attributed in the cases that:
+* they are of type `-dbg.js` or `-dbg.css`.
+* they are `.property` files depending on a locale.
+
+### Options
+
+#### dest
+
+Type: `String`
+
+The destination path of the resource list file.
+
+### Usage Examples
+
+```js
+'openui5_resourcelist': {
+  build: {
+    files: [{
+      expand: true,
+      src: '**/*',
+      cwd: 'path/to/openui5/resources'
+    }],
+    options: {
+      dest: 'path/to/openui5/resources/resources.json'
+    }
+  }
+}
+```
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
