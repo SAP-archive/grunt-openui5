@@ -456,6 +456,44 @@ the src pattern. The file entries listed are attributed in the cases that:
 * they are of type `-dbg.js` or `-dbg.css`.
 * they are `.property` files depending on a locale.
 
+For a directory containing e.g. the following files:
+* `Component.js`
+* `Component-dbg.js`
+* `styles.css`
+* `styles-dbg.css`
+* `i18n.properties`
+* `i18n_en.properties`
+the resulting `resource.json` file will have the following content:
+```
+{
+	"resources": [
+		{
+			"name": "Component-dbg.js",
+			"isDebug": "true"
+		},
+		{
+			"name": "Component.js"
+		},
+		{
+			"name": "styles-dbg.css",
+			"isDebug": "true"
+		},
+		{
+			"name": "css/styles.css"
+		},
+		{
+			"name": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_en.properties",
+			"raw": "i18n/i18n.properties",
+			"locale": "en"
+		}
+	]
+}
+```
+
+
 ### Options
 
 #### dest
