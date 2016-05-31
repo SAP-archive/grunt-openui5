@@ -280,6 +280,80 @@ module.exports = function(grunt) {
 
 		},
 
+		// Configuration to be run (and then tested).
+		'openui5_resourcelist': {
+			js: {
+				files: [{
+					expand: true,
+					src: '**/*.js',
+					cwd: 'test/resourcelist/fixtures/js'
+				}],
+				options: {
+					dest: 'tmp/resourcelist/js/resources.json'
+				}
+			},
+			jsDbg: {
+				files: [{
+					expand: true,
+					src: '**/*.js',
+					cwd: 'test/resourcelist/fixtures/jsDbg'
+				}],
+				options: {
+					dest: 'tmp/resourcelist/jsDbg/resources.json'
+				}
+			},
+			css: {
+				files: [{
+					expand: true,
+					src: '**/*.css',
+					cwd: 'test/resourcelist/fixtures/css'
+				}],
+				options: {
+					dest: 'tmp/resourcelist/css/resources.json'
+				}
+			},
+			cssDbg: {
+				files: [{
+					expand: true,
+					src: '**/*.css',
+					cwd: 'test/resourcelist/fixtures/cssDbg'
+				}],
+				options: {
+					dest: 'tmp/resourcelist/cssDbg/resources.json'
+				}
+			},
+			properties: {
+				files: [{
+					expand: true,
+					src: '**/*.properties',
+					cwd: 'test/resourcelist/fixtures/properties'
+				}],
+				options: {
+					dest: 'tmp/resourcelist/properties/resources.json'
+				}
+			},
+			propertiesLocale: {
+				files: [{
+					expand: true,
+					src: '**/*.properties',
+					cwd: 'test/resourcelist/fixtures/propertiesLocale'
+				}],
+				options: {
+					dest: 'tmp/resourcelist/propertiesLocale/resources.json'
+				}
+			},
+			propertiesLocaleRegion: {
+				files: [{
+					expand: true,
+					src: '**/*.properties',
+					cwd: 'test/resourcelist/fixtures/propertiesLocaleRegion'
+				}],
+				options: {
+					dest: 'tmp/resourcelist/propertiesLocaleRegion/resources.json'
+				}
+			}
+		},
+
 		// Unit tests.
 		mochaTest: {
 			tests: {
@@ -306,11 +380,12 @@ module.exports = function(grunt) {
 		'openui5_theme',
 		'openui5_preload',
 		'openui5_connect',
+		'openui5_resourcelist',
 
 		'mochaTest:tests'
 	]);
 
 	// By default, lint and run all tests.
-	grunt.registerTask('default', [ 'eslint', 'test']);
+	grunt.registerTask('default', ['eslint', 'test']);
 
 };

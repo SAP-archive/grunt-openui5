@@ -1,0 +1,8 @@
+{
+	"resources": [
+		{
+			"name": "css/styles-dbg.css",
+			"isDebug": "true"
+		}
+	]
+}
