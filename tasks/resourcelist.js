@@ -29,11 +29,11 @@ module.exports = function(grunt) {
 		});
 
 		var isDebugResource = function(file) {
-			return file.match(new RegExp(debugResourcePattern));
+			return file.match(debugResourcePattern);
 		}
 
 		var isMergedResource = function(file) {
-			return file.match(new RegExp(mergedResourcePattern));
+			return file.match(mergedResourcePattern);
 		}
 
 		var localizedProperty = function(file) {
