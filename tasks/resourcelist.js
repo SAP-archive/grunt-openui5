@@ -14,9 +14,9 @@
 
 'use strict';
 
-var debugResourcePattern = new RegExp("(-dbg\.js|-dbg\.controller\.js|-dbg\.view\.js|-dbg\.fragment\.js|-dbg\.css)$");
-var mergedResourcePattern = new RegExp("(Component-preload.js|library-preload.js|library-preload-dbg.js|library-preload.json|library-all.js|library-all-dbg.js)$");
-var localePattern = new RegExp("^((?:[^/]+/)*[^/]+?)_([A-Z]{2}(?:_[A-Z]{2}(?:_[A-Z0-9_]+)?)?)(\.properties|\.hdbtextbundle)", 'i');
+var debugResourcePattern = /(-dbg\.js|-dbg\.controller\.js|-dbg\.view\.js|-dbg\.fragment\.js|-dbg\.css)$/;
+var mergedResourcePattern = /(Component-preload.js|library-preload.js|library-preload-dbg.js|library-preload.json|library-all.js|library-all-dbg.js)$/;
+var localePattern = /^((?:[^\/]+\/)*[^\/]+?)_([A-Z]{2}(?:_[A-Z]{2}(?:_[A-Z0-9_]+)?)?)(\.properties|\.hdbtextbundle)/i;
 
 
 module.exports = function(grunt) {
