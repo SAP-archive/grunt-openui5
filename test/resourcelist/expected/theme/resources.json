@@ -1,0 +1,8 @@
+{
+	"resources": [
+		{
+			"name": "themes/mytheme/xyz.js",
+			"theme": "mytheme"
+		}
+	]
+}

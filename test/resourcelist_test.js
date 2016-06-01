@@ -32,6 +32,13 @@ describe('resourcelist', function() {
 			sMessage: 'Resource list of -dbg.js file was not correctly created.'
 		});
 	});
+	it("don't processes false -dbg.js files", function() {
+		fileContent.equal({
+			sActualFileSource: 'tmp/resourcelist/falseJsDbg/resources.json',
+			sExpectedFileSource: 'test/resourcelist/expected/falseJsDbg/resources.json',
+			sMessage: 'Resource list of false -dbg.js file was not correctly created.'
+		});
+	});
 	it("processes css files", function() {
 		fileContent.equal({
 			sActualFileSource: 'tmp/resourcelist/js/resources.json',
@@ -65,6 +72,27 @@ describe('resourcelist', function() {
 			sActualFileSource: 'tmp/resourcelist/propertiesLocaleRegion/resources.json',
 			sExpectedFileSource: 'test/resourcelist/expected/propertiesLocaleRegion/resources.json',
 			sMessage: 'Resource list of region locale .properties file was not correctly created.'
+		});
+	});
+	it("processes false preload files", function() {
+		fileContent.equal({
+			sActualFileSource: 'tmp/resourcelist/falsePreload/resources.json',
+			sExpectedFileSource: 'test/resourcelist/expected/falsePreload/resources.json',
+			sMessage: 'Resource list of false preload file was not correctly created.'
+		});
+	});
+	it("processes theme files", function() {
+		fileContent.equal({
+			sActualFileSource: 'tmp/resourcelist/theme/resources.json',
+			sExpectedFileSource: 'test/resourcelist/expected/theme/resources.json',
+			sMessage: 'Resource list of theme file was not correctly created.'
+		});
+	});
+	it("processes designtime files", function() {
+		fileContent.equal({
+			sActualFileSource: 'tmp/resourcelist/designtime/resources.json',
+			sExpectedFileSource: 'test/resourcelist/expected/designtime/resources.json',
+			sMessage: 'Resource list of designtime file was not correctly created.'
 		});
 	});
 

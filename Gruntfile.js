@@ -302,6 +302,16 @@ module.exports = function(grunt) {
 					dest: 'tmp/resourcelist/jsDbg/resources.json'
 				}
 			},
+			falseJsDbg: {
+				files: [{
+					expand: true,
+					src: '**/*',
+					cwd: 'test/resourcelist/fixtures/falseJsDbg'
+				}],
+				options: {
+					dest: 'tmp/resourcelist/falseJsDbg/resources.json'
+				}
+			},
 			css: {
 				files: [{
 					expand: true,
@@ -350,6 +360,36 @@ module.exports = function(grunt) {
 				}],
 				options: {
 					dest: 'tmp/resourcelist/propertiesLocaleRegion/resources.json'
+				}
+			},
+			falsePreload: {
+				files: [{
+					expand: true,
+					src: '**/*',
+					cwd: 'test/resourcelist/fixtures/falsePreload'
+				}],
+				options: {
+					dest: 'tmp/resourcelist/falsePreload/resources.json'
+				}
+			},
+			theme: {
+				files: [{
+					expand: true,
+					src: '**/*',
+					cwd: 'test/resourcelist/fixtures/theme'
+				}],
+				options: {
+					dest: 'tmp/resourcelist/theme/resources.json'
+				}
+			},
+			designtime: {
+				files: [{
+					expand: true,
+					src: '**/*',
+					cwd: 'test/resourcelist/fixtures/designtime'
+				}],
+				options: {
+					dest: 'tmp/resourcelist/designtime/resources.json'
 				}
 			}
 		},

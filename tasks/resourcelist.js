@@ -15,9 +15,10 @@
 'use strict';
 
 var debugResourcePattern = /(-dbg\.js|-dbg\.controller\.js|-dbg\.view\.js|-dbg\.fragment\.js|-dbg\.css)$/;
-var mergedResourcePattern = /(Component-preload.js|library-preload.js|library-preload-dbg.js|library-preload.json|library-all.js|library-all-dbg.js)$/;
+var mergedResourcePattern = /(Component-preload\.js|library-preload\.js|library-preload-dbg\.js|library-preload\.json|library-all\.js|library-all-dbg\.js)$/;
 var localePattern = /^((?:[^\/]+\/)*[^\/]+?)_([A-Z]{2}(?:_[A-Z]{2}(?:_[A-Z0-9_]+)?)?)(\.properties|\.hdbtextbundle)/i;
-
+var designtimeResourcePattern = /(\.designtime\.js|\.control|\.interface|\.type|themes\/[^\/]*\/[^\/]*\.less)$/;
+var themePattern = /^((?:[^\/]+\/)*)themes\/([^\/]+)\//;
 
 module.exports = function(grunt) {
 
@@ -36,6 +37,10 @@ module.exports = function(grunt) {
 			return file.match(mergedResourcePattern);
 		}
 
+		var isDesigntimeResource = function(file) {
+			return file.match(designtimeResourcePattern);
+		}
+
 		var localizedProperty = function(file) {
 			var match = file.match(localePattern);
 			if (match) {
@@ -45,14 +50,28 @@ module.exports = function(grunt) {
 			}
 		}
 
+		var getTheme = function(file) {
+			var match = file.match(themePattern);
+			if (match) {
+				return match[2];
+			} else {
+				return null;
+			}
+		}
+
 		var getResourceElement = function(path) {
 			var resourceElement = { name: path };
 			if (isDebugResource(path)) { resourceElement.isDebug = "true" };
 			if (isMergedResource(path)) { resourceElement.merged = "true" };
+			if (isDesigntimeResource(path)) { resourceElement.designtime = "true" };
 			var localeData = localizedProperty(path);
 			if (localeData) {
 				resourceElement.raw = localeData.raw;
 				resourceElement.locale = localeData.locale;
+			}
+			var themeData = getTheme(path);
+			if (themeData) {
+				resourceElement.theme = themeData;
 			}
 			return resourceElement;
 		}
