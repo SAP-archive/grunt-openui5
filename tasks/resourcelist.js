@@ -45,11 +45,11 @@ module.exports = function(grunt) {
 			}
 		}
 
-		String.prototype.getResourceElement = function() {
-			var resourceElement = { name: this };
-			if (isDebugResource(this)) { resourceElement.isDebug = "true" };
-			if (isMergedResource(this)) { resourceElement.merged = "true" };
-			var localeData = localizedProperty(this);
+		var getResourceElement = function(path) {
+			var resourceElement = { name: path };
+			if (isDebugResource(path)) { resourceElement.isDebug = "true" };
+			if (isMergedResource(path)) { resourceElement.merged = "true" };
+			var localeData = localizedProperty(path);
 			if (localeData) {
 				resourceElement.raw = localeData.raw;
 				resourceElement.locale = localeData.locale;
@@ -63,7 +63,7 @@ module.exports = function(grunt) {
 
 			dirEntries.forEach(function(element) {
 				if (fs.statSync(path + '/' + element).isFile()) {
-					resources.push(element.getResourceElement());
+					resources.push(getResourceElement(element));
 				} else {
 					resources = resources.concat(createFileStructure(path + '/' + element));
 				}
@@ -85,7 +85,7 @@ module.exports = function(grunt) {
 			});
 
 			if (src.length !== 0) {
-				resources.push(f.dest.getResourceElement());
+				resources.push(getResourceElement(f.dest));
 			}
 		}
 
