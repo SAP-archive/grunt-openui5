@@ -41,16 +41,16 @@ describe('resourcelist', function() {
 	});
 	it("processes css files", function() {
 		fileContent.equal({
-			sActualFileSource: 'tmp/resourcelist/js/resources.json',
-			sExpectedFileSource: 'test/resourcelist/expected/js/resources.json',
-			sMessage: 'Resource list of .js file was not correctly created.'
+			sActualFileSource: 'tmp/resourcelist/css/resources.json',
+			sExpectedFileSource: 'test/resourcelist/expected/css/resources.json',
+			sMessage: 'Resource list of .css file was not correctly created.'
 		});
 	});
 	it("processes -dbg.css files", function() {
 		fileContent.equal({
-			sActualFileSource: 'tmp/resourcelist/jsDbg/resources.json',
-			sExpectedFileSource: 'test/resourcelist/expected/jsDbg/resources.json',
-			sMessage: 'Resource list of -dbg.js file was not correctly created.'
+			sActualFileSource: 'tmp/resourcelist/cssDbg/resources.json',
+			sExpectedFileSource: 'test/resourcelist/expected/cssDbg/resources.json',
+			sMessage: 'Resource list of -dbg.sss file was not correctly created.'
 		});
 	});
 	it("processes .properties files", function() {

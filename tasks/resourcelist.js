@@ -76,24 +76,9 @@ module.exports = function(grunt) {
 			return resourceElement;
 		}
 
-		var createFileStructure = function(path) {
-			var dirEntries = fs.readdirSync(path);
-			var resources = [];
-
-			dirEntries.forEach(function(element) {
-				if (fs.statSync(path + '/' + element).isFile()) {
-					resources.push(getResourceElement(element));
-				} else {
-					resources = resources.concat(createFileStructure(path + '/' + element));
-				}
-			}, this);
-
-			return resources;
-		}
-
 		var resources = [];
 
-		var tmpFunc = function(f) {
+		var createFileStructure = function(f) {
 
 			var src = f.src.filter(function(filepath) {
 				if (!grunt.file.isDir(filepath)) {
@@ -108,8 +93,9 @@ module.exports = function(grunt) {
 			}
 		}
 
+
 		// Iterate over all src-dest file pairs. Filter the dirs. Populate resources array.
-		this.files.forEach(tmpFunc);
+		this.files.forEach(createFileStructure);
 		var noOfFiles = resources.length;
 		resources = { 'resources': resources };
 

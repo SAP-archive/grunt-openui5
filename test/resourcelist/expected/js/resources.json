@@ -2,6 +2,9 @@
 	"resources": [
 		{
 			"name": "Component.js"
+		},
+		{
+			"name": "subfolder/xyz.js"
 		}
 	]
 }
