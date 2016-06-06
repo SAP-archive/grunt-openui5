@@ -463,6 +463,9 @@ For a directory containing e.g. the following files:
 * `styles-dbg.css`
 * `i18n.properties`
 * `i18n_en.properties`
+* Themes files `themes/*/*`
+* Design time resources that are files the extentions `*.designtime.js`, `*.control`, `*.interface`, `*.type and with path `themes/*/*.less`.
+
 the resulting `resource.json` file will have the following content:
 ```
 {
@@ -488,6 +491,14 @@ the resulting `resource.json` file will have the following content:
 			"name": "i18n/i18n_en.properties",
 			"raw": "i18n/i18n.properties",
 			"locale": "en"
+		},
+		{
+			"name": "themes/mytheme/xyz.js",
+			"theme": "mytheme"
+		},
+		{
+			"name": "xyz.type",
+			"designtime": "true"
 		}
 	]
 }
