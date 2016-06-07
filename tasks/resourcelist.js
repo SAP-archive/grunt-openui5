@@ -61,9 +61,9 @@ module.exports = function(grunt) {
 			}
 		}
 
-
 		var resources = [];
 
+		// set default values for destination and extract cwd
 		if (typeof options.dest === 'undefined' || options.dest === null) {
 			options.dest = 'resources.json';
 		}
@@ -78,9 +78,12 @@ module.exports = function(grunt) {
 		}
 		grunt.verbose.writeln('Take ' + cwd + ' as root dir.');
 
+		// dest was given relative to cwd
 		var resourceListFile = path.posix.join(cwd, options.dest);
 
-		// calculate the path of the resource list file relative to cwd
+		// calculate cwd path relative to resource list file.
+		// All the resource.json entry paths have to be prefixed with them to make them relative to the 
+		// resource.json location
 		var resoucelistRelativePath = path.posix.relative(path.posix.parse(resourceListFile).dir, cwd);
 
 		var getResourceElement = function(p) {
