@@ -61,6 +61,28 @@ module.exports = function(grunt) {
 			}
 		}
 
+
+		var resources = [];
+
+		if (typeof options.dest === 'undefined' || options.dest === null) {
+			options.dest = 'resources.json';
+		}
+		var cwd = null;
+		if (typeof this.data.files !== 'undefined' && this.data.files !== null
+			&& this.data.files.length != 0
+			&& typeof this.data.files[0].cwd !== 'undefined' && this.data.files[0].cwd !== null) {
+			cwd = this.data.files[0].cwd;
+		} else {
+			grunt.fail.warn('No valid cwd as root dir for resourcelist defined.');
+			return;
+		}
+		grunt.verbose.writeln('Take ' + cwd + ' as root dir.');
+
+		var resourceListFile = path.posix.join(cwd, options.dest);
+
+		// calculate the path of the resource list file relative to cwd
+		var resoucelistRelativePath = path.posix.relative(path.posix.parse(resourceListFile).dir, cwd);
+
 		var getResourceElement = function(p) {
 			var resourceElement = { name: path.posix.join(resoucelistRelativePath, p) };
 			if (isDebugResource(p)) { resourceElement.isDebug = "true" };
@@ -77,28 +99,6 @@ module.exports = function(grunt) {
 			}
 			return resourceElement;
 		}
-
-		var resources = [];
-
-		if (typeof options.dest === 'undefined' || options.dest === null) {
-			options.dest = 'resources.json';
-		}
-		var cwd = null;
-		if (typeof this.data.files !== 'undefined' && this.data.files !== null
-			&& this.data.files.length != 0
-			&& typeof this.data.files[0].cwd !== 'undefined' && this.data.files[0].cwd !== null) {
-			cwd = this.data.files[0].cwd;
-			grunt.log.writeln( "CWD: " + cwd);
-		} else {
-			grunt.fail.warn('No valid cwd as root dir for resourcelist defined.');
-			return;
-		}
-		grunt.verbose.writeln('Take ' + cwd + ' as root dir.');
-
-		var resourceListFile = path.posix.join(cwd, options.dest);
-
-		// calculate the path of the resource list file relative to cwd
-		var resoucelistRelativePath = path.posix.relative(path.posix.parse(resourceListFile).dir, cwd);
 
 		var createFileStructure = function(f) {
 
