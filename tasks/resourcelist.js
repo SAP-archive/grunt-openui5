@@ -14,6 +14,8 @@
 
 'use strict';
 
+var path = require('path');
+
 var debugResourcePattern = /(-dbg\.js|-dbg\.controller\.js|-dbg\.view\.js|-dbg\.fragment\.js|-dbg\.css)$/;
 var mergedResourcePattern = /(Component-preload\.js|library-preload\.js|library-preload-dbg\.js|library-preload\.json|library-all\.js|library-all-dbg\.js)$/;
 var localePattern = /^((?:[^\/]+\/)*[^\/]+?)_([A-Z]{2}(?:_[A-Z]{2}(?:_[A-Z0-9_]+)?)?)(\.properties|\.hdbtextbundle)/i;
@@ -59,17 +61,17 @@ module.exports = function(grunt) {
 			}
 		}
 
-		var getResourceElement = function(path) {
-			var resourceElement = { name: path };
-			if (isDebugResource(path)) { resourceElement.isDebug = "true" };
-			if (isMergedResource(path)) { resourceElement.merged = "true" };
-			if (isDesigntimeResource(path)) { resourceElement.designtime = "true" };
-			var localeData = localizedProperty(path);
+		var getResourceElement = function(p) {
+			var resourceElement = { name: path.posix.join(resoucelistRelativePath, p) };
+			if (isDebugResource(p)) { resourceElement.isDebug = "true" };
+			if (isMergedResource(p)) { resourceElement.merged = "true" };
+			if (isDesigntimeResource(p)) { resourceElement.designtime = "true" };
+			var localeData = localizedProperty(p);
 			if (localeData) {
 				resourceElement.raw = localeData.raw;
 				resourceElement.locale = localeData.locale;
 			}
-			var themeData = getTheme(path);
+			var themeData = getTheme(p);
 			if (themeData) {
 				resourceElement.theme = themeData;
 			}
@@ -77,6 +79,26 @@ module.exports = function(grunt) {
 		}
 
 		var resources = [];
+
+		if (typeof options.dest === 'undefined' || options.dest === null) {
+			options.dest = 'resources.json';
+		}
+		var cwd = null;
+		if (typeof this.data.files !== 'undefined' && this.data.files !== null
+			&& this.data.files.length != 0
+			&& typeof this.data.files[0].cwd !== 'undefined' && this.data.files[0].cwd !== null) {
+			cwd = this.data.files[0].cwd;
+			grunt.log.writeln( "CWD: " + cwd);
+		} else {
+			grunt.fail.warn('No valid cwd as root dir for resourcelist defined.');
+			return;
+		}
+		grunt.verbose.writeln('Take ' + cwd + ' as root dir.');
+
+		var resourceListFile = path.posix.join(cwd, options.dest);
+
+		// calculate the path of the resource list file relative to cwd
+		var resoucelistRelativePath = path.posix.relative(path.posix.parse(resourceListFile).dir, cwd);
 
 		var createFileStructure = function(f) {
 
@@ -93,14 +115,13 @@ module.exports = function(grunt) {
 			}
 		}
 
-
 		// Iterate over all src-dest file pairs. Filter the dirs. Populate resources array.
 		this.files.forEach(createFileStructure);
 		var noOfFiles = resources.length;
 		resources = { 'resources': resources };
 
-		grunt.file.write(options.dest, JSON.stringify(resources, null, '\t'));
-		grunt.log.writeln('File ' + options.dest + ' created with ' + noOfFiles + ' files.');
+		grunt.file.write(resourceListFile, JSON.stringify(resources, null, '\t'));
+		grunt.log.writeln('File ' + resourceListFile + ' created with ' + noOfFiles + ' files.');
 
 	});
 }

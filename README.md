@@ -503,7 +503,16 @@ the resulting `resource.json` file will have the following content:
 	]
 }
 ```
+The paths of the file entries in the `resource.json` are relative to the directory where the resources.json file is created.
 
+### Files
+
+Specifies the set of files that should be entered into the resource file. The file paths are always calculated relative to the
+destination directory where the resource file is located. The the case that the `files` array contains more than one entry,
+all the `cwd` attributes have to be identical. Otherwise the files entries will not be created correctly.
+The destination, that means the path of the resource file is also given relative to the `cwd` path.
+  
+The `cwd` entry
 
 ### Options
 
@@ -511,7 +520,7 @@ the resulting `resource.json` file will have the following content:
 
 Type: `String`
 
-The destination path of the resource list file.
+The destination path of the resource list file. The path is taken relative to the (unique) `cwd` path given in the `files` array.
 
 ### Usage Examples
 
@@ -524,11 +533,12 @@ The destination path of the resource list file.
       cwd: 'path/to/openui5/resources'
     }],
     options: {
-      dest: 'path/to/openui5/resources/resources.json'
+      dest: 'resources.json'
     }
   }
 }
 ```
+The example above creates a `resources.json` file in the directory `path/to/openui5/resources` containing entries for all the files in this directory and its subdirectories.
 
 ## Contributing
 

@@ -95,6 +95,19 @@ describe('resourcelist', function() {
 			sMessage: 'Resource list of designtime file was not correctly created.'
 		});
 	});
-
+	it("creates custom resourcefile name", function() {
+		fileContent.equal({
+			sActualFileSource: 'tmp/resourcelist/customResourcefileName/myResources.json',
+			sExpectedFileSource: 'test/resourcelist/expected/customResourcefileName/myResources.json',
+			sMessage: 'Resource list in subdir was not correctly created.'
+		});
+	});
+	it("creates resourcefile in subdir", function() {
+		fileContent.equal({
+			sActualFileSource: 'tmp/resourcelist/resourcefileInSubdir/subdir1/subdir1_1/resources.json',
+			sExpectedFileSource: 'test/resourcelist/expected/resourcefileInSubdir/subdir1/subdir1_1/resources.json',
+			sMessage: 'Resource list in subdir was not correctly created.'
+		});
+	})
 });
 

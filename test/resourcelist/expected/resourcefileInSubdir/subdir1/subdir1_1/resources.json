@@ -1,0 +1,10 @@
+{
+	"resources": [
+		{
+			"name": "../../subdir2/subdir2_1/abc.js"
+		},
+		{
+			"name": "../../subdir2/xyz.js"
+		}
+	]
+}

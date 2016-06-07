@@ -286,111 +286,109 @@ module.exports = function(grunt) {
 				files: [{
 					expand: true,
 					src: '**/*.js',
-					cwd: 'test/resourcelist/fixtures/js'
-				}],
-				options: {
-					dest: 'tmp/resourcelist/js/resources.json'
-				}
+					cwd: 'tmp/resourcelist/js'
+				}]
 			},
 			jsDbg: {
 				files: [{
 					expand: true,
 					src: '**/*.js',
-					cwd: 'test/resourcelist/fixtures/jsDbg'
-				}],
-				options: {
-					dest: 'tmp/resourcelist/jsDbg/resources.json'
-				}
+					cwd: 'tmp/resourcelist/jsDbg'
+				}]
 			},
 			falseJsDbg: {
 				files: [{
 					expand: true,
 					src: '**/*',
-					cwd: 'test/resourcelist/fixtures/falseJsDbg'
-				}],
-				options: {
-					dest: 'tmp/resourcelist/falseJsDbg/resources.json'
-				}
+					cwd: 'tmp/resourcelist/falseJsDbg'
+				}]
 			},
 			css: {
 				files: [{
 					expand: true,
 					src: '**/*.css',
-					cwd: 'test/resourcelist/fixtures/css'
-				}],
-				options: {
-					dest: 'tmp/resourcelist/css/resources.json'
-				}
+					cwd: 'tmp/resourcelist/css'
+				}]
 			},
 			cssDbg: {
 				files: [{
 					expand: true,
 					src: '**/*.css',
-					cwd: 'test/resourcelist/fixtures/cssDbg'
-				}],
-				options: {
-					dest: 'tmp/resourcelist/cssDbg/resources.json'
-				}
+					cwd: 'tmp/resourcelist/cssDbg'
+				}]
 			},
 			properties: {
 				files: [{
 					expand: true,
 					src: '**/*.properties',
-					cwd: 'test/resourcelist/fixtures/properties'
-				}],
-				options: {
-					dest: 'tmp/resourcelist/properties/resources.json'
-				}
+					cwd: 'tmp/resourcelist/properties'
+				}]
 			},
 			propertiesLocale: {
 				files: [{
 					expand: true,
 					src: '**/*.properties',
-					cwd: 'test/resourcelist/fixtures/propertiesLocale'
-				}],
-				options: {
-					dest: 'tmp/resourcelist/propertiesLocale/resources.json'
-				}
+					cwd: 'tmp/resourcelist/propertiesLocale'
+				}]
 			},
 			propertiesLocaleRegion: {
 				files: [{
 					expand: true,
 					src: '**/*.properties',
-					cwd: 'test/resourcelist/fixtures/propertiesLocaleRegion'
-				}],
-				options: {
-					dest: 'tmp/resourcelist/propertiesLocaleRegion/resources.json'
-				}
+					cwd: 'tmp/resourcelist/propertiesLocaleRegion'
+				}]
 			},
 			falsePreload: {
 				files: [{
 					expand: true,
 					src: '**/*',
-					cwd: 'test/resourcelist/fixtures/falsePreload'
-				}],
-				options: {
-					dest: 'tmp/resourcelist/falsePreload/resources.json'
-				}
+					cwd: 'tmp/resourcelist/falsePreload'
+				}]
 			},
 			theme: {
 				files: [{
 					expand: true,
 					src: '**/*',
-					cwd: 'test/resourcelist/fixtures/theme'
-				}],
-				options: {
-					dest: 'tmp/resourcelist/theme/resources.json'
-				}
+					cwd: 'tmp/resourcelist/theme'
+				}]
 			},
 			designtime: {
 				files: [{
 					expand: true,
 					src: '**/*',
-					cwd: 'test/resourcelist/fixtures/designtime'
+					cwd: 'tmp/resourcelist/designtime'
+				}]
+			},
+			customResourcefileName: {
+				files: [{
+					expand: true,
+					src: '**/*',
+					cwd: 'tmp/resourcelist/customResourcefileName'
 				}],
 				options: {
-					dest: 'tmp/resourcelist/designtime/resources.json'
+					dest: 'myResources.json'
 				}
+			},
+			resourcefileInSubdir: {
+				files: [{
+					expand: true,
+					src: '**/*',
+					cwd: 'tmp/resourcelist/resourcefileInSubdir'
+				}],
+				options: {
+					dest: 'subdir1/subdir1_1/resources.json'
+				}
+			}
+		},
+
+		copy: {
+			resourcelistPrepare: {
+				files: [{
+					expand: true,
+					src: '**/*',
+					dest: 'tmp/resourcelist',
+					cwd: 'test/resourcelist/fixtures/'
+				}]
 			}
 		},
 
@@ -411,18 +409,22 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-eslint');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-mocha-test');
+	grunt.loadNpmTasks('grunt-contrib-copy');
+
 
 	// Whenever the "test" task is run, first clean the "tmp" dir, then run this
 	// plugin's task(s), then test the result.
+	grunt.registerTask('resourcelist', ['copy:resourcelistPrepare', 'openui5_resourcelist']);
+
 	grunt.registerTask('test', [
 		'clean',
 
 		'openui5_theme',
 		'openui5_preload',
 		'openui5_connect',
-		'openui5_resourcelist',
+		'resourcelist',
 
-		'mochaTest:tests'
+		'mochaTest:tests',
 	]);
 
 	// By default, lint and run all tests.
