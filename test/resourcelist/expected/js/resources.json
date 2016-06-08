@@ -1,10 +1,10 @@
 {
 	"resources": [
-		{
-			"name": "Component.js"
+				{
+			"name": "subfolder/xyz.js"
 		},
 		{
-			"name": "subfolder/xyz.js"
+			"name": "Component.js"
 		}
 	]
 }

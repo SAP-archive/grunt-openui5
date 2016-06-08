@@ -1,10 +1,22 @@
 {
 	"resources": [
 		{
+			"name": "../../cde.js"
+		},
+		{
 			"name": "../../subdir2/subdir2_1/abc.js"
 		},
 		{
 			"name": "../../subdir2/xyz.js"
+		},
+		{
+			"name": "../bcd.js"
+		},
+		{
+			"name": "../subdir1_2/fgh.js"
+		},
+		{
+			"name": "efg.js"
 		}
 	]
 }

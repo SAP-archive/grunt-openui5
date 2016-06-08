@@ -84,10 +84,10 @@ module.exports = function(grunt) {
 		// calculate cwd path relative to resource list file.
 		// All the resource.json entry paths have to be prefixed with them to make them relative to the 
 		// resource.json location
-		var resoucelistRelativePath = path.posix.relative(path.posix.parse(resourceListFile).dir, cwd);
+		var resoucelistRelativePath = path.posix.parse(path.posix.relative(cwd, resourceListFile)).dir;
 
 		var getResourceElement = function(p) {
-			var resourceElement = { name: path.posix.join(resoucelistRelativePath, p) };
+			var resourceElement = { name: path.posix.relative(resoucelistRelativePath, p) };
 			if (isDebugResource(p)) { resourceElement.isDebug = "true" };
 			if (isMergedResource(p)) { resourceElement.merged = "true" };
 			if (isDesigntimeResource(p)) { resourceElement.designtime = "true" };

@@ -1,6 +1,10 @@
 {
 	"resources": [
 		{
+			"name": "themes/mytheme/abc.css",
+			"theme": "mytheme"
+		},
+		{
 			"name": "themes/mytheme/xyz.js",
 			"theme": "mytheme"
 		}

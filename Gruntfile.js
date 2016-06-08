@@ -338,6 +338,13 @@ module.exports = function(grunt) {
 					cwd: 'tmp/resourcelist/propertiesLocaleRegion'
 				}]
 			},
+			preload: {
+				files: [{
+					expand: true,
+					src: '**/*',
+					cwd: 'tmp/resourcelist/preload'
+				}]
+			},
 			falsePreload: {
 				files: [{
 					expand: true,
