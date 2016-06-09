@@ -6,27 +6,27 @@
 		},
 		{
 			"name": "themes/mytheme/xyz.less",
-			"designtime": "true",
+			"designtime": true,
 			"theme": "mytheme"
 		},
 		{
 			"name": "xyz.control",
-			"designtime": "true"
+			"designtime": true
 		},
 		{
 			"name": "xyz.designtime.js",
-			"designtime": "true"
+			"designtime": true
 		},
 		{
 			"name": "xyz.interface",
-			"designtime": "true"
+			"designtime": true
 		},
 		{
 			"name": "xyz.less"
 		},
 		{
 			"name": "xyz.type",
-			"designtime": "true"
+			"designtime": true
 		}
 	]
 }

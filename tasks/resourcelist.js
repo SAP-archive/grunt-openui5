@@ -18,7 +18,7 @@ var path = require('path');
 
 var debugResourcePattern = /(-dbg\.js|-dbg\.controller\.js|-dbg\.view\.js|-dbg\.fragment\.js|-dbg\.css)$/;
 var mergedResourcePattern = /(Component-preload\.js|library-preload\.js|library-preload-dbg\.js|library-preload\.json|library-all\.js|library-all-dbg\.js)$/;
-var localePattern = /^((?:[^\/]+\/)*[^\/]+?)_([A-Z]{2}(?:_[A-Z]{2}(?:_[A-Z0-9_]+)?)?)(\.properties|\.hdbtextbundle)/i;
+var localePattern = /^((?:[^\/]+\/)*[^\/]+?)(?:_([A-Z]{2}(?:_[A-Z]{2}(?:_[A-Z0-9_]+)?)?))?(\.properties|\.hdbtextbundle)$/i;
 var designtimeResourcePattern = /(\.designtime\.js|\.control|\.interface|\.type|themes\/[^\/]*\/[^\/]*\.less)$/;
 var themePattern = /^((?:[^\/]+\/)*)themes\/([^\/]+)\//;
 
@@ -88,13 +88,13 @@ module.exports = function(grunt) {
 
 		var getResourceElement = function(p) {
 			var resourceElement = { name: path.posix.relative(resoucelistRelativePath, p) };
-			if (isDebugResource(p)) { resourceElement.isDebug = "true" };
-			if (isMergedResource(p)) { resourceElement.merged = "true" };
-			if (isDesigntimeResource(p)) { resourceElement.designtime = "true" };
+			if (isDebugResource(p)) { resourceElement.isDebug = true };
+			if (isMergedResource(p)) { resourceElement.merged = true };
+			if (isDesigntimeResource(p)) { resourceElement.designtime = true };
 			var localeData = localizedProperty(p);
 			if (localeData) {
 				resourceElement.raw = localeData.raw;
-				resourceElement.locale = localeData.locale;
+				resourceElement.locale = localeData.locale ? localeData.locale : "";
 			}
 			var themeData = getTheme(p);
 			if (themeData) {

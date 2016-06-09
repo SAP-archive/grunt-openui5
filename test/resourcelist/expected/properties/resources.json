@@ -1,7 +1,9 @@
 {
 	"resources": [
 		{
-			"name": "i18n/i18n.properties"
+			"name": "i18n/i18n.properties",
+			"raw": "i18n/i18n.properties",
+			"locale": ""
 		}
 	]
 }

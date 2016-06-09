@@ -2,7 +2,7 @@
 	"resources": [
 		{
 			"name": "Component-preload.js",
-			"merged": "true"
+			"merged": true
 		}
 	]
 }

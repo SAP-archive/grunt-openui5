@@ -2,7 +2,7 @@
 	"resources": [
 		{
 			"name": "Component-dbg.js",
-			"isDebug": "true"
+			"isDebug": true
 		},
 		{
 			"name": "Component-dbgxjs"
