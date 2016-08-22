@@ -214,7 +214,8 @@ module.exports = function (grunt) {
 									fromString: true,
 									warnings: grunt.option('verbose') === true,
 									output: {
-										comments: copyrightCommentsPattern
+										comments: copyrightCommentsPattern,
+										ascii_only: true
 									}
 								}).code;
 								break;
