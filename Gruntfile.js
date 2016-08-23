@@ -213,6 +213,22 @@ module.exports = function(grunt) {
 					dest: 'test/preload/fixtures/library-same-dest'
 				},
 				libraries: '**'
+			},
+
+			'library_custom_uglify_params': {
+				options: {
+					resources: 'test/preload/fixtures/library-custom-uglify-params',
+					dest: 'tmp/preload/library_custom_uglify_params',
+					compress: {
+						uglifyjs: {
+							mangle: false,
+							output: {
+								ascii_only: true
+							}
+						}
+					}
+				},
+				libraries: '**'
 			}
 
 		},

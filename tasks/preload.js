@@ -202,21 +202,35 @@ module.exports = function (grunt) {
 						
 						var iOriginalSize, iCompressedSize;
 
+						var parameterName;
+
+						// Default options for UglifyJS
+						var uglifyParameters = {
+							fromString: true,
+							warnings: grunt.option('verbose') === true,
+							output: {
+								comments: copyrightCommentsPattern
+							}
+						};
+
 						if (options.compress) {
 
 							iOriginalSize = fileContent.length;
 							iPreloadOriginalSize += iOriginalSize;
 
+							// Override UglifyJS defaults with given options
+							if (typeof options.compress.uglifyjs === 'object') {
+								for (parameterName in options.compress.uglifyjs) {
+									if (options.compress.uglifyjs.hasOwnProperty(parameterName)) {
+										uglifyParameters[parameterName] = options.compress.uglifyjs[parameterName];
+									}
+								}
+							}
+
 							switch (fileExtension) {
 							case '.js':
 								// Javascript files are processed by Uglify
-								fileContent = uglify.minify(fileContent, {
-									fromString: true,
-									warnings: grunt.option('verbose') === true,
-									output: {
-										comments: copyrightCommentsPattern
-									}
-								}).code;
+								fileContent = uglify.minify(fileContent, uglifyParameters).code;
 								break;
 							case '.json':
 								// JSON is parsed and written to string again to remove unwanted white space
