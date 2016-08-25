@@ -202,35 +202,33 @@ module.exports = function (grunt) {
 						
 						var iOriginalSize, iCompressedSize;
 
-						var parameterName;
-
-						// Default options for UglifyJS
-						var uglifyParameters = {
-							fromString: true,
-							warnings: grunt.option('verbose') === true,
-							output: {
-								comments: copyrightCommentsPattern
-							}
-						};
-
 						if (options.compress) {
 
 							iOriginalSize = fileContent.length;
 							iPreloadOriginalSize += iOriginalSize;
 
-							// Override UglifyJS defaults with given options
-							if (typeof options.compress.uglifyjs === 'object') {
-								for (parameterName in options.compress.uglifyjs) {
-									if (options.compress.uglifyjs.hasOwnProperty(parameterName)) {
-										uglifyParameters[parameterName] = options.compress.uglifyjs[parameterName];
-									}
-								}
+							// Convert default compression to empty configuration object
+							if (options.compress === true) {
+							  options.compress = {};
+							}
+
+							// Make sure to have an object
+							options.compress.uglifyjs = options.compress.uglifyjs || {};
+
+							// Always override given options, override shouldn't be possible
+							options.compress.uglifyjs.fromString = true;
+							options.compress.uglifyjs.warnings = grunt.option('verbose') === true;
+
+							// Set default "comments" option if not given already
+							options.compress.uglifyjs.output = options.compress.uglifyjs.output || {};
+							if (!options.compress.uglifyjs.output.hasOwnProperty("comments")) {
+							  options.compress.uglifyjs.output.comments = copyrightCommentsPattern;
 							}
 
 							switch (fileExtension) {
 							case '.js':
 								// Javascript files are processed by Uglify
-								fileContent = uglify.minify(fileContent, uglifyParameters).code;
+								fileContent = uglify.minify(fileContent, options.compress.uglifyjs).code;
 								break;
 							case '.json':
 								// JSON is parsed and written to string again to remove unwanted white space
