@@ -246,7 +246,8 @@ module.exports = function (grunt) {
 									break;
 								}
 							} catch (e) {
-								grunt.fail.warn('Failed to minify ' + fileName + '. This might be due to a syntax error in the file.');
+								grunt.log.error('Failed to compress ' + fileName + '. This might be due to a syntax error in the file.');
+								grunt.fail.warn(e);
 							}
 
 							iCompressedSize = fileContent.length;
