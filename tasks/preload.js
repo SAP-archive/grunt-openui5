@@ -199,7 +199,7 @@ module.exports = function (grunt) {
 						var fileName = resourceMap[preloadFile].fullPath;
 						var fileContent = grunt.file.read(fileName);
 						var fileExtension = path.extname(fileName);
-						
+
 						var iOriginalSize, iCompressedSize;
 
 						if (options.compress) {
@@ -225,24 +225,29 @@ module.exports = function (grunt) {
 							  options.compress.uglifyjs.output.comments = copyrightCommentsPattern;
 							}
 
-							switch (fileExtension) {
-							case '.js':
-								// Javascript files are processed by Uglify
-								fileContent = uglify.minify(fileContent, options.compress.uglifyjs).code;
-								break;
-							case '.json':
-								// JSON is parsed and written to string again to remove unwanted white space
-								fileContent = JSON.stringify(JSON.parse(fileContent));
-								break;
-							case '.xml':
-								// For XML we use the pretty data
+							try {
+								switch (fileExtension) {
+								case '.js':
+									// Javascript files are processed by Uglify
+									fileContent = uglify.minify(fileContent, options.compress.uglifyjs).code;
+									break;
+								case '.json':
+									// JSON is parsed and written to string again to remove unwanted white space
+									fileContent = JSON.stringify(JSON.parse(fileContent));
+									break;
+								case '.xml':
+									// For XML we use the pretty data
 
-								// Do not minify if XML(View) contains an <*:pre> tag because whitespace of HTML <pre> should be preserved (should only happen rarely)
-								if (!xmlHtmlPrePattern.test(fileContent)) {
-									fileContent = pd.xmlmin(fileContent, false);
+									// Do not minify if XML(View) contains an <*:pre> tag because whitespace of HTML <pre> should be preserved (should only happen rarely)
+									if (!xmlHtmlPrePattern.test(fileContent)) {
+										fileContent = pd.xmlmin(fileContent, false);
+									}
+
+									break;
 								}
-
-								break;
+							} catch (e) {
+								grunt.log.error('Failed to compress ' + fileName + '. This might be due to a syntax error in the file.');
+								grunt.fail.warn(e);
 							}
 
 							iCompressedSize = fileContent.length;
