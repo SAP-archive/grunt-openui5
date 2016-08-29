@@ -45,6 +45,14 @@ describe('openui5_preload', function() {
 			});
 		});
 
+		it('custom_uglify_params', function() {
+			fileContent.equal({
+				sActualFileSource: 'tmp/preload/library_custom_uglify_params/my/ui/lib/library-preload.json',
+				sExpectedFileSource: 'test/preload/expected/library_custom_uglify_params/my/ui/lib/library-preload.json',
+				sMessage: 'library preload JSON should be correctly created.'
+			});
+		})
+
 		it('library_same_dest', function() {
 			fileContent.equal({
 				sActualFileSource: 'test/preload/fixtures/library-same-dest/my/ui/lib/library-preload.json',
