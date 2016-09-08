@@ -175,13 +175,30 @@ Default value: `.`
 Path to the dest folder in which the preload files should be created.
 
 #### compress
-Type: `boolean`  
+Type: `boolean` or `object`  
 Default value: `true`
 
-Optional parameter to set compression/minification of the files.
-- Javascript is minified using [UglifyJS2](https://github.com/mishoo/UglifyJS2) and copyright comments are preserved (comments matching regular expression `/copyright|\(c\)|released under|license|\u00a9/i` )
+Optional parameter to set compression/minification of the files or to provide
+additional options.
+
+- Javascript is minified using [UglifyJS2](https://github.com/mishoo/UglifyJS2)
 - XML is minified using [pretty-data](https://github.com/vkiryukhin/pretty-data)
 - JSON is parsed for correctness and to remove extra whitespace
+
+An `object` can be used to provide options.  
+Currrently only `uglifyjs` is supported.  
+The given object will be passed to `UglifyJS2.minify` (see [here](https://github.com/mishoo/UglifyJS2#api-reference) for  options) and merged with the defaults (see below).  
+
+```js
+compress: {
+  uglifyjs: {
+    output: {
+      comments: /copyright|\(c\)|released under|license|\u00a9/i
+    }
+  }
+}
+```
+Note that `fromString` and `warnings` will be always overridden.
 
 #### components
 
