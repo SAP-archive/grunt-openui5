@@ -1,3 +1,20 @@
+# 0.10.0 (2016-09-09)
+
+### Features
+- openui5_preload task
+  - Compression options for UglifyJS [#41](https://github.com/SAP/grunt-openui5/pull/41) [`b2e6c0e`](https://github.com/SAP/grunt-openui5/commit/b2e6c0e87f94d1fc46b8fafa69bd40e8d2ffe88f)
+
+### Fixes
+- openui5_preload task
+  - Fail gracefully when minification fails [#42](https://github.com/SAP/grunt-openui5/pull/42) [`52b6c78`](https://github.com/SAP/grunt-openui5/commit/52b6c78d21eec1d90987838d3e7726d19baa8fca)
+
+### Others
+- Documentation: openui5_theme default example [#33](https://github.com/SAP/grunt-openui5/pull/33) [`8ef82a5`](https://github.com/SAP/grunt-openui5/commit/8ef82a510aed7159c81433d1896fbe7073535426)
+
+### All changes
+[`0.9.0...0.10.0`](https://github.com/SAP/grunt-openui5/compare/0.9.0...0.10.0)
+
+
 # 0.9.0 (2016-04-25)
 
 ### Breaking changes
