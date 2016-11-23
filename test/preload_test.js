@@ -23,41 +23,57 @@ describe('openui5_preload', function() {
 
 		it('default_options', function() {
 			fileContent.equal({
-				sActualFileSource: 'tmp/preload/library_default_options/my/ui/lib/library-preload.json',
-				sExpectedFileSource: 'test/preload/expected/library_default_options/my/ui/lib/library-preload.json',
+				sActualFileSource: 'tmp/preload/library_default_options/my/ui/lib/library-preload.js',
+				sExpectedFileSource: 'test/preload/expected/library_default_options/my/ui/lib/library-preload.js',
+				sMessage: 'library preload JS should be correctly created.'
+			});
+		});
+
+		it('compat_138', function() {
+			fileContent.equal({
+				sActualFileSource: 'tmp/preload/library_compat_138/my/ui/lib/library-preload.json',
+				sExpectedFileSource: 'test/preload/expected/library_compat_138/my/ui/lib/library-preload.json',
 				sMessage: 'library preload JSON should be correctly created.'
+			});
+		});
+
+		it('compat_140', function() {
+			fileContent.equal({
+				sActualFileSource: 'tmp/preload/library_compat_140/my/ui/lib/library-preload.js',
+				sExpectedFileSource: 'test/preload/expected/library_compat_140/my/ui/lib/library-preload.js',
+				sMessage: 'library preload JS should be correctly created.'
 			});
 		});
 
 		it('resource_prefix', function() {
 			fileContent.equal({
-				sActualFileSource: 'tmp/preload/library_resource_prefix/library-preload.json',
-				sExpectedFileSource: 'test/preload/expected/library_resource_prefix/library-preload.json',
-				sMessage: 'library preload JSON should be correctly created.'
+				sActualFileSource: 'tmp/preload/library_resource_prefix/library-preload.js',
+				sExpectedFileSource: 'test/preload/expected/library_resource_prefix/library-preload.js',
+				sMessage: 'library preload JS should be correctly created.'
 			});
 		});
 
 		it('no_compress', function() {
 			fileContent.equal({
-				sActualFileSource: 'tmp/preload/library_no_compress/my/ui/lib/library-preload.json',
-				sExpectedFileSource: 'test/preload/expected/library_no_compress/my/ui/lib/library-preload.json',
-				sMessage: 'library preload JSON should be correctly created.'
+				sActualFileSource: 'tmp/preload/library_no_compress/my/ui/lib/library-preload.js',
+				sExpectedFileSource: 'test/preload/expected/library_no_compress/my/ui/lib/library-preload.js',
+				sMessage: 'library preload JS should be correctly created.'
 			});
 		});
 
 		it('custom_uglify_params', function() {
 			fileContent.equal({
-				sActualFileSource: 'tmp/preload/library_custom_uglify_params/my/ui/lib/library-preload.json',
-				sExpectedFileSource: 'test/preload/expected/library_custom_uglify_params/my/ui/lib/library-preload.json',
-				sMessage: 'library preload JSON should be correctly created.'
+				sActualFileSource: 'tmp/preload/library_custom_uglify_params/my/ui/lib/library-preload.js',
+				sExpectedFileSource: 'test/preload/expected/library_custom_uglify_params/my/ui/lib/library-preload.js',
+				sMessage: 'library preload JS should be correctly created.'
 			});
 		})
 
 		it('library_same_dest', function() {
 			fileContent.equal({
-				sActualFileSource: 'test/preload/fixtures/library-same-dest/my/ui/lib/library-preload.json',
-				sExpectedFileSource: 'test/preload/expected/library_default_options/my/ui/lib/library-preload.json',
-				sMessage: 'library preload JSON should be correctly created.'
+				sActualFileSource: 'test/preload/fixtures/library-same-dest/my/ui/lib/library-preload.js',
+				sExpectedFileSource: 'test/preload/expected/library_default_options/my/ui/lib/library-preload.js',
+				sMessage: 'library preload JS should be correctly created.'
 			});
 		});
 

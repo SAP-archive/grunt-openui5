@@ -141,6 +141,24 @@ module.exports = function(grunt) {
 				libraries: '**'
 			},
 
+			'library_compat_138': {
+				options: {
+					resources: 'test/preload/fixtures/library',
+					dest: 'tmp/preload/library_compat_138',
+					compatVersion: '1.38'
+				},
+				libraries: '**'
+			},
+
+			'library_compat_140': {
+				options: {
+					resources: 'test/preload/fixtures/library',
+					dest: 'tmp/preload/library_compat_140',
+					compatVersion: '1.40'
+				},
+				libraries: '**'
+			},
+
 			'library_resource_prefix': {
 				options: {
 					resources: [

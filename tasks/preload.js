@@ -42,7 +42,8 @@ module.exports = function (grunt) {
 		var options = this.options({
 			resources: [],
 			dest: null,
-			compress: true
+			compress: true,
+			compatVersion: "edge"
 		});
 
 		var resourceMap = {};
@@ -109,28 +110,54 @@ module.exports = function (grunt) {
 		}
 
 		['components', 'libraries'].forEach(function(preloadType) {
+			var iMajor, iMinor, preloadInfo, preloadOptions;
 
-			var preloadOptions = preloadData[preloadType];
-
+			preloadOptions = preloadData[preloadType];
 			if (!preloadOptions) {
 				return;
 			}
 
-			var preloadInfo = (preloadType === 'libraries') ? {
-				moduleName: 'library-preload',
-				ext: '.json',
-				indicatorFile: 'library.js',
-				processModuleName: function(moduleName) {
-					return moduleName.replace(/\//g, '.');
+			if (preloadType === 'libraries') {
+				preloadInfo = {
+					moduleName: 'library-preload',
+					indicatorFile: 'library.js',
+					processModuleName: function(moduleName) {
+						return moduleName.replace(/\//g, '.');
+					}
+				};
+
+				if (options.compatVersion !== "edge") {
+					var aVersionMatch = options.compatVersion.match(/^([0-9]+)\.([0-9]+)$/);
+					if (!aVersionMatch) {
+						grunt.fail.warn('\'' + options.compatVersion + '\' is not a valid value for option compatVersion!');
+						return;
+					}
+					iMajor = parseInt(aVersionMatch[1], 10);
+					iMinor = parseInt(aVersionMatch[2], 10);
 				}
-			} : {
-				moduleName: 'Component-preload',
-				ext: '.js',
-				indicatorFile: 'Component.js',
-				processContent: function(content) {
-					return 'jQuery.sap.registerPreloadedModules(' + content + ');';
+
+				if (options.compatVersion === "edge" || (iMajor === 1 && iMinor >= 40) || iMajor > 1) {
+					// Build library-preload as .js file
+					preloadInfo.ext = ".js";
+					preloadInfo.processContent = function(content) {
+						return 'jQuery.sap.registerPreloadedModules(' + content + ');';
+					};
+				} else {
+					// Build as .json file (legacy, needed because UI5 <1.40 only loads the .json files)
+					preloadInfo.ext = ".json";
 				}
-			};
+			} else {
+				preloadInfo = {
+					moduleName: 'Component-preload',
+					ext: '.js',
+					indicatorFile: 'Component.js',
+					processContent: function(content) {
+						return 'jQuery.sap.registerPreloadedModules(' + content + ');';
+					}
+				};
+			}
+
+
 
 			if (preloadOptions === true) {
 				preloadOptions = '**';

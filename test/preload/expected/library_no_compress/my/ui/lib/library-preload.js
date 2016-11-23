@@ -1,4 +1,4 @@
-{
+jQuery.sap.registerPreloadedModules({
 	"version": "2.0",
 	"name": "my.ui.lib.library-preload",
 	"modules": {
@@ -8,4 +8,4 @@
 		"my/ui/lib/myHtmlPre.view.xml": "<my>XML</my>\n<!-- A comment in XML is the same as in HTML -->\n<html:pre>   </html:pre>",
 		"my/ui/lib/foo.properties": "FOO=BAR\n"
 	}
-}
+});
