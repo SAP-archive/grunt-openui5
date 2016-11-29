@@ -168,6 +168,15 @@ Default:
 
 Glob pattern(s) for finding relevant resources inside `cwd`. If set, the default patterns will be replaced.
 
+##### compatVersion
+Type: `string`  
+Default: `edge`
+
+Sets the UI5 version used for compatibility mode in the format `<major>.<minor>`. Use this when building older UI5 releases to ensure full functionality.
+
+Example:  
+When building for UI5 target version 1.38.x, use `compatVersion: '1.38'`.
+
 #### dest
 Type: `string`  
 Default value: `.`
@@ -181,7 +190,7 @@ Default value: `true`
 Optional parameter to set compression/minification of the files or to provide
 additional options.
 
-- Javascript is minified using [UglifyJS2](https://github.com/mishoo/UglifyJS2)
+- JavaScript is minified using [UglifyJS2](https://github.com/mishoo/UglifyJS2)
 - XML is minified using [pretty-data](https://github.com/vkiryukhin/pretty-data)
 - JSON is parsed for correctness and to remove extra whitespace
 
