@@ -23,18 +23,18 @@
     "node": ">= 0.10.0"
   },
   "dependencies": {
-    "async": "^1.5.2",
+    "async": "^2.1.4",
     "connect-inject": "^0.4.0",
     "connect-openui5": "^0.6.0",
     "cors": "^2.7.1",
     "less-openui5": "^0.2.0",
-    "maxmin": "^1.1.0",
+    "maxmin": "^2.1.0",
     "multiline": "^1.0.2",
     "pretty-data": "^0.40.0",
     "serve-static": "^1.10.2",
     "slash": "^1.0.0",
     "uglify-js": "^2.6.1",
-    "url-join": "0.0.1"
+    "urljoin": "^0.1.5"
   },
   "devDependencies": {
     "eslint": "^1.10.3",
@@ -42,8 +42,8 @@
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-connect": "^1.0.1",
     "grunt-eslint": "^17.3.2",
-    "grunt-mocha-test": "^0.12.7",
-    "mocha": "^2.3.4"
+    "grunt-mocha-test": "^0.13.2",
+    "mocha": "^3.2.0"
   },
   "peerDependencies": {
     "grunt": ">=0.4.0"
