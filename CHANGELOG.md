@@ -1,3 +1,21 @@
+# 0.11.0 (2016-12-01)
+
+### Breaking changes
+- Drop Node.js v0.10 support [`e99df21`](https://github.com/SAP/grunt-openui5/commit/e99df2129ec40960af70589a893af6732ba05295)
+- openui5_preload task
+  - Create library-preload.js files instead of .json [#47](https://github.com/SAP/grunt-openui5/pull/47) [`cb9bcae`](https://github.com/SAP/grunt-openui5/commit/cb9bcaef6cf8c8cef39f109f1cbb9bae21356e0a)
+
+### Features
+- openui5_preload task
+  - Introduce [`compatVersion` option](https://github.com/SAP/grunt-openui5#compatversion) [#47](https://github.com/SAP/grunt-openui5/pull/47) [`cb9bcae`](https://github.com/SAP/grunt-openui5/commit/cb9bcaef6cf8c8cef39f109f1cbb9bae21356e0a)
+
+### Others
+- Update npm dependencies / replace "url-join" with "urljoin" [#49](https://github.com/SAP/grunt-openui5/pull/49) [`b820a68`](https://github.com/SAP/grunt-openui5/commit/b820a6830cb7505374a10e86816263860f9a52c5)
+- Travis CI: Add node v7 / drop v0.10 [`f691e1a`](https://github.com/SAP/grunt-openui5/commit/f691e1a314d9b4d1ff6e540012562639e749276f)
+
+### All changes
+[`0.10.0...0.11.0`](https://github.com/SAP/grunt-openui5/compare/0.10.0...0.11.0)
+
 # 0.10.0 (2016-09-09)
 
 ### Features
