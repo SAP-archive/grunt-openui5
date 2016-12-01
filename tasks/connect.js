@@ -20,7 +20,7 @@ var openui5 = {
 var serveStatic = require('serve-static');
 var inject = require('connect-inject');
 var cors = require('cors');
-var urljoin = require('url-join');
+var urljoin = require('urljoin');
 var multiline = require('multiline');
 
 var liveReloadLessCssPlugin = multiline(function() {/*
