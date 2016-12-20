@@ -36,10 +36,10 @@ Builds a theme and creates the following files in the dest directory of the spec
 #### rootPaths
 Type: `array` of `string`
 
-Root paths to use for import directives.
+Root paths to use for import directives
 
-This option differs from the `parser.paths` option.  
-It is useful if less files are located in separate folders but referenced as they would all be in one.  
+This option differs from the `parser.paths` option.
+It is useful if less files are located in separate folders but referenced as they would all be in one.
 If `rootPaths` are provided and a file can not be found, the `parser.paths` option will be used instead.
 
 #### parser
@@ -82,7 +82,7 @@ Creates the following files
 
 #### Custom Options
 
-If import directives are used to import files from other src folders, the root paths should be defined.  
+If import directives are used to import files from other src folders, the root paths should be defined.
 The compress option can be used to minify the output css/json.
 
 ```js
@@ -141,17 +141,17 @@ Type: `string`
 Base/root directory for finding resources.
 
 ##### prefix
-Type: `string`  
+Type: `string`
 Default: ` `
 
 Directory namespace prefix that should be prepended to all found paths. This is useful if the source folder structure is not the same as the module namespace.
 
-Example:  
-`{ cwd: 'webapp', prefix: 'my/app' }`  
+Example:
+`{ cwd: 'webapp', prefix: 'my/app' }`
 `webapp/foo.js` will be treated as `my/app/foo.js` instead of `foo.js`.
 
 ##### src
-Type: `string` or `array` of `string`  
+Type: `string` or `array` of `string`
 Default:
 ```
 [
@@ -169,13 +169,13 @@ Default:
 Glob pattern(s) for finding relevant resources inside `cwd`. If set, the default patterns will be replaced.
 
 #### dest
-Type: `string`  
+Type: `string`
 Default value: `.`
 
 Path to the dest folder in which the preload files should be created.
 
 #### compress
-Type: `boolean` or `object`  
+Type: `boolean` or `object`
 Default value: `true`
 
 Optional parameter to set compression/minification of the files or to provide
@@ -185,9 +185,9 @@ additional options.
 - XML is minified using [pretty-data](https://github.com/vkiryukhin/pretty-data)
 - JSON is parsed for correctness and to remove extra whitespace
 
-An `object` can be used to provide options.  
-Currrently only `uglifyjs` is supported.  
-The given object will be passed to `UglifyJS2.minify` (see [here](https://github.com/mishoo/UglifyJS2#api-reference) for  options) and merged with the defaults (see below).  
+An `object` can be used to provide options.
+Currrently only `uglifyjs` is supported.
+The given object will be passed to `UglifyJS2.minify` (see [here](https://github.com/mishoo/UglifyJS2#api-reference) for  options) and merged with the defaults (see below).
 
 ```js
 compress: {
@@ -235,10 +235,10 @@ components: {
 ```
 
 ##### src
-Type: `string` / `array` of `string`  
+Type: `string` / `array` of `string`
 Default: component namespace path + `/**` (e.g. `my/app/**`)
 
-Glob pattern(s) for files that should be included into the preload.  
+Glob pattern(s) for files that should be included into the preload.
 Patterns are based on all available resources (see [resources](#resources)).
 
 ### libraries
@@ -296,8 +296,8 @@ grunt.initConfig({
 
 ### Overview
 
-Provides middleware for the [grunt-contrib-connect](https://github.com/gruntjs/grunt-contrib-connect) task to run a web server.  
-This task will configure the `connect` task target with the same name and invoke it with the provided arguments.  
+Provides middleware for the [grunt-contrib-connect](https://github.com/gruntjs/grunt-contrib-connect) task to run a web server.
+This task will configure the `connect` task target with the same name and invoke it with the provided arguments.
 As this task creates it's own middleware, the `connect` task's `base` option will not be respected. If you want to modify the middleware, provide a function callback as `middleware` option (see [here](https://github.com/gruntjs/grunt-contrib-connect#middleware)). The function will be called after the middleware has been created.
 
 ### Options
@@ -306,8 +306,8 @@ As this task creates it's own middleware, the `connect` task's `base` option wil
 
 #### contextpath
 
-Type: `string`  
-Default value: `/`  
+Type: `string`
+Default value: `/`
 
 The contextpath for all middlewares provided by this task.
 
@@ -366,7 +366,7 @@ test
 
 #### cors
 
-Type: `object`  
+Type: `object`
 Default: `null`
 
 Configuration for [node-cors](https://github.com/troygoode/node-cors/) to enable Cross Origin Resource Sharing (CORS).
@@ -409,7 +409,7 @@ Options for [connect-openui5 less](https://github.com/SAP/connect-openui5#lessop
 
 #### App
 
-This example will run a web server at `http://localhost:8000/`.  
+This example will run a web server at `http://localhost:8000/`.
 It serves the `webapp` directory at root level and the openui5 resources at `http://localhost:8000/resources/*`.
 
 ```js
