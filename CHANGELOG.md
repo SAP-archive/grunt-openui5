@@ -1,3 +1,15 @@
+# 0.12.0 (2017-03-24)
+
+### Features
+- openui5_theme task
+  - Support theme scopes (Belize Themes) [#55](https://github.com/SAP/grunt-openui5/pull/55) (via [SAP/less-openui5#10](https://github.com/SAP/less-openui5/pull/10))
+- openui5_connect task
+  - Support theme scopes (Belize Themes) [#57](https://github.com/SAP/grunt-openui5/pull/57) (via [SAP/less-openui5#10](https://github.com/SAP/less-openui5/pull/10))
+
+### All changes
+[`0.11.0...0.12.0`](https://github.com/SAP/grunt-openui5/compare/0.11.0...0.12.0)
+
+
 # 0.11.0 (2016-12-01)
 
 ### Breaking changes
