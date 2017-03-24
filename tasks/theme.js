@@ -16,7 +16,7 @@
 
 var path = require('path');
 var async = require('async');
-var lessOpenUI5 = require('less-openui5');
+var less = require('less-openui5');
 
 module.exports = function(grunt) {
 
@@ -29,6 +29,8 @@ module.exports = function(grunt) {
 			parser: {},
 			compiler: {}
 		});
+
+		var builder = new less.Builder();
 
 		// TODO check no file
 
@@ -47,17 +49,20 @@ module.exports = function(grunt) {
 			// TODO check no file
 
 			async.concatSeries(files, function(file, next) {
-				// make sure parser.filename is set
-				var parserOptions = grunt.util._.extend({}, options.parser, {
-					filename: file
-				});
-				lessOpenUI5.build(grunt.file.read(file), grunt.util._.extend({}, options, {
-					parser: parserOptions
-				}), function(err, result) {
-					if (err) {
-						nextFileObj(err);
-						return;
-					}
+
+				if (options.rootPaths) {
+
+					// Map rootpaths and get lessInputPath
+					options.rootPaths.forEach(function(path) {
+						if (file.indexOf(path) !== -1) {
+							file = file.substring(path.length);
+						}
+					});
+				}
+
+				builder.build(grunt.util._.extend({}, options, {
+					lessInputPath: file
+				})).then(function(result) {
 
 					var destDir = path.dirname(fileObj.dest);
 
@@ -75,6 +80,9 @@ module.exports = function(grunt) {
 					grunt.log.writeln('File ' + parametersDestFile + ' created.');
 
 					process.nextTick(next);
+
+				}, function(err) {
+					nextFileObj(err);
 				});
 			}, function() {
 				nextFileObj();
