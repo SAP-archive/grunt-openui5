@@ -22,6 +22,7 @@ var maxmin = require('maxmin');
 
 var defaultResourcePatterns = [
 	'**/*.js',
+	'!**/Component-preload.js',
 	'**/*.fragment.html',
 	'**/*.fragment.json',
 	'**/*.fragment.xml',
