@@ -290,7 +290,9 @@ module.exports = function (grunt) {
 							grunt.verbose.writeln(log);
 						}
 
-						preloadObject.modules[preloadFile] = fileContent;
+						// tranform resource path from folder into module
+						// my.lib into my/lib
+						preloadObject.modules[preloadFile.replace(/[.](?=.*[.])/, '/')] = fileContent;
 					});
 
 					var content = JSON.stringify(preloadObject, null, '\t');
