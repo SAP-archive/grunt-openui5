@@ -471,6 +471,95 @@ openui5_connect: {
   }
 }
 ```
+## openui5_deploy_abap
+
+### Overview
+Provides a tool to support continous integration and rapid deployment to Fiori Frontend Server.
+
+This task is based off of the SAP Tutorial by wolframK found [here](https://www.sap.com/developer/tutorials/ci-best-practices-fiori-abap.html).
+
+### Prerequsites
+This task is based off of `node-rfc`. Please refer to the `node-rfc` [documentation](https://github.com/SAP/node-rfc) for system requirements and limitations.
+
+### Options
+
+#### targetDir
+Type: `string`
+
+Directory of the application to be deployed. Recomended to run `openui5_preload` before hand.
+
+#### appName
+Type: `string`
+
+Name of the BSP application in SAP.
+
+#### appDesc
+Type: `string`
+
+Description of the BSP applicaiton in SAP
+
+#### package
+Type: `string`
+
+Package that the the BSP applicaiton will be deployed to. Package must exist before deployment.
+
+#### transportDesc
+Type: `string`
+
+Description that will be attached to the transport request.
+
+#### connection
+Type: `object`
+
+Object that holds the connection details for the RFC
+
+#### user
+Type: `string`
+
+Username that is used to authenticate with SAP.
+
+#### passwd
+Type: `string`
+
+Password for `user` that is used to authenticate with SAP.
+
+#### ashost
+Type: `string`
+
+Hostname of the SAP Frontend Server. Found by right clicking the connection in the SAP GUI logon pad.
+
+#### sysnr
+Type: `string`
+
+Instance number of the SAP Frontend Server. Found by right clicking the connection in the SAP GUI logon pad.
+
+#### client
+Type: `string`
+
+Client number used for the RFC connection.
+
+### Usage Example
+```js
+grunt.initConfig({
+
+  openui5_deploy_abap:{
+    build:{
+      targetDir:'webapp',
+      appName: 'y_test_app',
+      appDesc: 'Test Deployment',
+      package: 'Y_TEST_PACKAGE',
+      transportDesc:' Description goes here',
+      connection:{
+          user: "TEST123",
+          passwd: 'Password',
+          ashost: 'SAPGWTCI',
+          sysnr: '18',
+          client: '250'
+      }
+    }
+  }
+});
+```
 
 ## Contributing
 

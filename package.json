@@ -27,6 +27,7 @@
     "connect-inject": "^0.4.0",
     "connect-openui5": "^0.7.0",
     "cors": "^2.7.1",
+    "ip": "^1.1.5",
     "less-openui5": "^0.3.0",
     "maxmin": "^2.1.0",
     "multiline": "^1.0.2",
@@ -35,6 +36,9 @@
     "slash": "^1.0.0",
     "uglify-js": "^2.8.15",
     "urljoin": "^0.1.5"
+  },
+  "optionalPeerDependencies":{
+    "node-rfc": "^0.1.11"
   },
   "devDependencies": {
     "eslint": "^1.10.3",
