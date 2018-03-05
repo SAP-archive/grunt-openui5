@@ -136,7 +136,14 @@ module.exports = function (grunt) {
 					iMinor = parseInt(aVersionMatch[2], 10);
 				}
 
-				if (options.compatVersion === "edge" || (iMajor === 1 && iMinor >= 40) || iMajor > 1) {
+				if (options.compatVersion === "edge" || (iMajor === 1 && iMinor >= 54) || iMajor > 1) {
+					// Build library-preload as .js file
+					preloadInfo.ext = ".js";
+					preloadInfo.processContent = function(content, preloadObject) {
+						// workaround for new modules based on sap.ui.predefine
+						return 'sap.ui.require.preload(' + JSON.stringify(preloadObject.modules, null, '\t') + ', "' + preloadObject.name + '");';
+					};
+				} else if (iMajor === 1 && iMinor >= 40 && iMinor < 54) {
 					// Build library-preload as .js file
 					preloadInfo.ext = ".js";
 					preloadInfo.processContent = function(content) {
@@ -295,7 +302,7 @@ module.exports = function (grunt) {
 
 					var content = JSON.stringify(preloadObject, null, '\t');
 					if (typeof preloadInfo.processContent === 'function') {
-						content = preloadInfo.processContent(content);
+						content = preloadInfo.processContent(content, preloadObject);
 					}
 
 					var destPath = options.dest;

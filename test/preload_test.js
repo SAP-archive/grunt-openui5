@@ -45,6 +45,14 @@ describe('openui5_preload', function() {
 			});
 		});
 
+		it('compat_154', function() {
+			fileContent.equal({
+				sActualFileSource: 'tmp/preload/library_compat_154/my/ui/lib/library-preload.js',
+				sExpectedFileSource: 'test/preload/expected/library_compat_154/my/ui/lib/library-preload.js',
+				sMessage: 'library preload JS should be correctly created.'
+			});
+		});
+
 		it('resource_prefix', function() {
 			fileContent.equal({
 				sActualFileSource: 'tmp/preload/library_resource_prefix/library-preload.js',

@@ -159,6 +159,15 @@ module.exports = function(grunt) {
 				libraries: '**'
 			},
 
+			'library_compat_154': {
+				options: {
+					resources: 'test/preload/fixtures/library',
+					dest: 'tmp/preload/library_compat_154',
+					compatVersion: '1.54'
+				},
+				libraries: '**'
+			},
+
 			'library_resource_prefix': {
 				options: {
 					resources: [
