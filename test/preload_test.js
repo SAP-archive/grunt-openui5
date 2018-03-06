@@ -97,6 +97,22 @@ describe('openui5_preload', function() {
 			});
 		});
 
+		it('compat_140', function() {
+			fileContent.equal({
+				sActualFileSource: 'tmp/preload/component_compat_140/my/app/Component-preload.js',
+				sExpectedFileSource: 'test/preload/expected/component_compat_140/my/app/Component-preload.js',
+				sMessage: 'component preload JS should be correctly created.'
+			});
+		});
+
+		it('compat_154', function() {
+			fileContent.equal({
+				sActualFileSource: 'tmp/preload/component_compat_154/my/app/Component-preload.js',
+				sExpectedFileSource: 'test/preload/expected/component_compat_154/my/app/Component-preload.js',
+				sMessage: 'component preload JS should be correctly created.'
+			});
+		});
+
 		it('resource_prefix', function() {
 			fileContent.equal({
 				sActualFileSource: 'tmp/preload/component_resource_prefix/Component-preload.js',

@@ -4,4 +4,4 @@ sap.ui.require.preload({
 	"my/ui/lib/my.view.xml": "<my>XML</my>\n<!-- A comment in XML is the same as in HTML -->",
 	"my/ui/lib/myHtmlPre.view.xml": "<my>XML</my>\n<!-- A comment in XML is the same as in HTML -->\n<html:pre>   </html:pre>",
 	"my/ui/lib/foo.properties": "FOO=BAR\n"
-}, "my.ui.lib.library-preload");
+}, "my/ui/lib/library-preload");

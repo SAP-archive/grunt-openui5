@@ -34,6 +34,16 @@ var defaultResourcePatterns = [
 var copyrightCommentsPattern = /copyright|\(c\)|released under|license|\u00a9/i;
 var xmlHtmlPrePattern = /<(?:\w+:)?pre>/;
 
+function createJSPreload(preloadObject) {
+	return 'sap.ui.require.preload(' + JSON.stringify(preloadObject.modules, null, '\t') + ', "' + preloadObject.name + '");';
+}
+function createLegacyJSPreload(preloadObject) {
+	return 'jQuery.sap.registerPreloadedModules(' + JSON.stringify(preloadObject, null, '\t') + ');';
+}
+function createLegacyJSONPreload(preloadObject) {
+	return JSON.stringify(preloadObject, null, '\t');
+}
+
 module.exports = function (grunt) {
 
 	grunt.registerMultiTask('openui5_preload', 'Create OpenUI5 preload files', function() {
@@ -117,51 +127,50 @@ module.exports = function (grunt) {
 				return;
 			}
 
+			if (options.compatVersion !== "edge") {
+				var aVersionMatch = options.compatVersion.match(/^([0-9]+)\.([0-9]+)$/);
+				if (!aVersionMatch) {
+					grunt.fail.warn('\'' + options.compatVersion + '\' is not a valid value for option compatVersion!');
+					return;
+				}
+				iMajor = parseInt(aVersionMatch[1], 10);
+				iMinor = parseInt(aVersionMatch[2], 10);
+			}
+
 			if (preloadType === 'libraries') {
 				preloadInfo = {
 					moduleName: 'library-preload',
-					indicatorFile: 'library.js',
-					processModuleName: function(moduleName) {
-						return moduleName.replace(/\//g, '.');
-					}
+					ext: '.js',
+					indicatorFile: 'library.js'
 				};
-
-				if (options.compatVersion !== "edge") {
-					var aVersionMatch = options.compatVersion.match(/^([0-9]+)\.([0-9]+)$/);
-					if (!aVersionMatch) {
-						grunt.fail.warn('\'' + options.compatVersion + '\' is not a valid value for option compatVersion!');
-						return;
-					}
-					iMajor = parseInt(aVersionMatch[1], 10);
-					iMinor = parseInt(aVersionMatch[2], 10);
-				}
 
 				if (options.compatVersion === "edge" || (iMajor === 1 && iMinor >= 54) || iMajor > 1) {
 					// Build library-preload as .js file
-					preloadInfo.ext = ".js";
-					preloadInfo.processContent = function(content, preloadObject) {
-						// workaround for new modules based on sap.ui.predefine
-						return 'sap.ui.require.preload(' + JSON.stringify(preloadObject.modules, null, '\t') + ', "' + preloadObject.name + '");';
-					};
+					preloadInfo.createContent = createJSPreload;
 				} else if (iMajor === 1 && iMinor >= 40 && iMinor < 54) {
 					// Build library-preload as .js file
-					preloadInfo.ext = ".js";
-					preloadInfo.processContent = function(content) {
-						return 'jQuery.sap.registerPreloadedModules(' + content + ');';
-					};
+					preloadInfo.createContent = createLegacyJSPreload;
 				} else {
-					// Build as .json file (legacy, needed because UI5 <1.40 only loads the .json files)
+					// Build as .json file (legacy, needed because UI5 < 1.40 only loads the .json files)
 					preloadInfo.ext = ".json";
+					preloadInfo.processModuleName = function(moduleName) {
+						return moduleName.replace(/\//g, '.');
+					};
+					preloadInfo.createContent = createLegacyJSONPreload;
 				}
 			} else {
 				preloadInfo = {
 					moduleName: 'Component-preload',
 					ext: '.js',
-					indicatorFile: 'Component.js',
-					processContent: function(content) {
-						return 'jQuery.sap.registerPreloadedModules(' + content + ');';
-					}
+					indicatorFile: 'Component.js'
 				};
+
+				if (options.compatVersion === "edge" || (iMajor === 1 && iMinor >= 54) || iMajor > 1) {
+					preloadInfo.createContent = createJSPreload;
+				} else {
+					preloadInfo.createContent = createLegacyJSPreload;
+				}
+
 			}
 
 
@@ -300,10 +309,7 @@ module.exports = function (grunt) {
 						preloadObject.modules[preloadFile] = fileContent;
 					});
 
-					var content = JSON.stringify(preloadObject, null, '\t');
-					if (typeof preloadInfo.processContent === 'function') {
-						content = preloadInfo.processContent(content, preloadObject);
-					}
+					var content = preloadInfo.createContent(preloadObject);
 
 					var destPath = options.dest;
 					var preloadResourceInfo = resourceMap[preloadFile];
