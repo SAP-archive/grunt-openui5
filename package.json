@@ -23,27 +23,27 @@
     "node": ">= 0.12.0"
   },
   "dependencies": {
-    "async": "^2.1.4",
+    "async": "^2.6.0",
     "connect-inject": "^0.4.0",
-    "connect-openui5": "^0.7.0",
-    "cors": "^2.7.1",
-    "less-openui5": "^0.3.0",
+    "connect-openui5": "^0.7.3",
+    "cors": "^2.8.4",
+    "less-openui5": "^0.5.1",
     "maxmin": "^2.1.0",
     "multiline": "^1.0.2",
     "pretty-data": "^0.40.0",
-    "serve-static": "^1.10.2",
+    "serve-static": "^1.13.2",
     "slash": "^1.0.0",
-    "uglify-js": "^2.8.15",
+    "uglify-js": "^2.8.29",
     "urljoin": "^0.1.5"
   },
   "devDependencies": {
-    "eslint": "^1.10.3",
-    "grunt": "^1.0.1",
+    "eslint": "^4.18.2",
+    "grunt": "^1.0.2",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-connect": "^1.0.1",
-    "grunt-eslint": "^17.3.2",
-    "grunt-mocha-test": "^0.13.2",
-    "mocha": "^3.2.0"
+    "grunt-eslint": "^20.1.0",
+    "grunt-mocha-test": "^0.13.3",
+    "mocha": "^5.0.4"
   },
   "peerDependencies": {
     "grunt": ">=0.4.0"
