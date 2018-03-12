@@ -45,6 +45,14 @@ describe('openui5_preload', function() {
 			});
 		});
 
+		it('compat_154', function() {
+			fileContent.equal({
+				sActualFileSource: 'tmp/preload/library_compat_154/my/ui/lib/library-preload.js',
+				sExpectedFileSource: 'test/preload/expected/library_compat_154/my/ui/lib/library-preload.js',
+				sMessage: 'library preload JS should be correctly created.'
+			});
+		});
+
 		it('resource_prefix', function() {
 			fileContent.equal({
 				sActualFileSource: 'tmp/preload/library_resource_prefix/library-preload.js',
@@ -85,6 +93,22 @@ describe('openui5_preload', function() {
 			fileContent.equal({
 				sActualFileSource: 'tmp/preload/component_default_options/my/app/Component-preload.js',
 				sExpectedFileSource: 'test/preload/expected/component_default_options/my/app/Component-preload.js',
+				sMessage: 'component preload JS should be correctly created.'
+			});
+		});
+
+		it('compat_140', function() {
+			fileContent.equal({
+				sActualFileSource: 'tmp/preload/component_compat_140/my/app/Component-preload.js',
+				sExpectedFileSource: 'test/preload/expected/component_compat_140/my/app/Component-preload.js',
+				sMessage: 'component preload JS should be correctly created.'
+			});
+		});
+
+		it('compat_154', function() {
+			fileContent.equal({
+				sActualFileSource: 'tmp/preload/component_compat_154/my/app/Component-preload.js',
+				sExpectedFileSource: 'test/preload/expected/component_compat_154/my/app/Component-preload.js',
 				sMessage: 'component preload JS should be correctly created.'
 			});
 		});

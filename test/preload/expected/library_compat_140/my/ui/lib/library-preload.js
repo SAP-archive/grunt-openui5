@@ -1,6 +1,6 @@
 jQuery.sap.registerPreloadedModules({
 	"version": "2.0",
-	"name": "my.ui.lib.library-preload",
+	"name": "my/ui/lib/library-preload",
 	"modules": {
 		"my/ui/lib/library.js": "jQuery.sap.require(\"sap.ui.core.library\"),jQuery.sap.declare(\"my.ui.lib.library\"),sap.ui.getCore().initLibrary({name:\"my.ui.lib\",version:\"0.0.0\",dependencies:[\"sap.ui.core\"]});",
 		"my/ui/lib/myJS.js": "/* © */\n\"use strict\";function myFunction(n,o){return n+o}/**\n* This is a copyright comment\n*/\n/* (c) */\n/* released under */\n/* license */\nconsole.log(\"myJS\");",

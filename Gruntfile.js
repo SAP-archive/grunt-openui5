@@ -133,6 +133,24 @@ module.exports = function(grunt) {
 				components: '**'
 			},
 
+			'component_compat_140': {
+				options: {
+					resources: 'test/preload/fixtures/app',
+					dest: 'tmp/preload/component_compat_140',
+					compatVersion: '1.40'
+				},
+				components: '**'
+			},
+
+			'component_compat_154': {
+				options: {
+					resources: 'test/preload/fixtures/app',
+					dest: 'tmp/preload/component_compat_154',
+					compatVersion: '1.54'
+				},
+				components: '**'
+			},
+
 			'library_default_options': {
 				options: {
 					resources: 'test/preload/fixtures/library',
@@ -155,6 +173,15 @@ module.exports = function(grunt) {
 					resources: 'test/preload/fixtures/library',
 					dest: 'tmp/preload/library_compat_140',
 					compatVersion: '1.40'
+				},
+				libraries: '**'
+			},
+
+			'library_compat_154': {
+				options: {
+					resources: 'test/preload/fixtures/library',
+					dest: 'tmp/preload/library_compat_154',
+					compatVersion: '1.54'
 				},
 				libraries: '**'
 			},
