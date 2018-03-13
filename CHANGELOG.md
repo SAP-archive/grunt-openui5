@@ -1,3 +1,17 @@
+# 0.13.0 (2018-03-13)
+
+### Features
+- openui5_preload task
+  - Usage of sap.ui.require.preload for library-preload.js >=1.54 [#55](https://github.com/SAP/grunt-openui5/pull/65)
+### Other changes
+- Update dependencies ([`a04861e`](https://github.com/SAP/grunt-openui5/commit/a04861e151743da711364147c566b62cd49f082e))
+
+### Breaking changes
+- Drop unsupported Node.js versions v0.12 / v5 / v7 ([`1d5735f`](https://github.com/SAP/grunt-openui5/commit/1d5735fd8f81e24ef17f50ff7d94834376e9f429))
+### All changes
+[`0.12.0...0.13.0`](https://github.com/SAP/grunt-openui5/compare/0.12.0...0.13.0)
+
+
 # 0.12.0 (2017-03-24)
 
 ### Features
