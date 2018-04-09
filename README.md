@@ -168,7 +168,7 @@ Default:
 
 Glob pattern(s) for finding relevant resources inside `cwd`. If set, the default patterns will be replaced.
 
-##### compatVersion
+#### compatVersion
 Type: `string`  
 Default: `edge`
 
