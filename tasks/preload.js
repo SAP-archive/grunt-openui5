@@ -16,7 +16,8 @@
 
 var path = require('path');
 var slash = require('slash');
-var uglify = require('uglify-js');
+var uglifyJS = require('uglify-js');
+var uglifyES = require('uglify-es');
 var pd = require('pretty-data').pd;
 var maxmin = require('maxmin');
 
@@ -252,41 +253,47 @@ module.exports = function (grunt) {
 
 							// Convert default compression to empty configuration object
 							if (options.compress === true) {
-							  options.compress = {};
+								options.compress = {};
 							}
 
 							// Make sure to have an object
 							options.compress.uglifyjs = options.compress.uglifyjs || {};
 
 							// Always override given options, override shouldn't be possible
-							options.compress.uglifyjs.fromString = true;
 							options.compress.uglifyjs.warnings = grunt.option('verbose') === true;
 
 							// Set default "comments" option if not given already
 							options.compress.uglifyjs.output = options.compress.uglifyjs.output || {};
 							if (!options.compress.uglifyjs.output.hasOwnProperty("comments")) {
-							  options.compress.uglifyjs.output.comments = copyrightCommentsPattern;
+								options.compress.uglifyjs.output.comments = copyrightCommentsPattern;
 							}
 
 							try {
 								switch (fileExtension) {
-								case '.js':
-									// Javascript files are processed by Uglify
-									fileContent = uglify.minify(fileContent, options.compress.uglifyjs).code;
-									break;
-								case '.json':
-									// JSON is parsed and written to string again to remove unwanted white space
-									fileContent = JSON.stringify(JSON.parse(fileContent));
-									break;
-								case '.xml':
-									// For XML we use the pretty data
+									case '.js':
+										// Javascript files are processed by Uglify
+										if (options.es6) {
+											// case with es6+ features
+											fileContent = uglifyES.minify(fileContent, options.compress.uglifyjs).code;
+										} else {
+											// case with es5
+											options.compress.uglifyjs.fromString = true;
+											fileContent = uglifyJS.minify(fileContent, options.compress.uglifyjs).code;
+										}
+										break;
+									case '.json':
+										// JSON is parsed and written to string again to remove unwanted white space
+										fileContent = JSON.stringify(JSON.parse(fileContent));
+										break;
+									case '.xml':
+										// For XML we use the pretty data
 
-									// Do not minify if XML(View) contains an <*:pre> tag because whitespace of HTML <pre> should be preserved (should only happen rarely)
-									if (!xmlHtmlPrePattern.test(fileContent)) {
-										fileContent = pd.xmlmin(fileContent, false);
-									}
+										// Do not minify if XML(View) contains an <*:pre> tag because whitespace of HTML <pre> should be preserved (should only happen rarely)
+										if (!xmlHtmlPrePattern.test(fileContent)) {
+											fileContent = pd.xmlmin(fileContent, false);
+										}
 
-									break;
+										break;
 								}
 							} catch (e) {
 								grunt.log.error('Failed to compress ' + fileName + '. This might be due to a syntax error in the file.');
