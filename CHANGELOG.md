@@ -1,3 +1,17 @@
+# 0.14.0 (2018-05-18)
+
+### Features
+- openui5_preload task
+  - preload: ES6+ support for uglifying JS Files [#70](https://github.com/SAP/grunt-openui5/pull/70)
+
+### Breaking changes
+- openui5_preload task
+  - `compress.uglifyjs` option is now based on [UglifyJS v3](https://github.com/mishoo/UglifyJS2/tree/harmony).
+
+### All changes
+[`0.13.0...0.14.0`](https://github.com/SAP/grunt-openui5/compare/0.13.0...0.14.0)
+
+
 # 0.13.0 (2018-03-13)
 
 ### Features
