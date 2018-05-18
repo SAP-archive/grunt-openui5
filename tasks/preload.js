@@ -16,7 +16,7 @@
 
 var path = require('path');
 var slash = require('slash');
-var uglify = require('uglify-js');
+var uglify = require('uglify-es');
 var pd = require('pretty-data').pd;
 var maxmin = require('maxmin');
 
@@ -259,7 +259,6 @@ module.exports = function (grunt) {
 							options.compress.uglifyjs = options.compress.uglifyjs || {};
 
 							// Always override given options, override shouldn't be possible
-							options.compress.uglifyjs.fromString = true;
 							options.compress.uglifyjs.warnings = grunt.option('verbose') === true;
 
 							// Set default "comments" option if not given already
