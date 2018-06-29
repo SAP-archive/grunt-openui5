@@ -75,7 +75,7 @@ module.exports = function(grunt) {
 					grunt.log.writeln('File ' + rtlCssDestFile + ' created.');
 
 					var parametersDestFile = destDir + '/library-parameters.json';
-					var parametersFileContent = JSON.stringify(result.variables, null, options.compiler.compress ? 0 : 4);
+					var parametersFileContent = JSON.stringify(options.parser.allVariables ? result.allVariables : result.variables, null, options.compiler.compress ? 0 : 4);
 					grunt.file.write(parametersDestFile, parametersFileContent);
 					grunt.log.writeln('File ' + parametersDestFile + ' created.');
 
