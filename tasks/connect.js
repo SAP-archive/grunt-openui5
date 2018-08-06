@@ -102,7 +102,7 @@ module.exports = function(grunt, config) {
 			// returns a function that mounts the static middleware using the provided path
 			function mountStatic(context) {
 				return function(staticPath) {
-					mountMiddleware(serveStatic(staticPath, { dotfiles: 'allow' }), context);
+					mountMiddleware(serveStatic(staticPath, { dotfiles: 'allow', etag: false, lastModified: false }), context);
 				};
 			}
 
