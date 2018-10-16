@@ -1,3 +1,14 @@
+# 0.15.0 (2018-10-16)
+
+### Other changes
+- Update dependencies [#80](https://github.com/SAP/grunt-openui5/pull/80)
+  - [connect-openui5@^0.7.5](https://github.com/SAP/connect-openui5/releases/tag/0.7.5)
+	- [less-openui5@^0.6.0](https://github.com/SAP/less-openui5/releases/tag/0.6.0)
+
+### All changes
+[`0.14.0...0.15.0`](https://github.com/SAP/grunt-openui5/compare/0.14.0...0.15.0)
+
+
 # 0.14.0 (2018-05-18)
 
 ### Features
