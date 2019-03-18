@@ -26,7 +26,7 @@
     "async": "^2.6.0",
     "connect-inject": "^0.4.0",
     "connect-openui5": "^0.7.5",
-    "cors": "^2.8.4",
+    "cors": "^2.8.5",
     "less-openui5": "^0.6.0",
     "maxmin": "^2.1.0",
     "multiline": "^2.0.0",
