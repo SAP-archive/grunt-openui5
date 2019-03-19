@@ -37,7 +37,7 @@
     "urljoin": "^0.1.5"
   },
   "devDependencies": {
-    "eslint": "^5.15.2",
+    "eslint": "^5.15.3",
     "grunt": "^1.0.3",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-connect": "^2.0.0",
