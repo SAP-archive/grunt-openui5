@@ -23,7 +23,7 @@
     "node": ">= 4"
   },
   "dependencies": {
-    "async": "^2.6.0",
+    "async": "^3.0.1",
     "connect-inject": "^0.4.0",
     "connect-openui5": "^0.7.6",
     "cors": "^2.8.5",
