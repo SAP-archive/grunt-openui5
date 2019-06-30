@@ -41,7 +41,7 @@
     "grunt": "^1.0.4",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-connect": "^2.0.0",
-    "grunt-eslint": "^20.2.0",
+    "grunt-eslint": "^21.1.0",
     "grunt-mocha-test": "^0.13.3",
     "mocha": "^5.0.4"
   },
