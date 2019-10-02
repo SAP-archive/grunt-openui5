@@ -20,7 +20,7 @@
   "author": "SAP SE",
   "license": "Apache-2.0",
   "engines": {
-    "node": ">= 4"
+    "node": ">= 8.5"
   },
   "dependencies": {
     "async": "^2.6.3",
