@@ -27,7 +27,7 @@
     "connect-inject": "^0.4.0",
     "connect-openui5": "^0.7.7",
     "cors": "^2.8.5",
-    "less-openui5": "^0.6.0",
+    "less-openui5": "^0.7.0",
     "maxmin": "^2.1.0",
     "multiline": "^2.0.0",
     "pretty-data": "^0.40.0",
