@@ -2,9 +2,23 @@
 All notable changes to this project will be documented in this file.  
 This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-A list of unreleased changes can be found [here](https://github.com/SAP/grunt-openui5/compare/0.15.0...HEAD).
+A list of unreleased changes can be found [here](https://github.com/SAP/grunt-openui5/compare/v0.16.0...HEAD).
+
+<a name="v0.16.0"></a>
+## [v0.16.0] - 2019-12-05
+### Breaking Changes
+- Drop support for Node.js < 8.5 [`42b6391`](https://github.com/SAP/grunt-openui5/commit/42b6391662441c225e6c32347a930c855e6fcded)
+
+### Bug Fixes
+- Upgrade less-openui5 dependency [`b553666`](https://github.com/SAP/grunt-openui5/commit/b553666bd8dcf3608344f49f79524dec47b27361)
+
+### BREAKING CHANGE
+
+The openui5_theme compiler options `sourceMap` and `cleancss` are not
+supported anymore. An exception will be thrown when used.
 
 
+[v0.16.0]: https://github.com/SAP/grunt-openui5/compare/0.15.0...v0.16.0
 # 0.15.0 - 2018-10-16
 
 ### Other changes
