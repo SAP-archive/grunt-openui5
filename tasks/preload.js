@@ -17,6 +17,7 @@
 var path = require('path');
 var slash = require('slash');
 var uglify = require('uglify-es');
+var terser = require('terser');
 var pd = require('pretty-data').pd;
 var maxmin = require('maxmin');
 
@@ -42,6 +43,19 @@ function createLegacyJSPreload(preloadObject) {
 }
 function createLegacyJSONPreload(preloadObject) {
 	return JSON.stringify(preloadObject, null, '\t');
+}
+function minifyJS(library, fileContent, options) {
+	var minifiedFile;
+	switch (library) {
+		default:
+		case "uglifyjs":
+			minifiedFile = uglify.minify(fileContent, options).code;
+			break;
+		case "terser":
+			minifiedFile = terser.minify(fileContent, options).code;
+			break;
+	}
+	return minifiedFile;
 }
 
 module.exports = function (grunt) {
@@ -247,6 +261,9 @@ module.exports = function (grunt) {
 
 						if (options.compress) {
 
+							// Make sure to have an object
+							var minifier = "uglifyjs";
+
 							iOriginalSize = fileContent.length;
 							iPreloadOriginalSize += iOriginalSize;
 
@@ -254,24 +271,43 @@ module.exports = function (grunt) {
 							if (options.compress === true) {
 							  options.compress = {};
 							}
+							if (typeof options.compress ===  "string") {
+								switch(options.compress) {
+									case "terser":
+										minifier = "terser";
+										options.compress = {};
+										break;
+									case "uglifyjs":
+										options.compress = {};
+										break;
+									default:
+										grunt.fail.warn('Invalid options.compress value: "' + options.compress + '"! Valid values: uglifyjs, terser.');
+										break;
+								}
+							}
 
-							// Make sure to have an object
-							options.compress.uglifyjs = options.compress.uglifyjs || {};
+							if (typeof options.compress ===  "object"){
+								if (options.compress.terser) {
+									minifier = "terser";
+								}
+							}
+
+							options.compress[minifier] = options.compress[minifier] || {};
 
 							// Always override given options, override shouldn't be possible
-							options.compress.uglifyjs.warnings = grunt.option('verbose') === true;
+							options.compress[minifier].warnings = grunt.option('verbose') === true;
 
 							// Set default "comments" option if not given already
-							options.compress.uglifyjs.output = options.compress.uglifyjs.output || {};
-							if (!options.compress.uglifyjs.output.hasOwnProperty("comments")) {
-							  options.compress.uglifyjs.output.comments = copyrightCommentsPattern;
+							options.compress[minifier].output = options.compress[minifier].output || {};
+							if (!options.compress[minifier].output.hasOwnProperty("comments")) {
+							  options.compress[minifier].output.comments = copyrightCommentsPattern;
 							}
 
 							try {
 								switch (fileExtension) {
 								case '.js':
-									// Javascript files are processed by Uglify
-									fileContent = uglify.minify(fileContent, options.compress.uglifyjs).code;
+									// Javascript files are processed by Uglify or Terser
+									fileContent = minifyJS(minifier, fileContent, options.compress[minifier]);
 									break;
 								case '.json':
 									// JSON is parsed and written to string again to remove unwanted white space

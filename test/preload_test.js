@@ -29,9 +29,25 @@ describe('openui5_preload', function() {
 			});
 		});
 
+		it('default_options_terser', function() {
+			fileContent.equal({
+				sActualFileSource: 'tmp/preload/library_default_options_terser/my/ui/lib/library-preload.js',
+				sExpectedFileSource: 'test/preload/expected/library_default_options/my/ui/lib/library-preload.js',
+				sMessage: 'library preload JS should be correctly created.'
+			});
+		});
+
 		it('compat_138', function() {
 			fileContent.equal({
 				sActualFileSource: 'tmp/preload/library_compat_138/my/ui/lib/library-preload.json',
+				sExpectedFileSource: 'test/preload/expected/library_compat_138/my/ui/lib/library-preload.json',
+				sMessage: 'library preload JSON should be correctly created.'
+			});
+		});
+
+		it('compat_138_terser', function() {
+			fileContent.equal({
+				sActualFileSource: 'tmp/preload/library_compat_138_terser/my/ui/lib/library-preload.json',
 				sExpectedFileSource: 'test/preload/expected/library_compat_138/my/ui/lib/library-preload.json',
 				sMessage: 'library preload JSON should be correctly created.'
 			});
@@ -45,6 +61,14 @@ describe('openui5_preload', function() {
 			});
 		});
 
+		it('compat_140_terser', function() {
+			fileContent.equal({
+				sActualFileSource: 'tmp/preload/library_compat_140_terser/my/ui/lib/library-preload.js',
+				sExpectedFileSource: 'test/preload/expected/library_compat_140/my/ui/lib/library-preload.js',
+				sMessage: 'library preload JS should be correctly created.'
+			});
+		});
+
 		it('compat_154', function() {
 			fileContent.equal({
 				sActualFileSource: 'tmp/preload/library_compat_154/my/ui/lib/library-preload.js',
@@ -53,9 +77,25 @@ describe('openui5_preload', function() {
 			});
 		});
 
+		it('compat_154_terser', function() {
+			fileContent.equal({
+				sActualFileSource: 'tmp/preload/library_compat_154_terser/my/ui/lib/library-preload.js',
+				sExpectedFileSource: 'test/preload/expected/library_compat_154/my/ui/lib/library-preload.js',
+				sMessage: 'library preload JS should be correctly created.'
+			});
+		});
+
 		it('resource_prefix', function() {
 			fileContent.equal({
 				sActualFileSource: 'tmp/preload/library_resource_prefix/library-preload.js',
+				sExpectedFileSource: 'test/preload/expected/library_resource_prefix/library-preload.js',
+				sMessage: 'library preload JS should be correctly created.'
+			});
+		});
+
+		it('resource_prefix_terser', function() {
+			fileContent.equal({
+				sActualFileSource: 'tmp/preload/library_resource_prefix_terser/library-preload.js',
 				sExpectedFileSource: 'test/preload/expected/library_resource_prefix/library-preload.js',
 				sMessage: 'library preload JS should be correctly created.'
 			});
@@ -72,6 +112,14 @@ describe('openui5_preload', function() {
 		it('custom_uglify_params', function() {
 			fileContent.equal({
 				sActualFileSource: 'tmp/preload/library_custom_uglify_params/my/ui/lib/library-preload.js',
+				sExpectedFileSource: 'test/preload/expected/library_custom_uglify_params/my/ui/lib/library-preload.js',
+				sMessage: 'library preload JS should be correctly created.'
+			});
+		})
+
+		it('custom_uglify_params_terser', function() {
+			fileContent.equal({
+				sActualFileSource: 'tmp/preload/library_custom_terser_params/my/ui/lib/library-preload.js',
 				sExpectedFileSource: 'test/preload/expected/library_custom_uglify_params/my/ui/lib/library-preload.js',
 				sMessage: 'library preload JS should be correctly created.'
 			});
@@ -97,9 +145,25 @@ describe('openui5_preload', function() {
 			});
 		});
 
+		it('default_options_terser', function() {
+			fileContent.equal({
+				sActualFileSource: 'tmp/preload/component_default_options_terser/my/app/Component-preload.js',
+				sExpectedFileSource: 'test/preload/expected/component_default_options/my/app/Component-preload.js',
+				sMessage: 'component preload JS should be correctly created.'
+			});
+		});
+
 		it('compat_140', function() {
 			fileContent.equal({
 				sActualFileSource: 'tmp/preload/component_compat_140/my/app/Component-preload.js',
+				sExpectedFileSource: 'test/preload/expected/component_compat_140/my/app/Component-preload.js',
+				sMessage: 'component preload JS should be correctly created.'
+			});
+		});
+
+		it('compat_140_terser', function() {
+			fileContent.equal({
+				sActualFileSource: 'tmp/preload/component_compat_140_terser/my/app/Component-preload.js',
 				sExpectedFileSource: 'test/preload/expected/component_compat_140/my/app/Component-preload.js',
 				sMessage: 'component preload JS should be correctly created.'
 			});
@@ -113,9 +177,25 @@ describe('openui5_preload', function() {
 			});
 		});
 
+		it('compat_154_terser', function() {
+			fileContent.equal({
+				sActualFileSource: 'tmp/preload/component_compat_154_terser/my/app/Component-preload.js',
+				sExpectedFileSource: 'test/preload/expected/component_compat_154/my/app/Component-preload.js',
+				sMessage: 'component preload JS should be correctly created.'
+			});
+		});
+
 		it('resource_prefix', function() {
 			fileContent.equal({
 				sActualFileSource: 'tmp/preload/component_resource_prefix/Component-preload.js',
+				sExpectedFileSource: 'test/preload/expected/component_resource_prefix/Component-preload.js',
+				sMessage: 'component preload JS should be correctly created.'
+			});
+		});
+
+		it('resource_prefix_terser', function() {
+			fileContent.equal({
+				sActualFileSource: 'tmp/preload/component_resource_prefix_terser/Component-preload.js',
 				sExpectedFileSource: 'test/preload/expected/component_resource_prefix/Component-preload.js',
 				sMessage: 'component preload JS should be correctly created.'
 			});

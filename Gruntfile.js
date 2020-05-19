@@ -93,6 +93,15 @@ module.exports = function(grunt) {
 				components: '**'
 			},
 
+			'component_default_options_terser': {
+				options: {
+					resources: 'test/preload/fixtures/app',
+					dest: 'tmp/preload/component_default_options_terser',
+					compress: 'terser'
+				},
+				components: '**'
+			},
+
 			'component_resource_prefix': {
 				options: {
 					resources: [
@@ -102,6 +111,20 @@ module.exports = function(grunt) {
 						}
 					],
 					dest: 'tmp/preload/component_resource_prefix'
+				},
+				components: 'my/app'
+			},
+
+			'component_resource_prefix_terser': {
+				options: {
+					resources: [
+						{
+							cwd: 'test/preload/fixtures/app/my/app',
+							prefix: 'my/app'
+						}
+					],
+					dest: 'tmp/preload/component_resource_prefix_terser',
+					compress: 'terser'
 				},
 				components: 'my/app'
 			},
@@ -142,6 +165,16 @@ module.exports = function(grunt) {
 				components: '**'
 			},
 
+			'component_compat_140_terser': {
+				options: {
+					resources: 'test/preload/fixtures/app',
+					dest: 'tmp/preload/component_compat_140_terser',
+					compatVersion: '1.40',
+					compress: 'terser'
+				},
+				components: '**'
+			},
+
 			'component_compat_154': {
 				options: {
 					resources: 'test/preload/fixtures/app',
@@ -151,10 +184,29 @@ module.exports = function(grunt) {
 				components: '**'
 			},
 
+			'component_compat_154_terser': {
+				options: {
+					resources: 'test/preload/fixtures/app',
+					dest: 'tmp/preload/component_compat_154_terser',
+					compatVersion: '1.54',
+					compress: 'terser'
+				},
+				components: '**'
+			},
+
 			'library_default_options': {
 				options: {
 					resources: 'test/preload/fixtures/library',
 					dest: 'tmp/preload/library_default_options'
+				},
+				libraries: '**'
+			},
+
+			'library_default_options_terser': {
+				options: {
+					resources: 'test/preload/fixtures/library',
+					dest: 'tmp/preload/library_default_options_terser',
+					compress: 'terser'
 				},
 				libraries: '**'
 			},
@@ -168,11 +220,31 @@ module.exports = function(grunt) {
 				libraries: '**'
 			},
 
+			'library_compat_138_terser': {
+				options: {
+					resources: 'test/preload/fixtures/library',
+					dest: 'tmp/preload/library_compat_138_terser',
+					compatVersion: '1.38',
+					comress: 'terser'
+				},
+				libraries: '**'
+			},
+
 			'library_compat_140': {
 				options: {
 					resources: 'test/preload/fixtures/library',
 					dest: 'tmp/preload/library_compat_140',
 					compatVersion: '1.40'
+				},
+				libraries: '**'
+			},
+
+			'library_compat_140_terser': {
+				options: {
+					resources: 'test/preload/fixtures/library',
+					dest: 'tmp/preload/library_compat_140_terser',
+					compatVersion: '1.40',
+					compress: 'terser'
 				},
 				libraries: '**'
 			},
@@ -186,6 +258,16 @@ module.exports = function(grunt) {
 				libraries: '**'
 			},
 
+			'library_compat_154_terser': {
+				options: {
+					resources: 'test/preload/fixtures/library',
+					dest: 'tmp/preload/library_compat_154_terser',
+					compatVersion: '1.54',
+					compress: 'terser'
+				},
+				libraries: '**'
+			},
+
 			'library_resource_prefix': {
 				options: {
 					resources: [
@@ -195,6 +277,20 @@ module.exports = function(grunt) {
 						}
 					],
 					dest: 'tmp/preload/library_resource_prefix'
+				},
+				libraries: 'my/ui/lib'
+			},
+
+			'library_resource_prefix_terser': {
+				options: {
+					resources: [
+						{
+							cwd: 'test/preload/fixtures/library/my/ui/lib',
+							prefix: 'my/ui/lib'
+						}
+					],
+					dest: 'tmp/preload/library_resource_prefix_terser',
+					compress: 'terser'
 				},
 				libraries: 'my/ui/lib'
 			},
@@ -266,6 +362,22 @@ module.exports = function(grunt) {
 					dest: 'tmp/preload/library_custom_uglify_params',
 					compress: {
 						uglifyjs: {
+							mangle: false,
+							output: {
+								ascii_only: true
+							}
+						}
+					}
+				},
+				libraries: '**'
+			},
+
+			'library_custom_terser_params': {
+				options: {
+					resources: 'test/preload/fixtures/library-custom-uglify-params',
+					dest: 'tmp/preload/library_custom_terser_params',
+					compress: {
+						terser: {
 							mangle: false,
 							output: {
 								ascii_only: true

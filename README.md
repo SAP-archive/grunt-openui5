@@ -186,23 +186,40 @@ Default value: `.`
 Path to the dest folder in which the preload files should be created.
 
 #### compress
-Type: `boolean` or `object`  
+Type: `boolean`, `string` or `object`
 Default value: `true`
 
 Optional parameter to set compression/minification of the files or to provide
 additional options.
 
-- JavaScript is minified using [UglifyJS v3 (`uglify-es`)](https://github.com/mishoo/UglifyJS2/tree/harmony)
+- JavaScript is minified using [UglifyJS v3 (`uglify-es`)](https://github.com/mishoo/UglifyJS2/tree/harmony) by `default`. It is also possible to use [terser](https://github.com/terser/terser) instead.
 - XML is minified using [pretty-data](https://github.com/vkiryukhin/pretty-data)
 - JSON is parsed for correctness and to remove extra whitespace
 
+An `string` can be used to select between uglifyjs and terser.  
+```js
+compress: 'uglifyjs'
+```
+```js
+compress: 'terser'
+```
+
 An `object` can be used to provide options.  
-Currrently only `uglifyjs` is supported.  
-The given object will be passed to `minify` (see [here](https://github.com/mishoo/UglifyJS2/tree/harmony#output-options) for options) and merged with the defaults (see below).  
+Currrently only `uglifyjs` or `terser` is supported.  
+The given object will be passed to `minify` (see [uglifyjs](https://github.com/mishoo/UglifyJS2/tree/harmony#output-options) and [terser](https://github.com/terser/terser#output-options) for options) and merged with the defaults (see below).  
 
 ```js
 compress: {
   uglifyjs: {
+    output: {
+      comments: /copyright|\(c\)|released under|license|\u00a9/i
+    }
+  }
+}
+```
+```js
+compress: {
+  terser: {
     output: {
       comments: /copyright|\(c\)|released under|license|\u00a9/i
     }
