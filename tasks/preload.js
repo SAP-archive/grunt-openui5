@@ -272,7 +272,7 @@ module.exports = function (grunt) {
 							  options.compress = {};
 							}
 							if (typeof options.compress ===  "string") {
-								switch(options.compress) {
+								switch (options.compress) {
 									case "terser":
 										minifier = "terser";
 										options.compress = {};
