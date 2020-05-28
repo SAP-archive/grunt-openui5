@@ -69,6 +69,14 @@ describe('openui5_preload', function() {
 			});
 		});
 
+		it('custom_terser_params', function() {
+			fileContent.equal({
+				sActualFileSource: 'tmp/preload/library_custom_terser_params/my/ui/lib/library-preload.js',
+				sExpectedFileSource: 'test/preload/expected/library_custom_terser_params/my/ui/lib/library-preload.js',
+				sMessage: 'library preload JS should be correctly created.'
+			});
+		})
+
 		it('custom_uglify_params', function() {
 			fileContent.equal({
 				sActualFileSource: 'tmp/preload/library_custom_uglify_params/my/ui/lib/library-preload.js',

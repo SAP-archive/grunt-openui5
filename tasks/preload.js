@@ -16,7 +16,7 @@
 
 var path = require('path');
 var slash = require('slash');
-var uglify = require('uglify-es');
+var terser = require('terser');
 var pd = require('pretty-data').pd;
 var maxmin = require('maxmin');
 
@@ -256,22 +256,22 @@ module.exports = function (grunt) {
 							}
 
 							// Make sure to have an object
-							options.compress.uglifyjs = options.compress.uglifyjs || {};
+							options.compress.terser = options.compress.terser || options.compress.uglifyjs ||  {};
 
 							// Always override given options, override shouldn't be possible
-							options.compress.uglifyjs.warnings = grunt.option('verbose') === true;
+							options.compress.terser.warnings = grunt.option('verbose') === true;
 
 							// Set default "comments" option if not given already
-							options.compress.uglifyjs.output = options.compress.uglifyjs.output || {};
-							if (!options.compress.uglifyjs.output.hasOwnProperty("comments")) {
-							  options.compress.uglifyjs.output.comments = copyrightCommentsPattern;
+							options.compress.terser.output = options.compress.terser.output || {};
+							if (!options.compress.terser.output.hasOwnProperty("comments")) {
+							  options.compress.terser.output.comments = copyrightCommentsPattern;
 							}
 
 							try {
 								switch (fileExtension) {
 								case '.js':
 									// Javascript files are processed by Uglify
-									fileContent = uglify.minify(fileContent, options.compress.uglifyjs).code;
+									fileContent = terser.minify(fileContent, options.compress.terser).code;
 									break;
 								case '.json':
 									// JSON is parsed and written to string again to remove unwanted white space

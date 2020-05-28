@@ -260,6 +260,22 @@ module.exports = function(grunt) {
 				libraries: '**'
 			},
 
+			'library_custom_terser_params': {
+				options: {
+					resources: 'test/preload/fixtures/library-custom-terser-params',
+					dest: 'tmp/preload/library_custom_terser_params',
+					compress: {
+						terser: {
+							mangle: false,
+							output: {
+								ascii_only: true
+							}
+						}
+					}
+				},
+				libraries: '**'
+			},
+
 			'library_custom_uglify_params': {
 				options: {
 					resources: 'test/preload/fixtures/library-custom-uglify-params',

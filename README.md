@@ -192,17 +192,17 @@ Default value: `true`
 Optional parameter to set compression/minification of the files or to provide
 additional options.
 
-- JavaScript is minified using [UglifyJS v3 (`uglify-es`)](https://github.com/mishoo/UglifyJS2/tree/harmony)
+- JavaScript is minified using [terser](https://github.com/terser/terser)
 - XML is minified using [pretty-data](https://github.com/vkiryukhin/pretty-data)
 - JSON is parsed for correctness and to remove extra whitespace
 
 An `object` can be used to provide options.  
-Currrently only `uglifyjs` is supported.  
-The given object will be passed to `minify` (see [here](https://github.com/mishoo/UglifyJS2/tree/harmony#output-options) for options) and merged with the defaults (see below).  
+Provide a `terser` object with the options. `uglifyjs` is also supported for backwards compatibility reasons.
+The given object will be passed to `minify` (see [here](https://github.com/terser/terser#output-options) for options) and merged with the defaults (see below).  
 
 ```js
 compress: {
-  uglifyjs: {
+  terser: {
     output: {
       comments: /copyright|\(c\)|released under|license|\u00a9/i
     }
