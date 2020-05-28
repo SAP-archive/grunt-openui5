@@ -197,7 +197,7 @@ additional options.
 - JSON is parsed for correctness and to remove extra whitespace
 
 An `object` can be used to provide options.  
-Provide `terser` object with the options. Object name `uflifyjs` is supported for backwards compatibility reasons to.
+Provide a `terser` object with the options. `uglifyjs` is also supported for backwards compatibility reasons.
 The given object will be passed to `minify` (see [here](https://github.com/terser/terser#output-options) for options) and merged with the defaults (see below).  
 
 ```js
