@@ -47,7 +47,7 @@
     "grunt-contrib-connect": "^2.1.0",
     "grunt-eslint": "^23.0.0",
     "grunt-mocha-test": "^0.13.3",
-    "mocha": "^7.2.0"
+    "mocha": "^8.0.1"
   },
   "peerDependencies": {
     "grunt": ">=0.4.0"
