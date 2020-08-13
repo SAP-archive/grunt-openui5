@@ -481,7 +481,3 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 ## Release History
 
 See [CHANGELOG.md](CHANGELOG.md).
-
-## Lisense
-
-[Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0) © 2019 [SAP SE](http://www.sap.com)
