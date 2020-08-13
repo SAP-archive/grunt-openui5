@@ -11,7 +11,9 @@
   },
   "files": [
     "tasks",
-    "LICENSE.txt"
+    "LICENSE.txt",
+    "LICENSES/**",
+    ".reuse/**"
   ],
   "repository": {
     "type": "git",
