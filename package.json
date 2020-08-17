@@ -24,7 +24,7 @@
   "author": "SAP SE",
   "license": "Apache-2.0",
   "engines": {
-    "node": ">= 8.5"
+    "node": ">= 10"
   },
   "dependencies": {
     "async": "^3.2.0",
