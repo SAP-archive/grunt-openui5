@@ -33,7 +33,11 @@ function createLegacyJSONPreload(preloadObject) {
 module.exports = function (grunt) {
 
 	grunt.registerMultiTask('openui5_preload', 'Create OpenUI5 preload files', function() {
+		const done = this.async();
+		preloadTask.apply(this).then(done, done);
+	});
 
+	async function preloadTask() {
 		// Merge task-specific and/or target-specific options with these defaults.
 		var options = this.options({
 			resources: [],
@@ -105,19 +109,19 @@ module.exports = function (grunt) {
 			return;
 		}
 
-		['components', 'libraries'].forEach(function(preloadType) {
+		const preloadTypes = ['components', 'libraries'];
+		for (const preloadType of preloadTypes) {
 			var iMajor, iMinor, preloadInfo, preloadOptions;
-
 			preloadOptions = preloadData[preloadType];
 			if (!preloadOptions) {
-				return;
+				continue;
 			}
 
 			if (options.compatVersion !== "edge") {
 				var aVersionMatch = options.compatVersion.match(/^([0-9]+)\.([0-9]+)$/);
 				if (!aVersionMatch) {
 					grunt.fail.warn('\'' + options.compatVersion + '\' is not a valid value for option compatVersion!');
-					return;
+					continue;
 				}
 				iMajor = parseInt(aVersionMatch[1], 10);
 				iMinor = parseInt(aVersionMatch[2], 10);
@@ -175,19 +179,19 @@ module.exports = function (grunt) {
 			if (preloadOptionKeys.length === 0) {
 				grunt.log.writeflags(preloadOptions, 'preloadOptions');
 				grunt.fail.warn('No valid options provided for "' + preloadType + '" preload!');
-				return;
+				continue;
 			}
 
-			preloadOptionKeys.forEach(function(preloadPattern) {
+			for (const preloadPattern of preloadOptionKeys) {
 				var preloadOption = preloadOptions[preloadPattern];
 				var preloadFiles = grunt.file.match(preloadPattern + '/' + preloadInfo.indicatorFile, resourceFiles);
 
 				if (preloadFiles.length < 1) {
 					grunt.fail.warn('No "' + preloadInfo.indicatorFile + '" found for pattern "' + preloadPattern + '"!');
-					return;
+					continue;
 				}
 
-				preloadFiles.forEach(function(preloadFile) {
+				for (const preloadFile of preloadFiles) {
 					var preloadDir = path.dirname(preloadFile);
 					var preloadModuleName = preloadDir + '/' + preloadInfo.moduleName;
 
@@ -218,12 +222,12 @@ module.exports = function (grunt) {
 					if (preloadFiles.length === 0) {
 						var patternsString = (typeof preloadPatterns === 'string') ? preloadPatterns : preloadPatterns.join('", "');
 						grunt.fail.warn('No files found for pattern(s): "' + patternsString + '"!');
-						return;
+						continue;
 					}
 
 					var iPreloadOriginalSize = 0, iPreloadCompressedSize = 0;
 
-					preloadFiles.forEach(function(preloadFile) {
+					for (const preloadFile of preloadFiles) {
 
 						var fileName = resourceMap[preloadFile].fullPath;
 						var fileContent = grunt.file.read(fileName);
@@ -244,9 +248,6 @@ module.exports = function (grunt) {
 							// Make sure to have an object
 							options.compress.terser = options.compress.terser || options.compress.uglifyjs ||  {};
 
-							// Always override given options, override shouldn't be possible
-							options.compress.terser.warnings = grunt.option('verbose') === true;
-
 							// Set default "comments" option if not given already
 							options.compress.terser.output = options.compress.terser.output || {};
 							if (!options.compress.terser.output.hasOwnProperty("comments")) {
@@ -257,7 +258,7 @@ module.exports = function (grunt) {
 								switch (fileExtension) {
 								case '.js':
 									// Javascript files are processed by Uglify
-									fileContent = terser.minify(fileContent, options.compress.terser).code;
+									fileContent = (await terser.minify(fileContent, options.compress.terser)).code;
 									break;
 								case '.json':
 									// JSON is parsed and written to string again to remove unwanted white space
@@ -292,7 +293,7 @@ module.exports = function (grunt) {
 						}
 
 						preloadObject.modules[preloadFile] = fileContent;
-					});
+					}
 
 					var content = preloadInfo.createContent(preloadObject);
 
@@ -312,11 +313,11 @@ module.exports = function (grunt) {
 					}
 					grunt.log.writeln(log);
 
-				});
+				}
 
-			});
+			}
 
-		});
+		}
 
-	});
+	}
 };
