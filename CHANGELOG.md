@@ -2,7 +2,24 @@
 All notable changes to this project will be documented in this file.  
 This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-A list of unreleased changes can be found [here](https://github.com/SAP/grunt-openui5/compare/v0.16.0...HEAD).
+A list of unreleased changes can be found [here](https://github.com/SAP/grunt-openui5/compare/v0.17.0...HEAD).
+
+<a name="v0.17.0"></a>
+## [v0.17.0] - 2020-09-10
+### Breaking Changes
+- Require Node.js >= 10 [`8cadebc`](https://github.com/SAP/grunt-openui5/commit/8cadebce61b08e0a84e6def373387d12dac7805b)
+
+### Dependency Updates
+- Bump connect-openui5 from 0.9.0 to 0.9.1 ([#168](https://github.com/SAP/grunt-openui5/issues/168)) [`72b936c`](https://github.com/SAP/grunt-openui5/commit/72b936c33b62642c89731ab6f31c3d2bff6299c1)
+
+### Features
+- Switch to Terser for JavaScript minification ([#153](https://github.com/SAP/grunt-openui5/issues/153)) [`8c525ba`](https://github.com/SAP/grunt-openui5/commit/8c525ba764b49d3094f5bc048e7363614aed9ebd)
+
+### BREAKING CHANGE
+
+Support for older Node.js releases has been dropped.
+Only Node.js v10 or higher is supported.
+
 
 <a name="v0.16.0"></a>
 ## [v0.16.0] - 2019-12-05
@@ -18,6 +35,7 @@ The openui5_theme compiler options `sourceMap` and `cleancss` are not
 supported anymore. An exception will be thrown when used.
 
 
+[v0.17.0]: https://github.com/SAP/grunt-openui5/compare/v0.16.0...v0.17.0
 [v0.16.0]: https://github.com/SAP/grunt-openui5/compare/0.15.0...v0.16.0
 # 0.15.0 - 2018-10-16
 
