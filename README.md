@@ -199,7 +199,7 @@ additional options.
 
 An `object` can be used to provide options.  
 Provide a `terser` object with the options. `uglifyjs` is also supported for backwards compatibility reasons.
-The given object will be passed to `minify` (see [here](https://github.com/terser/terser#output-options) for options) and merged with the defaults (see below).  
+The given object will be passed to `minify` (see [here](https://github.com/terser/terser#format-options) for options) and merged with the defaults (see below).  
 
 ```js
 compress: {
@@ -210,7 +210,6 @@ compress: {
   }
 }
 ```
-Note that `warnings` will be always overridden depending on the Grunt ["verbose" option](https://gruntjs.com/using-the-cli#verbose-v).
 
 #### components
 
