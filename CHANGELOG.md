@@ -2,7 +2,13 @@
 All notable changes to this project will be documented in this file.  
 This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-A list of unreleased changes can be found [here](https://github.com/SAP/grunt-openui5/compare/v0.17.0...HEAD).
+A list of unreleased changes can be found [here](https://github.com/SAP/grunt-openui5/compare/v0.18.0...HEAD).
+
+<a name="v0.18.0"></a>
+## [v0.18.0] - 2020-10-18
+### Dependency Updates
+- Bump terser from 4.8.0 to 5.3.0 ([#167](https://github.com/SAP/grunt-openui5/issues/167)) [`1799a5a`](https://github.com/SAP/grunt-openui5/commit/1799a5a2e61371d9c1f25a8f942d7e9ab70c446a)
+
 
 <a name="v0.17.0"></a>
 ## [v0.17.0] - 2020-09-10
@@ -35,6 +41,7 @@ The openui5_theme compiler options `sourceMap` and `cleancss` are not
 supported anymore. An exception will be thrown when used.
 
 
+[v0.18.0]: https://github.com/SAP/grunt-openui5/compare/v0.17.0...v0.18.0
 [v0.17.0]: https://github.com/SAP/grunt-openui5/compare/v0.16.0...v0.17.0
 [v0.16.0]: https://github.com/SAP/grunt-openui5/compare/0.15.0...v0.16.0
 # 0.15.0 - 2018-10-16
