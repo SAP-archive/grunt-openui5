@@ -1,57 +1,108 @@
 {
-  "name": "grunt-openui5",
-  "version": "0.18.0",
-  "description": "Grunt tasks around OpenUI5",
-  "scripts": {
-    "test": "grunt",
-    "preversion": "npm test",
-    "version": "git-chglog --next-tag v$npm_package_version -o CHANGELOG.md v0.16.0.. && git add CHANGELOG.md",
-    "postversion": "git push --follow-tags",
-    "release-note": "git-chglog -c .chglog/release-config.yml v$npm_package_version"
-  },
-  "files": [
-    "tasks",
-    "LICENSE.txt",
-    "LICENSES/**",
-    ".reuse/**"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/SAP/grunt-openui5.git"
-  },
-  "keywords": [
-    "gruntplugin",
-    "openui5"
-  ],
-  "author": "SAP SE",
-  "license": "Apache-2.0",
-  "engines": {
-    "node": ">= 10"
-  },
-  "dependencies": {
-    "async": "^3.2.0",
-    "connect-inject": "^0.4.0",
-    "connect-openui5": "^0.9.1",
-    "cors": "^2.8.5",
-    "less-openui5": "^0.8.7",
-    "maxmin": "^3.0.0",
-    "multiline": "^2.0.0",
-    "pretty-data": "^0.40.0",
-    "serve-static": "^1.14.1",
-    "slash": "^3.0.0",
-    "terser": "^5.5.1",
-    "urljoin": "^0.1.5"
-  },
-  "devDependencies": {
-    "eslint": "^7.18.0",
-    "grunt": "^1.3.0",
-    "grunt-contrib-clean": "^2.0.0",
-    "grunt-contrib-connect": "^3.0.0",
-    "grunt-eslint": "^23.0.0",
-    "grunt-mocha-test": "^0.13.3",
-    "mocha": "^8.2.1"
-  },
-  "peerDependencies": {
-    "grunt": ">=0.4.0"
-  }
+	"name": "grunt-openui5",
+	"version": "0.18.0",
+	"description": "Grunt tasks around OpenUI5",
+	"author": {
+		"name": "SAP SE",
+		"email": "openui5@sap.com",
+		"url": "https://www.sap.com"
+	},
+	"license": "Apache-2.0",
+	"keywords": [
+		"openui5",
+		"sapui5",
+		"ui5",
+		"gruntplugin"
+	],
+	"engines": {
+		"node": ">= 10",
+		"npm": ">= 5"
+	},
+	"scripts": {
+		"lint": "eslint ./",
+		"unit": "grunt",
+		"coverage": "nyc npm run unit",
+		"test": "npm run lint && npm run coverage && npm run depcheck",
+		"preversion": "npm test",
+		"version": "git-chglog --next-tag v$npm_package_version -o CHANGELOG.md v0.16.0.. && git add CHANGELOG.md",
+		"postversion": "git push --follow-tags",
+		"release-note": "git-chglog -c .chglog/release-config.yml v$npm_package_version",
+		"depcheck": "depcheck"
+	},
+	"files": [
+		"tasks",
+		"LICENSE.txt",
+		"LICENSES/**",
+		".reuse/**"
+	],
+	"nyc": {
+		"reporter": [
+			"lcov",
+			"text",
+			"text-summary"
+		],
+		"exclude": [
+			"coverage/**",
+			"test/**",
+			".eslintrc.js",
+			"tmp/**"
+		],
+		"check-coverage": true,
+		"statements": 85,
+		"branches": 75,
+		"functions": 90,
+		"lines": 85,
+		"watermarks": {
+			"statements": [
+				70,
+				90
+			],
+			"branches": [
+				70,
+				90
+			],
+			"functions": [
+				70,
+				90
+			],
+			"lines": [
+				70,
+				90
+			]
+		},
+		"cache": true,
+		"all": true
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:SAP/grunt-openui5.git"
+	},
+	"peerDependencies": {
+		"grunt": ">=0.4.0"
+	},
+	"dependencies": {
+		"async": "^3.2.0",
+		"connect-inject": "^0.4.0",
+		"connect-openui5": "^0.9.1",
+		"cors": "^2.8.5",
+		"less-openui5": "^0.8.7",
+		"maxmin": "^3.0.0",
+		"multiline": "^2.0.0",
+		"pretty-data": "^0.40.0",
+		"serve-static": "^1.14.1",
+		"slash": "^3.0.0",
+		"terser": "^5.5.1",
+		"urljoin": "^0.1.5"
+	},
+	"devDependencies": {
+		"depcheck": "^1.3.1",
+		"eslint": "^7.18.0",
+		"eslint-config-google": "^0.14.0",
+		"grunt": "^1.3.0",
+		"grunt-contrib-clean": "^2.0.0",
+		"grunt-contrib-connect": "^3.0.0",
+		"grunt-mocha-test": "^0.13.3",
+		"mocha": "^8.2.1",
+		"nyc": "^15.1.0"
+	}
 }
