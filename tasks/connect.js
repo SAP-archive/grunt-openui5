@@ -1,15 +1,15 @@
-'use strict';
+"use strict";
 
-var openui5 = {
-	connect: require('connect-openui5')
+const openui5 = {
+	connect: require("connect-openui5")
 };
-var serveStatic = require('serve-static');
-var inject = require('connect-inject');
-var cors = require('cors');
-var urljoin = require('urljoin');
-var multiline = require('multiline');
+const serveStatic = require("serve-static");
+const inject = require("connect-inject");
+const cors = require("cors");
+const urljoin = require("urljoin");
+const multiline = require("multiline");
 
-var liveReloadLessCssPlugin = multiline(function() {/*
+const liveReloadLessCssPlugin = multiline(function() {/*
 var LiveReloadPluginLessCss = function(window, host) {
 	this.window = window;
 	this.host = host;
@@ -38,12 +38,10 @@ LiveReloadPluginLessCss.prototype.analyze = function() {
 */});
 
 module.exports = function(grunt, config) {
-
-	grunt.registerMultiTask('openui5_connect', 'Grunt task to start an OpenUI5 connect server', function() {
-
+	grunt.registerMultiTask("openui5_connect", "Grunt task to start an OpenUI5 connect server", function() {
 		// Merge task-specific and/or target-specific options with these defaults.
-		var options = this.options({
-			contextpath: '/',
+		const options = this.options({
+			contextpath: "/",
 			appresources: [],
 			resources: [],
 			testresources: [],
@@ -54,33 +52,35 @@ module.exports = function(grunt, config) {
 		});
 
 		// normalize strings to arrays for "resources" options
-		['appresources', 'resources', 'testresources'].forEach(function(optionName) {
-			var option = options[optionName];
-			if (typeof option === 'string') {
-				options[optionName] = [ option ];
+		["appresources", "resources", "testresources"].forEach(function(optionName) {
+			const option = options[optionName];
+			if (typeof option === "string") {
+				options[optionName] = [option];
 			}
 		});
 
-		var target = this.target;
-		var args = this.args;
+		const target = this.target;
+		const args = this.args;
 
 		// Make sure the same target is configured for the 'connect' task
-		this.requiresConfig(['connect', this.target]);
+		this.requiresConfig(["connect", this.target]);
 
 		// save original middleware object before overwriting it
-		var vOriginalMiddleware = grunt.config(['connect', target, 'options', 'middleware']) || grunt.config(['connect', 'options', 'middleware']);
+		const vOriginalMiddleware =
+			grunt.config(["connect", target, "options", "middleware"]) ||
+			grunt.config(["connect", "options", "middleware"]);
 
 		// Adopt connect middleware
-		grunt.config(['connect', target, 'options', 'middleware'], function(connect, connectOptions, middlewares) {
+		grunt.config(["connect", target, "options", "middleware"], function(connect, connectOptions, middlewares) {
 			middlewares = []; // clear existing middlewares
 
 			// get connect app instance
-			var app = connect();
+			const app = connect();
 
 			// adds the middleware (with optional context url)
 			function mountMiddleware(middleware, context) {
-				if (typeof context === 'string') {
-					middleware = app.use(urljoin('/', options.contextpath, context), middleware);
+				if (typeof context === "string") {
+					middleware = app.use(urljoin("/", options.contextpath, context), middleware);
 				}
 				middlewares.push(middleware);
 			}
@@ -88,18 +88,21 @@ module.exports = function(grunt, config) {
 			// returns a function that mounts the static middleware using the provided path
 			function mountStatic(context) {
 				return function(staticPath) {
-					mountMiddleware(serveStatic(staticPath, { dotfiles: 'allow' }), context);
+					mountMiddleware(serveStatic(staticPath, {dotfiles: "allow"}), context);
 				};
 			}
 
 			// handle livereload option including css/less files (reload css if less files got changed)
 			if (connectOptions.livereload !== false) {
-				var port = (connectOptions.livereload === true) ? 35729 : connectOptions.livereload;
+				const port = (connectOptions.livereload === true) ? 35729 : connectOptions.livereload;
 				connectOptions.livereload = false; // prevent grunt-contrib-connect from inserting the livereload script
 				mountMiddleware(inject({
 					snippet: [
-						'\n<script>//<![CDATA[\n' + liveReloadLessCssPlugin + '\n//]]></script>\n',
-						'\n<script>//<![CDATA[\ndocument.write("<script src=\'//" + (location.hostname || "localhost") + ":' + port + '/livereload.js?snipver=1\'><\\/script>")\n//]]></script>\n'
+						"\n<script>//<![CDATA[\n" + liveReloadLessCssPlugin + "\n//]]></script>\n",
+						"\n<script>//<![CDATA[\ndocument.write(\"<script src='//\" + " +
+						"(location.hostname || \"localhost\") + \":" +
+						port +
+						"/livereload.js?snipver=1'><\\/script>\")\n//]]></script>\n"
 					]
 				}));
 			}
@@ -117,25 +120,30 @@ module.exports = function(grunt, config) {
 				appresources: options.appresources,
 				resources: options.resources,
 				testresources: options.testresources
-			}), '/discovery');
+			}), "/discovery");
 
 			// mount all static paths
-			options.appresources.forEach(mountStatic('/'));
-			options.resources.forEach(mountStatic('/resources'));
-			options.testresources.forEach(mountStatic('/test-resources'));
+			options.appresources.forEach(mountStatic("/"));
+			options.resources.forEach(mountStatic("/resources"));
+			options.testresources.forEach(mountStatic("/test-resources"));
 
 			// compile themes on-the-fly using openui5 less middleware
 			options.lessOptions = options.lessOptions || {};
 			options.lessOptions.rootPaths = options.resources;
-			mountMiddleware(openui5.connect.less(options.lessOptions), '/resources');
+			mountMiddleware(openui5.connect.less(options.lessOptions), "/resources");
 
 			// mount a generic proxy
 			if (options.proxypath) {
-				mountMiddleware(openui5.connect.proxy(typeof options.proxyOptions === 'object' ? options.proxyOptions : undefined), options.proxypath);
+				mountMiddleware(
+					openui5.connect.proxy(
+						typeof options.proxyOptions === "object" ? options.proxyOptions : undefined
+					),
+					options.proxypath
+				);
 			}
 
 			// run original middleware function
-			if (typeof vOriginalMiddleware === 'function') {
+			if (typeof vOriginalMiddleware === "function") {
 				middlewares = vOriginalMiddleware.call(this, connect, connectOptions, middlewares);
 			}
 
@@ -143,12 +151,10 @@ module.exports = function(grunt, config) {
 		});
 
 		// Run the 'connect' task with the same target and arguments
-		var task = 'connect:' + target;
+		let task = "connect:" + target;
 		if (args.length > 0) {
-			task += ':' + args.join(':');
+			task += ":" + args.join(":");
 		}
 		grunt.task.run(task);
-
 	});
-
 };
