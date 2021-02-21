@@ -95,7 +95,7 @@
 		"urljoin": "^0.1.5"
 	},
 	"devDependencies": {
-		"depcheck": "^1.3.1",
+		"depcheck": "^1.4.0",
 		"eslint": "^7.20.0",
 		"eslint-config-google": "^0.14.0",
 		"grunt": "^1.3.0",
