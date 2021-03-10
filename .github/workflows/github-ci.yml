@@ -57,7 +57,7 @@ jobs:
     - run: npm ci
       name: Install dependencies
 
-    - run: npm ls
+    - run: npm ls --prod
       name: Check for missing / extraneous Dependencies
 
     - run: npm run unit
