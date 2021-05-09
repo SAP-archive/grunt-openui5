@@ -96,13 +96,13 @@
 	},
 	"devDependencies": {
 		"depcheck": "^1.4.0",
-		"eslint": "^7.25.0",
+		"eslint": "^7.26.0",
 		"eslint-config-google": "^0.14.0",
 		"grunt": "^1.4.0",
 		"grunt-contrib-clean": "^2.0.0",
 		"grunt-contrib-connect": "^3.0.0",
 		"grunt-mocha-test": "^0.13.3",
-		"mocha": "^8.3.2",
+		"mocha": "^8.4.0",
 		"nyc": "^15.1.0"
 	}
 }
