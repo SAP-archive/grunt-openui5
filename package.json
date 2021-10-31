@@ -81,7 +81,7 @@
 		"grunt": ">=0.4.0"
 	},
 	"dependencies": {
-		"async": "^3.2.1",
+		"async": "^3.2.2",
 		"connect-inject": "^0.4.0",
 		"connect-openui5": "^0.10.2",
 		"cors": "^2.8.5",
