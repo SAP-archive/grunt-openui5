@@ -81,7 +81,7 @@
 		"grunt": ">=0.4.0"
 	},
 	"dependencies": {
-		"async": "^3.2.2",
+		"async": "^3.2.3",
 		"connect-inject": "^0.4.0",
 		"connect-openui5": "^0.10.2",
 		"cors": "^2.8.5",
@@ -95,7 +95,7 @@
 		"urljoin": "^0.1.5"
 	},
 	"devDependencies": {
-		"depcheck": "^1.4.2",
+		"depcheck": "^1.4.3",
 		"eslint": "^7.32.0",
 		"eslint-config-google": "^0.14.0",
 		"grunt": "^1.4.1",
