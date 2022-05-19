@@ -1,6 +1,6 @@
 {
 	"name": "grunt-openui5",
-	"version": "0.18.2",
+	"version": "0.18.3",
 	"description": "Grunt tasks around OpenUI5",
 	"author": {
 		"name": "SAP SE",
