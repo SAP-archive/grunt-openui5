@@ -33,8 +33,7 @@ LiveReloadPluginLessCss.prototype.analyze = function() {
 	return {
 		disable: (this.window.less && this.window.less.refresh)
 	};
-};
-`;
+};`;
 
 module.exports = function(grunt, config) {
 	grunt.registerMultiTask("openui5_connect", "Grunt task to start an OpenUI5 connect server", function() {
