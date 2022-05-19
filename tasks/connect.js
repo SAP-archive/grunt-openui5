@@ -7,9 +7,8 @@ const serveStatic = require("serve-static");
 const inject = require("connect-inject");
 const cors = require("cors");
 const urljoin = require("urljoin");
-const multiline = require("multiline");
 
-const liveReloadLessCssPlugin = multiline(function() {/*
+const liveReloadLessCssPlugin = `
 var LiveReloadPluginLessCss = function(window, host) {
 	this.window = window;
 	this.host = host;
@@ -20,10 +19,10 @@ LiveReloadPluginLessCss.prototype.reload = function(path, options) {
 	// do only run this if less is not loaded (LiveReload LessPlugin will handle this)
 	if (!this.window.less) {
 		// reload stylesheets (css) also if a less file was changed
-		if (path.match(/\.less$/i)) {
+		if (path.match(/.less$/i)) {
 			return this.window.LiveReload.reloader.reloadStylesheet(path);
 		}
-		if (options.originalPath.match(/\.less$/i)) {
+		if (options.originalPath.match(/.less$/i)) {
 			return this.window.LiveReload.reloader.reloadStylesheet(options.originalPath);
 		}
 	}
@@ -35,7 +34,7 @@ LiveReloadPluginLessCss.prototype.analyze = function() {
 		disable: (this.window.less && this.window.less.refresh)
 	};
 };
-*/});
+`;
 
 module.exports = function(grunt, config) {
 	grunt.registerMultiTask("openui5_connect", "Grunt task to start an OpenUI5 connect server", function() {
