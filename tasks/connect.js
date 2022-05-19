@@ -19,10 +19,10 @@ LiveReloadPluginLessCss.prototype.reload = function(path, options) {
 	// do only run this if less is not loaded (LiveReload LessPlugin will handle this)
 	if (!this.window.less) {
 		// reload stylesheets (css) also if a less file was changed
-		if (path.match(/.less$/i)) {
+		if (path.match(/\\.less$/i)) {
 			return this.window.LiveReload.reloader.reloadStylesheet(path);
 		}
-		if (options.originalPath.match(/.less$/i)) {
+		if (options.originalPath.match(/\\.less$/i)) {
 			return this.window.LiveReload.reloader.reloadStylesheet(options.originalPath);
 		}
 	}
