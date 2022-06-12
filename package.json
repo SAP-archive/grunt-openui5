@@ -81,7 +81,7 @@
 		"grunt": ">=0.4.0"
 	},
 	"dependencies": {
-		"async": "^3.2.3",
+		"async": "^3.2.4",
 		"connect-inject": "^0.4.0",
 		"connect-openui5": "^0.10.2",
 		"cors": "^2.8.5",
@@ -90,7 +90,7 @@
 		"pretty-data": "^0.40.0",
 		"serve-static": "^1.15.0",
 		"slash": "^3.0.0",
-		"terser": "^5.14.0",
+		"terser": "^5.14.1",
 		"urljoin": "^0.1.5"
 	},
 	"devDependencies": {
