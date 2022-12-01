@@ -83,7 +83,7 @@
 	"dependencies": {
 		"async": "^3.2.4",
 		"connect-inject": "^0.4.0",
-		"connect-openui5": "^0.10.2",
+		"connect-openui5": "^0.10.3",
 		"cors": "^2.8.5",
 		"less-openui5": "^0.11.3",
 		"maxmin": "^3.0.0",
