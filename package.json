@@ -85,7 +85,7 @@
 		"connect-inject": "^0.4.0",
 		"connect-openui5": "^0.10.2",
 		"cors": "^2.8.5",
-		"less-openui5": "^0.11.2",
+		"less-openui5": "^0.11.3",
 		"maxmin": "^3.0.0",
 		"pretty-data": "^0.40.0",
 		"serve-static": "^1.15.0",
