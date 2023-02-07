@@ -90,14 +90,14 @@
 		"pretty-data": "^0.40.0",
 		"serve-static": "^1.15.0",
 		"slash": "^3.0.0",
-		"terser": "^5.16.1",
+		"terser": "^5.16.3",
 		"urljoin": "^0.1.5"
 	},
 	"devDependencies": {
 		"depcheck": "^1.4.3",
 		"eslint": "^7.32.0",
 		"eslint-config-google": "^0.14.0",
-		"grunt": "^1.6.0",
+		"grunt": "^1.6.1",
 		"grunt-contrib-clean": "^2.0.1",
 		"grunt-contrib-connect": "^3.0.0",
 		"grunt-mocha-test": "^0.13.3",
