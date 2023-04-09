@@ -101,7 +101,7 @@
 		"grunt-contrib-clean": "^2.0.1",
 		"grunt-contrib-connect": "^3.0.0",
 		"grunt-mocha-test": "^0.13.3",
-		"mocha": "^8.4.0",
+		"mocha": "^10.2.0",
 		"nyc": "^15.1.0"
 	}
 }
