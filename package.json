@@ -89,7 +89,7 @@
 		"maxmin": "^3.0.0",
 		"pretty-data": "^0.40.0",
 		"serve-static": "^1.15.0",
-		"slash": "^3.0.0",
+		"slash": "^5.0.0",
 		"terser": "^5.16.9",
 		"urljoin": "^0.1.5"
 	},
