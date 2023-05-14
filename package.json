@@ -90,7 +90,7 @@
 		"pretty-data": "^0.40.0",
 		"serve-static": "^1.15.0",
 		"slash": "^3.0.0",
-		"terser": "^5.17.1",
+		"terser": "^5.17.3",
 		"urljoin": "^0.1.5"
 	},
 	"devDependencies": {
