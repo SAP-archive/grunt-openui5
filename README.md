@@ -4,6 +4,10 @@
 [![Build Status](http://img.shields.io/travis/SAP/grunt-openui5.svg?style=flat)](https://travis-ci.org/SAP/grunt-openui5)
 [![NPM Version](http://img.shields.io/npm/v/grunt-openui5.svg?style=flat)](https://www.npmjs.org/package/grunt-openui5)
 
+# DEPRECATED
+
+**⚠️ This project has been deprecated in favor of [UI5 Tooling](https://sap.github.io/ui5-tooling/).**
+
 # grunt-openui5
 
 > Grunt tasks around OpenUI5
